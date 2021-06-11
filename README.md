@@ -60,11 +60,11 @@ xx deleteMonster() --> splice(); // Check if it works or not
 
 xx gameOver() { empty all arrays, reset health }
 
-xxcreateMonsterWave() --> variables: monsterName, amount, amountOfTimeAllMonstersSpawnIn // loops over amount, creates monsterName object, with random amountOfTimeAllMonstersSpawnIn, then pushes monster to the monsterArr[{}]
+xx createMonsterWave() --> variables: monsterName, amount, amountOfTimeAllMonstersSpawnIn // loops over amount, creates monsterName object, with random amountOfTimeAllMonstersSpawnIn, then pushes monster to the monsterArr[{}]
 randomSpawnTime(amountOfTimeAllMonstersSpawnIn)
 
 xxstartGame() 
-xxgameInterval() -->  Runs gameInterval function that tracks gameTime
+xx gameInterval() -->  Runs gameInterval function that tracks gameTime // Put on window loader
 
 xx animate() {
   drawFullRoad()
@@ -126,7 +126,6 @@ Something funny
 
 **winScreen**
 Something funny
-
 
 ## Task
 - Draw board
