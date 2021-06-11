@@ -3,7 +3,7 @@ class RoadPart {
         this.startX = startX;
         this.startY = startY;
         this.width = width;
-        this.heigth = height;
+        this.height = height;
         this.collisionSide = collisionSide;
         this.directionChangeX = directionChangeX;
         this.directionChangeY = directionChangeY;
@@ -15,24 +15,24 @@ class RoadPart {
 
     drawCollisionRectangle() {
         if (this.collisionSide === 'right') {
-            this.collisionX = this.startX + this.width - collisionOffSet - ( height + 2 * collisionOffSet );
+            this.collisionX = this.startX + this.width - collisionOffSet - ( this.height - 2 * collisionOffSet );
             this.collisionY = this.startY + collisionOffSet;
-            this.collisionSideSize = height - 2 * collisionOffSet;
+            this.collisionSideSize = this.height - 2 * collisionOffSet;
         }
         if (this.collisionSide === 'left') {
             this.collisionX = this.startX + collisionOffSet;
             this.collisionY = this.startY + collisionOffSet;
-            this.collisionSideSize = height - 2 * collisionOffSet;
+            this.collisionSideSize = this.height - 2 * collisionOffSet;
         }
         if (this.collisionSide === 'top') {
             this.collisionX = this.startX + collisionOffSet;
             this.collisionY = this.startY + collisionOffSet;
-            this.collisionSideSize = width - 2 * collisionOffSet;
+            this.collisionSideSize = this.width - 2 * collisionOffSet;
         }
         if (this.collisionSide === 'bottom') {
             this.collisionX = this.startX + collisionOffSet;
-            this.collisionY = this.startY + this.height - collisionOffSet - ( width + 2 * collisionOffSet );
-            this.collisionSideSize = width - 2 * collisionOffSet;
+            this.collisionY = this.startY + this.height - ( this.width - 2 * collisionOffSet ) - collisionOffSet;
+            this.collisionSideSize = this.width - 2 * collisionOffSet;
         }
     }
 }
