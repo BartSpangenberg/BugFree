@@ -1,11 +1,93 @@
 class Hotgun {
+    constructor() {
+        this.name = 'Basic hotGun';
+        this.damage = 20;
+        this.range = 50; 
+        this.loadingTime = 200;
+        this.loaded = true;
+        this.hotGunX = null;
+        this.hotGunY = null;
+        this.radius = 25;
+    }
+
+    loadGun() {
+        setTimeout(() => {
+            this.loaded = true;
+        }, 2000)
+    }
     
+    drawHotGun() {
+        ctx.beginPath();
+        ctx.fillStyle = '#39FF14';
+        ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+    }
 }
 
-const checkHotGunSpaceAvailable = (x, y, selectedHotGun) => {
+const checkHotGunSpaceAvailable = (centerX, centerY, selectedHotGun) => {
+    // ?? How to get access to the selectedHotGun radius without having to create a new object first or giving it in manually?
+    // Current solution: Make if condition for every possible gun --> very inefficient
+    let corners = [];
+    let output = true;
+    // Create array for for points
+    if (selectedHotGun === 'basicGun') {
+        corners.push({
+            X: centerX - 25,
+            Y: centerY - 25 // 25 is the radius of the basicGun
+        })    
+        corners.push({
+            X: centerX + 25,
+            Y: centerY - 25 // 25 is the radius of the basicGun
+        })    
+        corners.push({
+            X: centerX + 25,
+            Y: centerY + 25 // 25 is the radius of the basicGun
+        })    
+        corners.push({
+            X: centerX - 25,
+            Y: centerY + 25 // 25 is the radius of the basicGun
+        })    
+    }
 
+    corners.forEach(corner => {
+        // check all road parts
+        roadParts.forEach(roadPart => {
+            if ( roadPart.startX <= corner.X && corner.X <= roadPart.startX + roadPart.width) {
+                if (roadPart.startY <= corner.Y && corner.Y <= roadPart.startY + roadPart.height) {                   
+                    output = false;
+                }
+            }
+        })
+        
+        // check other guns
+        hotGuns.forEach(hotGun => {
+            if ( hotGun.hotGunX - hotGun.radius <= corner.X && corner.X <= hotGun.hotGunX + hotGun.radius) {
+                if (hotGun.hotGunY - hotGun.radius <= corner.Y && corner.Y <= hotGun.hotGunY + hotGun.radius) {                   
+                    output = false;
+                }
+            }
+        })
+
+    })
+    console.log(hotGuns)
+    console.log(centerX, centerY)
+
+
+    return output;
 }
 
 const placeGun = (x, y, selectedHotGun) => {
-    
+    // If there multiple hotguns, write logic to create a different hotGun based on the string value (selectedHotGun)
+    let hotGun = null;
+    if (selectedHotGun === 'basicGun') {
+        hotGun = new Hotgun; // can I put the arguments name in the location of HotGun somehow? or do I need to create conditions for all of them
+    }
+    hotGun.hotGunX = x;
+    hotGun.hotGunY = y;
+    hotGuns.push(hotGun);
+}
+
+const shootAnimation = () => {
+
 }

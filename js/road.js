@@ -37,3 +37,22 @@ class RoadPart {
     }
 }
 
+const createRoad = () => {
+    roadParts.push(new RoadPart(50, 0, 50, 200, 'bottom', 1, 0, 'red'));
+    roadParts.push(new RoadPart(100, 150, 250, 50, 'right', 0, -1, 'green'));
+    roadParts.push(new RoadPart(300, 50, 50, 100, 'top', 1, 0, 'yellow'));
+    roadParts.push(new RoadPart(350, 50, 600, 50, 'right', 0, 1, 'blue'));
+    roadParts.push(new RoadPart(900, 100, 50, 350, 'bottom', -1, 0, 'purple'));
+    roadParts.push(new RoadPart(650, 400, 250, 50, 'left', 0, -1, 'orange'));
+    roadParts.push(new RoadPart(650, 200, 50, 200, 'top', -1, 0, 'red'));
+    roadParts.push(new RoadPart(500, 200, 150, 50, 'left', 0, 1, 'yellow'));
+    roadParts.push(new RoadPart(500, 250, 50, 200, 'bottom', -1, 0, 'red'));
+    roadParts.push(new RoadPart(300, 400, 200, 50, 'left', 0, -1, 'yellow'));
+    roadParts.push(new RoadPart(300, 300, 50, 100, 'top', -1, 0, 'red'));
+    roadParts.push(new RoadPart(50, 300, 250, 50, 'left', 0, 1, 'yellow'));
+    roadParts.push(new RoadPart(50, 350, 50, 150, 'bottom', 0, 1, 'red'));
+
+    roadParts.forEach(roadPart => {
+        roadPart.drawCollisionRectangle();
+    })
+}

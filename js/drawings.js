@@ -20,6 +20,9 @@ const drawFullRoad = () => {
 }
 
 const drawHotGuns = () => {
+    hotGuns.forEach(hotGun => {
+        hotGun.drawHotGun();
+    })
 
 };
 

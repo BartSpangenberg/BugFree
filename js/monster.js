@@ -7,7 +7,8 @@ class Monster {
         this.directionX = 0;
         this.directionY = 1;
         this.spawnTime = undefined;
-        this.speed = 10;    
+
+        this.speed = 1;    
         this.health = 100;
         this.radius = 15;
     }
@@ -39,7 +40,6 @@ const checkMonsterCollision = monster => {
     })
     if (monster.monsterY > canvas.height + 30) {
         gameIsOver = true;
-        console.log(gameIsOver)
     }
         // Checks for collision with end point
 }
@@ -55,6 +55,17 @@ const monsterAction = () => {
     })
 }
 
+const createMonsterWave = (firstWave) => {
+    for (let i = 0; i < firstWave.amountOfNormalMonsters; i++) {
+        let monster = new Monster
+        monster.spawnTime = randomSpawnTime(firstWave.waveTime);
+        monsters.push(monster);
+    }    
+}
+
+const randomSpawnTime = time => {
+    return Math.random() * time;
+}
 
 
 // checkDirectionChange(this); // Where to place this object
