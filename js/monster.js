@@ -10,6 +10,7 @@ class Monster {
         this.color = '#F58B36'
         this.speed = 1;    
         this.health = 100;
+        this.maxHealth = 100;
         this.radius = 15;
     }
 
@@ -21,6 +22,18 @@ class Monster {
         ctx.fill();
         ctx.closePath();
    } 
+
+   drawHealthMeter() {
+        ctx.beginPath();
+        ctx.globalAlpha = 0.8;
+        ctx.fillStyle = healthMeterBgColor;
+        ctx.fillRect(this.monsterX - this.radius, this.monsterY - 1.5 * this.radius, this.radius*2 ,  1 / 3 * this. radius);
+        ctx.fill();
+        ctx.fillStyle = healthMeterColor;
+        ctx.fillRect(this.monsterX - this.radius, this.monsterY - 1.5 * this.radius, this.health * this.radius * 2 / this.maxHealth,  1 / 3 * this. radius);
+        ctx.fill();
+        ctx.closePath();
+   }
 }
 
 const moveMonster = monster => {
@@ -50,6 +63,7 @@ const monsterAction = () => {
     monsters.forEach(monster => {
         if (monster.spawnTime < gameTime) {
             monster.drawMonster()
+            monster.drawHealthMeter();
             moveMonster(monster);
             checkMonsterCollision(monster);
         }

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/gamepage.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,9 +11,42 @@
 </head>
 <body>
     
-    <div id="game-board">
-        <canvas id="canvas" width="1000" height="500"></canvas>
-    </div>
+    <section id="game">
+        <article class="flex-row">
+            <div id="scores">
+                <h4>Score:</h4>
+                <h4>Highscore:</h4>
+                <h4>Level:</h4>
+            </div>
+            <div id="wave-info">
+                <h4>Wave:</h4>
+                <button id="start-wave">Start wave</button>
+            </div>
+        </article>
+        <article id="game-board">
+            <canvas id="canvas" width="1000" height="500"></canvas>
+        </article>
+        <article id="gun-stats" class="flex-row">
+                <div id="money" class="flex-row">
+                    <h3>Money: </h3>
+                </div>
+                <div class="flex-wrap">
+                    <h4 class="gunstat">Damage per second: </h4>
+                    <h4 class="gunstat">Shots per Second:</h4>
+                    <h4 class="gunstat">1 Shot Power:</h4>
+                    <h4 class="gunstat">Arsenal Value:</h4>
+                </div>
+            </div>
+        </article>
+        <article id="hotguns" class="flex-row space-around-row">
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+        </article>
+    </section>
 
     <script src="./js/road.js"></script>
     <script src="./js/monster.js"></script>

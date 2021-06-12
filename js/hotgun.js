@@ -23,12 +23,13 @@ class Hotgun {
     aim(monster) {
         this.targetX = monster.monsterX;
         this.targetY = monster.monsterY;
-        this.framesVisible = 20;
+        this.framesVisible = 10;
     }
     
     drawHotGun() {
         ctx.beginPath();
         ctx.fillStyle = '#39FF14';
+        ctx.globalAlpha = 0.9;
         ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
         ctx.fill();
         ctx.closePath();

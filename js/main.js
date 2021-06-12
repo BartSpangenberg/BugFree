@@ -10,6 +10,8 @@ let heatMeter = 0;
 let score = 0;
 let collisionOffSet = 20;
 let selectedHotGun = 'basicGun';
+let healthMeterColor = 'green';
+let healthMeterBgColor = 'white';
 
 // Arrays of objects
 let monsters = [];
