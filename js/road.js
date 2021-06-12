@@ -37,11 +37,3 @@ class RoadPart {
     }
 }
 
-
-
-// xx **road.js**
-// class RoadPart 
-// Variables: startX, startY, width, height, collisionSide, directionChangeX, directionChangeY, collisionX, collisionY, width, height
-// // Every Roadpart will have collision X, Y, width, height (which is calculated by the function)
-// drawPartRoad()
-// drawCollisionRectangle()

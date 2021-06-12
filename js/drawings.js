@@ -5,7 +5,6 @@ const drawRoadElement = roadElement => {
     ctx.closePath();
 }
 
-// Work on this
 const drawRoadElementCollison = roadElement => {
     ctx.beginPath();
     ctx.fillStyle = 'white';
@@ -18,10 +17,6 @@ const drawFullRoad = () => {
     roadParts.forEach(roadPart => {
         drawRoadElement(roadPart);
     })
-}
-
-const drawMonsters = () => {
-
 }
 
 const drawHotGuns = () => {

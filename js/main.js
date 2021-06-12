@@ -11,42 +11,46 @@ let animationId = null;
 let gameIsOver = false;
 let heatMeter = 0;
 let score = 0;
-let collisionOffSet = 20;
+let collisionOffSet = 10;
+let selectedHotGun = 'basicGun';
 
 // Arrays of objects
 let monsters = [];
 let roadParts = [];
 let hotGuns = [];
 
-const createMonsterWave = (monsterName, amount, amountOfTimeAllMonstersSpawnIn) => {
-    // Loop over amount
-        // create monsterName Object
-        // with random time in reach of amountOfTimeAllMonstersSpawnIn
+const createMonsterWave = (firstWave) => {
+    for (let i = 0; i < firstWave.amountOfNormalMonsters; i++) {
+        let monster = new Monster
+        monster.spawnTime = randomSpawnTime(firstWave.waveTime);
+        monsters.push(monster);
+    }    
+}
+
+const randomSpawnTime = time => {
+    return Math.random() * time;
 }
 
 const createRoad = () => {
     roadParts.push(new RoadPart(50, 0, 50, 200, 'bottom', 1, 0, 'red'));
-    roadParts.push(new RoadPart(100, 150, 250, 50, 'right', 1, 0, 'green'));
+    roadParts.push(new RoadPart(100, 150, 250, 50, 'right', 0, -1, 'green'));
     roadParts.push(new RoadPart(300, 50, 50, 100, 'top', 1, 0, 'yellow'));
-    roadParts.push(new RoadPart(350, 50, 600, 50, 'right', 1, 0, 'blue'));
-    roadParts.push(new RoadPart(900, 100, 50, 350, 'bottom', 1, 0, 'purple'));
-    roadParts.push(new RoadPart(650, 400, 250, 50, 'left', 1, 0, 'orange'));
-    roadParts.push(new RoadPart(650, 200, 50, 200, 'top', 1, 0, 'red'));
-    roadParts.push(new RoadPart(500, 200, 150, 50, 'left', 1, 0, 'yellow'));
-    roadParts.push(new RoadPart(500, 250, 50, 200, 'bottom', 1, 0, 'red'));
-    roadParts.push(new RoadPart(300, 400, 200, 50, 'left', 1, 0, 'yellow'));
-    roadParts.push(new RoadPart(300, 300, 50, 100, 'top', 1, 0, 'red'));
-    roadParts.push(new RoadPart(50, 300, 250, 50, 'left', 1, 0, 'yellow'));
-    roadParts.push(new RoadPart(50, 350, 50, 150, 'bottom', 1, 0, 'red'));
+    roadParts.push(new RoadPart(350, 50, 600, 50, 'right', 0, 1, 'blue'));
+    roadParts.push(new RoadPart(900, 100, 50, 350, 'bottom', -1, 0, 'purple'));
+    roadParts.push(new RoadPart(650, 400, 250, 50, 'left', 0, -1, 'orange'));
+    roadParts.push(new RoadPart(650, 200, 50, 200, 'top', -1, 0, 'red'));
+    roadParts.push(new RoadPart(500, 200, 150, 50, 'left', 0, 1, 'yellow'));
+    roadParts.push(new RoadPart(500, 250, 50, 200, 'bottom', -1, 0, 'red'));
+    roadParts.push(new RoadPart(300, 400, 200, 50, 'left', 0, -1, 'yellow'));
+    roadParts.push(new RoadPart(300, 300, 50, 100, 'top', -1, 0, 'red'));
+    roadParts.push(new RoadPart(50, 300, 250, 50, 'left', 0, 1, 'yellow'));
+    roadParts.push(new RoadPart(50, 350, 50, 150, 'bottom', 0, 1, 'red'));
 
     roadParts.forEach(roadPart => {
         roadPart.drawCollisionRectangle();
     })
 }
 
-const randomSpawnTime = time => {
-    // Create a random time between 0 and time
-}
 
 const startGame = () => {
     animate();
@@ -79,15 +83,19 @@ const shootBullet = () => {
     // if loaded is true && within range, firsst implementation can be without the loading, just go for low damage and continous hitting
         // decrease health
         // set loaded to false 
+
             // if monster.health < 0 --> delete monster
 }
 
 
 const animate = () => {
     drawFullRoad();
-    drawMonsters();
+    monsterAction();
     drawHotGuns();
     shootBullet();
+
+    // Move monsters
+
 
     roadParts.forEach(roadPart => {
         // console.log(roadPart.startX, roadPart.startY, roadPart.width, roadPart.height, 'roadPart')
@@ -107,7 +115,7 @@ const animate = () => {
 
 
 window.addEventListener('load', () => {
-    createMonsterWave();
+    createMonsterWave(firstWave);
     createRoad();
     startGame();
 
@@ -115,10 +123,13 @@ window.addEventListener('load', () => {
     // collision logic, road + guns
 
     canvasElement.addEventListener('click', (event) => {
-        // log all this stuff to see what is happening exactly
-        let canvasLeft = canvas.offsetLeft + canvas.clientLeft;
-        let canvasTop = canvas.offsetTop + canvas.clientTop;
-        let x = event.pageX - canvasLeft;
+        let canvasLeft = canvas.offsetLeft; // + canvas.clientLeft; Add  when border is applied // CanvasLeft = distance  to left side screen
+        let canvasTop = canvas.offsetTop; // + canvas.clientTop; Add when border is applied to the canvas
+        let x = event.pageX - canvasLeft; // event.pageX is actual location  
         let y = event.pageY - canvasTop;
+        if (checkHotGunSpaceAvailable(x, y, selectedHotGun)) {
+            placeGun(x, y, selectedHotGun);
+            selectedHotGun = null;
+        }
     } )
 })
