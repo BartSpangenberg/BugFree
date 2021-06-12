@@ -1,4 +1,4 @@
 const firstWave = {
-    amountOfNormalMonsters: 5,
+    amountOfNormalMonsters: 50,
     waveTime: 10
 }

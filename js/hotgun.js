@@ -2,18 +2,28 @@ class Hotgun {
     constructor() {
         this.name = 'Basic hotGun';
         this.damage = 20;
-        this.range = 50; 
+        this.range = 100; 
         this.loadingTime = 200;
         this.loaded = true;
         this.hotGunX = null;
         this.hotGunY = null;
-        this.radius = 25;
+        this.radius = 15;
+        this.shotColor = 'red'; 
+        this.framesVisible = null;
+        this.targetX = undefined;
+        this.targetY = undefined;
     }
 
     loadGun() {
         setTimeout(() => {
             this.loaded = true;
-        }, 2000)
+        }, this.loadingTime)
+    }
+
+    aim(monster) {
+        this.targetX = monster.monsterX;
+        this.targetY = monster.monsterY;
+        this.framesVisible = 20;
     }
     
     drawHotGun() {
@@ -22,6 +32,20 @@ class Hotgun {
         ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
         ctx.fill();
         ctx.closePath();
+    }  
+
+    shotAnimation() {
+        if (this.framesVisible > 0) {
+            this.framesVisible--; 
+            ctx.beginPath();
+            ctx.globalAlpha = 1;
+            ctx.moveTo(this.hotGunX, this.hotGunY);
+            ctx.lineTo(this.targetX, this.targetY);
+            ctx.strokeStyle = this.shotColor;
+            ctx.setLineDash([0]);
+            ctx.stroke();
+            ctx.closePath();
+        }
     }
 }
 
@@ -32,21 +56,22 @@ const checkHotGunSpaceAvailable = (centerX, centerY, selectedHotGun) => {
     let output = true;
     // Create array for for points
     if (selectedHotGun === 'basicGun') {
+        let radius = 15;
         corners.push({
-            X: centerX - 25,
-            Y: centerY - 25 // 25 is the radius of the basicGun
+            X: centerX - radius,
+            Y: centerY - radius // 25 is the radius of the basicGun
         })    
         corners.push({
-            X: centerX + 25,
-            Y: centerY - 25 // 25 is the radius of the basicGun
+            X: centerX + radius,
+            Y: centerY - radius // 25 is the radius of the basicGun
         })    
         corners.push({
-            X: centerX + 25,
-            Y: centerY + 25 // 25 is the radius of the basicGun
+            X: centerX + radius,
+            Y: centerY + radius // 25 is the radius of the basicGun
         })    
         corners.push({
-            X: centerX - 25,
-            Y: centerY + 25 // 25 is the radius of the basicGun
+            X: centerX - radius,
+            Y: centerY + radius // 25 is the radius of the basicGun
         })    
     }
 
@@ -68,12 +93,7 @@ const checkHotGunSpaceAvailable = (centerX, centerY, selectedHotGun) => {
                 }
             }
         })
-
     })
-    console.log(hotGuns)
-    console.log(centerX, centerY)
-
-
     return output;
 }
 
@@ -88,6 +108,31 @@ const placeGun = (x, y, selectedHotGun) => {
     hotGuns.push(hotGun);
 }
 
-const shootAnimation = () => {
-
+const checkRange = () => {
+    let output = false;
+    monsters.forEach(monster => {
+        hotGuns.forEach(hotGun => {
+            if ( hotGun.hotGunX - hotGun.range < monster.monsterX && monster.monsterX < hotGun.hotGunX + hotGun.range ) {
+                if ( hotGun.hotGunY - hotGun.range < monster.monsterY && monster.monsterY < hotGun.hotGunY + hotGun.range ) {
+                    shootBullet(monster, hotGun);
+                }
+            }
+        })
+    })
+    return output
 }
+
+const shootBullet = (monster, hotGun) => {
+
+    if (hotGun.loaded) {
+        // Change values
+        monster.health -= hotGun.damage;
+        hotGun.loaded = false;
+        // console.log('Gun Fired', monster.health)
+        hotGun.loadGun();
+        checkIfMonsterIsAlive(monster);
+        hotGun.aim(monster);
+    }
+}
+
+

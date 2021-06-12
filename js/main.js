@@ -1,8 +1,5 @@
 const canvasElement = document.querySelector('#canvas')
-canvasElement.style.background = 'black'
 const ctx = canvasElement.getContext('2d')
-
-
 
 // Global variables
 let gameIntervalId = null;
@@ -18,6 +15,7 @@ let selectedHotGun = 'basicGun';
 let monsters = [];
 let roadParts = [];
 let hotGuns = [];
+let gunShots = [];
 
 
 const startGame = () => {
@@ -39,29 +37,17 @@ const gameOver = () => {
     cancelAnimationFrame(animationId);
 }
 
-
-
 const gameInterval = () => {
     // Use set interval method to create a gameinterval 
 }
 
-const shootBullet = () => {
-    // loop over monsters
-    // loop over hotGuns
-    // if loaded is true && within range, firsst implementation can be without the loading, just go for low damage and continous hitting
-        // decrease health
-        // set loaded to false 
-
-            // if monster.health < 0 --> delete monster
-}
-
-
 const animate = () => {
+    drawBoard();
     drawFullRoad();
     monsterAction();
     drawHotGuns();
-    shootBullet();
-
+    checkRange();
+    drawHotGunRange();
     // Move monsters
 
 

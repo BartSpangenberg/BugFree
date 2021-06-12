@@ -7,7 +7,7 @@ class Monster {
         this.directionX = 0;
         this.directionY = 1;
         this.spawnTime = undefined;
-
+        this.color = '#F58B36'
         this.speed = 1;    
         this.health = 100;
         this.radius = 15;
@@ -15,7 +15,8 @@ class Monster {
 
     drawMonster() {
         ctx.beginPath();
-        ctx.fillStyle = 'pink';
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = 1;
         ctx.arc(this.monsterX, this.monsterY, this.radius, 0, 2 * Math.PI);
         ctx.fill();
         ctx.closePath();
@@ -61,11 +62,19 @@ const createMonsterWave = (firstWave) => {
         monster.spawnTime = randomSpawnTime(firstWave.waveTime);
         monsters.push(monster);
     }    
+    monsters.sort((a, b) => {
+        return a.spawnTime - b.spawnTime;
+    })
 }
 
 const randomSpawnTime = time => {
     return Math.random() * time;
 }
 
+const checkIfMonsterIsAlive = (monster) => {
+    if (monster.health < 0) {
+        monsters.splice(monsters.indexOf(monster), 1);
+    }
+}
 
 // checkDirectionChange(this); // Where to place this object
