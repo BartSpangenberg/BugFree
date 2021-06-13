@@ -1,6 +1,6 @@
 const drawBoard = () => {
     ctx.beginPath();
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = bgColor;
     ctx.globalAlpha = 1;
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     ctx.closePath();
@@ -27,7 +27,10 @@ const drawFullRoad = () => {
     roadParts.forEach(roadPart => {
         drawRoadElement(roadPart);
     })
+    drawMonsterPit();
+    drawHeatChamber();
 }
+
 
 const drawHotGuns = () => {
     hotGuns.forEach(hotGun => {
@@ -56,3 +59,37 @@ const drawGunShots = () => {
         }
     })
 }
+
+const drawAllBoards = () => {
+    drawScoreBoard();
+    drawGunStats();
+    drawBoard();
+}
+
+const drawScoreBoard = () => {
+    ctxStats.beginPath();
+    ctxStats.fillStyle = bgColor;
+    ctxStats.fillRect(0, 0, canvasStatsElement.width, canvasStatsElement.height);
+    ctxStats.fillStyle = textColor;
+    ctxStats.font = '20px Arial'
+    ctxStats.fillText(`Level: ${level}`, 20, 30)
+    ctxStats.fillText(`Score: ${score}`, 200, 30)
+    ctxStats.fillText(`Highscore: ${highScore}`, 400, 30)
+    ctxStats.fillText(`Wave: ${wave}`, 600, 30)
+    ctxStats.closePath();
+}
+
+const drawGunStats = () => {
+    ctxGuns.beginPath();
+    ctxGuns.fillStyle = bgColor;
+    ctxGuns.fillRect(0, 0, canvasGunElement.width, canvasGunElement.height);
+    ctxGuns.fillStyle = textColor;
+    ctxGuns.font = '20px Arial'
+    ctxGuns.fillText(`Money: ${level}`, 30, 40)
+    ctxGuns.fillText(`Damage per second: ${dps}`, 300, 40)
+    ctxGuns.fillText(`Shots per second: ${shotsPerSecond}`, 700, 40)
+    ctxGuns.fillText(`Combined 1 shot damage: ${oneShotDamage}`, 300, 70)
+    ctxGuns.fillText(`Arsenal value: ${oneShotDamage}`, 700, 70)
+    ctxGuns.closePath();
+}
+

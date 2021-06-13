@@ -1,9 +1,21 @@
 #game {
-  width: 1000px;
+  position: relative;
 }
 
 #scores {
   width: 50%;
+}
+
+#wave {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
+
+#stats-canvas,
+#canvas,
+#gun-canvas {
+  display: block;
 }
 
 /* #wave-info {
@@ -18,14 +30,5 @@
 #gun-stats {
 } */
 
-#money {
-  width: 40%;
-  align-items: flex-start;
-}
-
 /* #hotguns {
 } */
-
-.gunstat {
-  width: 40%;
-}

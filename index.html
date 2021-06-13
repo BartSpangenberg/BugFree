@@ -12,31 +12,19 @@
 <body>
     
     <section id="game">
-        <article class="flex-row">
-            <div id="scores">
-                <h4>Score:</h4>
-                <h4>Highscore:</h4>
-                <h4>Level:</h4>
-            </div>
+        <article id="stats">
+            <canvas id="stats-canvas" width="1000" height="50"></canvas>
+        </article>
+        <article id="wave" class="flex-row">
             <div id="wave-info">
-                <h4>Wave:</h4>
-                <button id="start-wave">Start wave</button>
+                <button id="start-wave">Next wave</button>
             </div>
         </article>
         <article id="game-board">
             <canvas id="canvas" width="1000" height="500"></canvas>
         </article>
-        <article id="gun-stats" class="flex-row">
-                <div id="money" class="flex-row">
-                    <h3>Money: </h3>
-                </div>
-                <div class="flex-wrap">
-                    <h4 class="gunstat">Damage per second: </h4>
-                    <h4 class="gunstat">Shots per Second:</h4>
-                    <h4 class="gunstat">1 Shot Power:</h4>
-                    <h4 class="gunstat">Arsenal Value:</h4>
-                </div>
-            </div>
+        <article id="gun-stats">
+            <canvas id="gun-canvas" width="1000" height="100"></canvas>
         </article>
         <article id="hotguns" class="flex-row space-around-row">
             <button></button>

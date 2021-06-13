@@ -56,3 +56,50 @@ const createRoad = () => {
         roadPart.drawCollisionRectangle();
     })
 }
+
+const drawMonsterPit = () => {
+
+    ctx.beginPath();
+    ctx.setLineDash([0]);
+    ctx.strokeStyle = '#cf1020';
+    ctx.arc(levelStartX + 25, levelStartY + 25, 24, 0, 2 * Math.PI);
+    ctx.globalAlpha = 1;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(levelStartX + 25, levelStartY + 25, 19, 0, 2 * Math.PI);
+    ctx.globalAlpha = 0.8;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(levelStartX + 25, levelStartY + 25, 14, 0, 2 * Math.PI);
+    ctx.globalAlpha = 0.7;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(levelStartX + 25, levelStartY + 25, 10, 0, 2 * Math.PI);
+    ctx.globalAlpha = 0.6;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(levelStartX + 25, levelStartY + 25, 8, 0, 2 * Math.PI);
+    ctx.globalAlpha = 0.4;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(levelStartX + 25, levelStartY + 25, 7, 0, 2 * Math.PI);
+    ctx.globalAlpha = 0.3;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.fillStyle =  "red";
+    ctx.globalAlpha = 0.3;
+    ctx.arc(levelStartX + 25, levelStartY + 25, 7, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+
+}
+
+const drawHeatChamber = () => {
+}
+
