@@ -13,6 +13,27 @@
   top: 15px;
 }
 
+#next-wave {
+  border-radius: 20px;
+  border-style: none;
+  background-color: red;
+  color: white;
+  padding: 3px 8px;
+  font-size: 1em;
+}
+
+#next-wave:hover {
+  background-color: black;
+  color: red;
+  border: 1px solid red;
+}
+
+#next-wave:disabled {
+  background-color: grey;
+  color: rgba(1, 1, 1, 0.5);
+  border: none;
+}
+
 #stats-canvas,
 #canvas,
 #gun-canvas {

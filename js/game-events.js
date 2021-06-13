@@ -41,8 +41,10 @@ const enableWaveButton = () => {
 
 const setLevelData = () => {
     hotGuns = [];
-    levelStartX = roadLevelStartPoints[level - 1].levelStartX
-    levelStartY = roadLevelStartPoints[level - 1].levelStartY
+    roadParts = [];
+    levelStartX = roadLevelStartPoints[level - 1].levelStartX;
+    levelStartY = roadLevelStartPoints[level - 1].levelStartY;
+    money = startMoney[level - 1];
 
     // Road needs to be made specific for level
     createRoad();
@@ -96,3 +98,22 @@ const resetGame = () => {
     oneShotDamage = 0;
     arsenalValue = 0; 
 }
+
+const calculateDps = () => {
+    dps = hotGuns.reduce((dps, hotGun) => {
+        return dps += hotGun.dps;
+    }, 0)
+}
+
+const calculateShotsPerSecond = () => {
+    shotsPerSecond = hotGuns.reduce((shotsPerSecond, hotGun) => {
+        return shotsPerSecond += hotGun.shotsPerSecond;
+    }, 0)
+}
+
+const calculateOneShotDamage = () => {
+    oneShotDamage = hotGuns.reduce((oneShotDamage, hotGun) => {
+        return oneShotDamage += hotGun.damage;
+    }, 0)
+}
+

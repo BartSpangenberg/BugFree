@@ -23,15 +23,18 @@ let gameIntervalId = null;
 let gameTime = 0;
 let animationId = null;
 let gameIsOver = false;
-let heatMeter = 0;
 let collisionOffSet = 20;
-let selectedHotGun = 'basicGun';
 let healthMeterColor = 'green';
 let healthMeterBgColor = 'white';
-let bgColor = 'black'
-let textColor = 'white'
+let bgColor = 'black';
+let textColor = 'white';
+let statColor = 'yellow';
 let levelStartX = null, levelStartY = null;
 let waveStarted = false;
+
+// HotGun info
+let instanceOfAllHotGuns = [new HotGun];
+let selectedHotGun = 'basicGun';
 
 // Arrays of objects
 let monsters = [];
@@ -39,6 +42,7 @@ let roadParts = [];
 let hotGuns = [];
 
 // Stats
+let money = null;
 let level = 1;
 let wave = 1;
 let score = 0;
@@ -47,6 +51,7 @@ let dps = 0;
 let shotsPerSecond = 0;
 let oneShotDamage = 0;
 let arsenalValue = 0; 
+let heatMeter = 0;
 
 const animate = () => {
     drawAllBoards();

@@ -1,6 +1,6 @@
-class Hotgun {
+class HotGun {
     constructor() {
-        this.name = 'Basic hotGun';
+        this.name = 'basicGun';
         this.damage = 20;
         this.range = 100; 
         this.loadingTime = 200;
@@ -12,6 +12,9 @@ class Hotgun {
         this.framesVisible = null;
         this.targetX = undefined;
         this.targetY = undefined;
+        this.dps = 1000 / this.loadingTime * this.damage;
+        this.shotsPerSecond = 1000 / this.loadingTime;
+        this.cost = 100;
     }
 
     loadGun() {
@@ -100,13 +103,27 @@ const checkHotGunSpaceAvailable = (centerX, centerY, selectedHotGun) => {
 
 const placeGun = (x, y, selectedHotGun) => {
     // If there multiple hotguns, write logic to create a different hotGun based on the string value (selectedHotGun)
-    let hotGun = null;
-    if (selectedHotGun === 'basicGun') {
-        hotGun = new Hotgun; // can I put the arguments name in the location of HotGun somehow? or do I need to create conditions for all of them
+    let newHotGun = null;
+
+    // old solution
+    // if (selectedHotGun === 'basicGun') {
+    //     hotGun = new HotGun; // can I put the arguments name in the location of HotGun somehow? or do I need to create conditions for all of them
+    // }
+
+    // sick!
+    instanceOfAllHotGuns.forEach(hotGun => {
+        if (hotGun.name === selectedHotGun) {
+            newHotGun = new hotGun.constructor();            
+        }
+    })
+
+    // This is fine
+    if (newHotGun.cost <= money) {
+        money -= newHotGun.cost;
+        newHotGun.hotGunX = x;
+        newHotGun.hotGunY = y;
+        hotGuns.push(newHotGun);
     }
-    hotGun.hotGunX = x;
-    hotGun.hotGunY = y;
-    hotGuns.push(hotGun);
 }
 
 const checkRange = () => {

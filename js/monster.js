@@ -12,6 +12,8 @@ class Monster {
         this.health = 100;
         this.maxHealth = 100;
         this.radius = 15;
+        this.points = 100;
+        this.money = 25;
     }
 
     drawMonster() {
@@ -79,7 +81,6 @@ const createMonsterWave = (monsterWave) => {
     monsters.sort((a, b) => {
         return a.spawnTime - b.spawnTime;
     })
-    console.log(monsters)
 }
 
 const randomSpawnTime = time => {
@@ -88,8 +89,8 @@ const randomSpawnTime = time => {
 
 const checkIfMonsterIsAlive = (monster) => {
     if (monster.health < 0) {
+        score += monster.points;
+        money += monster.money;
         monsters.splice(monsters.indexOf(monster), 1);
     }
 }
-
-// checkDirectionChange(this); // Where to place this object

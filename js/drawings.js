@@ -61,6 +61,9 @@ const drawGunShots = () => {
 }
 
 const drawAllBoards = () => {
+    calculateDps();
+    calculateShotsPerSecond();
+    calculateOneShotDamage();
     drawScoreBoard();
     drawGunStats();
     drawBoard();
@@ -70,12 +73,20 @@ const drawScoreBoard = () => {
     ctxStats.beginPath();
     ctxStats.fillStyle = bgColor;
     ctxStats.fillRect(0, 0, canvasStatsElement.width, canvasStatsElement.height);
+    ctxStats.font = '20px Arial';
+    
     ctxStats.fillStyle = textColor;
-    ctxStats.font = '20px Arial'
-    ctxStats.fillText(`Level: ${level}`, 20, 30)
-    ctxStats.fillText(`Score: ${score}`, 200, 30)
-    ctxStats.fillText(`Highscore: ${highScore}`, 400, 30)
-    ctxStats.fillText(`Wave: ${wave}`, 600, 30)
+    ctxStats.fillText(`Level:`, 20, 30);
+    ctxStats.fillText(`Score:`, 200, 30);
+    ctxStats.fillText(`Highscore:`, 400, 30);
+    ctxStats.fillText(`Wave:`, 650, 30);
+    ctxStats.font = '20px Arial';
+
+    ctxStats.fillStyle = statColor;
+    ctxStats.fillText(`#${level}`, 85, 30);
+    ctxStats.fillText(`${score} points`, 270, 30);
+    ctxStats.fillText(`${highScore} points`, 505, 30);
+    ctxStats.fillText(`#${wave}`, 720, 30);
     ctxStats.closePath();
 }
 
@@ -84,12 +95,22 @@ const drawGunStats = () => {
     ctxGuns.fillStyle = bgColor;
     ctxGuns.fillRect(0, 0, canvasGunElement.width, canvasGunElement.height);
     ctxGuns.fillStyle = textColor;
-    ctxGuns.font = '20px Arial'
-    ctxGuns.fillText(`Money: ${level}`, 30, 40)
-    ctxGuns.fillText(`Damage per second: ${dps}`, 300, 40)
-    ctxGuns.fillText(`Shots per second: ${shotsPerSecond}`, 700, 40)
-    ctxGuns.fillText(`Combined 1 shot damage: ${oneShotDamage}`, 300, 70)
-    ctxGuns.fillText(`Arsenal value: ${oneShotDamage}`, 700, 70)
+    ctxGuns.font = '20px Arial';
+    ctxGuns.fillStyle = textColor;
+    ctxGuns.fillText(`Money:`, 30, 40);
+    ctxGuns.fillText(`Damage per second:`, 250, 40);
+    ctxGuns.fillText(`Shots per second:`, 700, 40);
+    ctxGuns.fillText(`Combined 1 shot damage:`, 250, 70);
+    ctxGuns.fillText(`Arsenal value:`, 700, 70);
+    
+    ctxGuns.fillStyle = statColor;
+    ctxGuns.fillText(`${money} $`, 105, 40);
+    ctxGuns.fillText(`${dps} damage`, 500, 40);
+    ctxGuns.fillText(`${shotsPerSecond} shots`, 875, 40);
+    ctxGuns.fillText(`${oneShotDamage} damage`, 500, 70);
+    ctxGuns.fillText(`${oneShotDamage} $`, 875, 70);
+    
+
     ctxGuns.closePath();
 }
 
