@@ -1,7 +1,7 @@
 class Hotgun {
     constructor() {
         this.name = 'Basic hotGun';
-        this.damage = 20;
+        this.damage = 100;
         this.range = 100; 
         this.loadingTime = 200;
         this.loaded = true;

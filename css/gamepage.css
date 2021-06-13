@@ -1,5 +1,6 @@
 #game {
   position: relative;
+  display: none;
 }
 
 #scores {

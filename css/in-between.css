@@ -1,0 +1,8 @@
+#in-between {
+  display: none;
+}
+
+#in-between button {
+  font-size: 2em;
+  padding: 30px;
+}

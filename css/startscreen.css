@@ -1,0 +1,8 @@
+#startscreen {
+  display: block;
+}
+
+#startscreen button {
+  font-size: 3em;
+  padding: 30px;
+}

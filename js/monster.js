@@ -8,7 +8,7 @@ class Monster {
         this.directionY = 1;
         this.spawnTime = undefined;
         this.color = '#F58B36'
-        this.speed = 1;    
+        this.speed = 5;    
         this.health = 100;
         this.maxHealth = 100;
         this.radius = 15;
@@ -70,10 +70,10 @@ const monsterAction = () => {
     })
 }
 
-const createMonsterWave = (firstWave) => {
-    for (let i = 0; i < firstWave.amountOfNormalMonsters; i++) {
+const createMonsterWave = (monsterWave) => {
+    for (let i = 0; i < monsterWave.amountOfNormalMonsters; i++) {
         let monster = new Monster
-        monster.spawnTime = randomSpawnTime(firstWave.waveTime);
+        monster.spawnTime = randomSpawnTime(monsterWave.waveTime);
         monsters.push(monster);
     }    
     monsters.sort((a, b) => {

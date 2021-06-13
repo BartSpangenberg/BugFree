@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/gamepage.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Mans Not HotGun</title>
 
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/startscreen.css">
+    <link rel="stylesheet" href="./css/in-between.css">
+    <link rel="stylesheet" href="./css/victory.css">
+    <link rel="stylesheet" href="./css/gameover.css">
+    <link rel="stylesheet" href="./css/gamepage.css">
 </head>
 <body>
-    
+    <section id="startscreen">
+        <h1>MANS NOT HOTGUN</h1>
+        <button id="start-game">Start game</button>
+    </section>
+
+    <section id="in-between">
+        <h1>READY FOR THE NEXT LEVEL?</h1>
+        <button id="next-level">Next level</button>
+    </section>
+
+    <section id="victory">
+        <h1>VICTORY</h1>
+        <button id="play-again-victory">Play again/button>
+    </section>
+
+    <section id="game-over">
+        <h1>GAME OVER</h1>
+        <button id="play-again-game-over">Play again</button>
+    </section>
+
     <section id="game">
         <article id="stats">
             <canvas id="stats-canvas" width="1000" height="50"></canvas>
         </article>
         <article id="wave" class="flex-row">
             <div id="wave-info">
-                <button id="start-wave">Next wave</button>
+                <button id="next-wave">Next wave</button>
             </div>
         </article>
         <article id="game-board">
@@ -35,7 +59,8 @@
             <button></button>
         </article>
     </section>
-
+    
+    <script src="./js/game-events.js"></script>
     <script src="./js/road.js"></script>
     <script src="./js/monster.js"></script>
     <script src="./js/monsterwaves.js"></script>
