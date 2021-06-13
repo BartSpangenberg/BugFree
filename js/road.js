@@ -13,7 +13,7 @@ class RoadPart {
         this.collisionSideSize = null;
     }
 
-    drawCollisionRectangle() {
+    createCollisionRectangle() {
         if (this.collisionSide === 'right') {
             this.collisionX = this.startX + this.width - collisionOffSet - ( this.height - 2 * collisionOffSet );
             this.collisionY = this.startY + collisionOffSet;
@@ -37,23 +37,13 @@ class RoadPart {
     }
 }
 
-const createRoad = () => {
-    roadParts.push(new RoadPart(50, 0, 50, 200, 'bottom', 1, 0, 'blue'));
-    roadParts.push(new RoadPart(100, 150, 250, 50, 'right', 0, -1, '#5D12FC'));
-    roadParts.push(new RoadPart(300, 50, 50, 100, 'top', 1, 0, 'blue'));
-    roadParts.push(new RoadPart(350, 50, 600, 50, 'right', 0, 1, '#5D12FC'));
-    roadParts.push(new RoadPart(900, 100, 50, 350, 'bottom', -1, 0, 'blue'));
-    roadParts.push(new RoadPart(650, 400, 250, 50, 'left', 0, -1, '#5D12FC'));
-    roadParts.push(new RoadPart(650, 200, 50, 200, 'top', -1, 0, 'blue'));
-    roadParts.push(new RoadPart(500, 200, 150, 50, 'left', 0, 1, '#5D12FC'));
-    roadParts.push(new RoadPart(500, 250, 50, 200, 'bottom', -1, 0, 'blue'));
-    roadParts.push(new RoadPart(300, 400, 200, 50, 'left', 0, -1, '#5D12FC'));
-    roadParts.push(new RoadPart(300, 300, 50, 100, 'top', -1, 0, 'blue'));
-    roadParts.push(new RoadPart(50, 300, 250, 50, 'left', 0, 1, '#5D12FC'));
-    roadParts.push(new RoadPart(50, 350, 50, 150, 'bottom', 0, 1, 'blue'));
+const createRoad = () => {    
+    roadLevels[level -  1].forEach(roadPart => {
+        roadParts.push(new RoadPart(roadPart.startX, roadPart.startY, roadPart.width, roadPart.height, roadPart.collisionSide, roadPart.directionChangeX, roadPart.directionChangeY, roadPart.color))
+    })
 
     roadParts.forEach(roadPart => {
-        roadPart.drawCollisionRectangle();
+        roadPart.createCollisionRectangle();
     })
 }
 

@@ -24,13 +24,13 @@ let gameTime = 0;
 let animationId = null;
 let gameIsOver = false;
 let heatMeter = 0;
-let collisionOffSet = 5;
+let collisionOffSet = 20;
 let selectedHotGun = 'basicGun';
 let healthMeterColor = 'green';
 let healthMeterBgColor = 'white';
 let bgColor = 'black'
 let textColor = 'white'
-let levelStartX = 50, levelStartY = 0;
+let levelStartX = null, levelStartY = null;
 let waveStarted = false;
 
 // Arrays of objects
@@ -84,8 +84,6 @@ const animate = () => {
     }
 
     roadParts.forEach(roadPart => {
-        // console.log(roadPart.startX, roadPart.startY, roadPart.width, roadPart.height, 'roadPart')
-        roadPart.drawCollisionRectangle();
         drawRoadElementCollison(roadPart);
     })
 

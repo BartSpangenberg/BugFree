@@ -2,13 +2,13 @@ class Monster {
     constructor() {
         this.name = "Basic monster";
         this.description = "Blablabla";
-        this.monsterX = 75;
-        this.monsterY = 50;
+        this.monsterX = levelStartX + 25;
+        this.monsterY = levelStartY;
         this.directionX = 0;
         this.directionY = 1;
         this.spawnTime = undefined;
         this.color = '#F58B36'
-        this.speed = 5;    
+        this.speed = 2;    
         this.health = 100;
         this.maxHealth = 100;
         this.radius = 15;
@@ -79,6 +79,7 @@ const createMonsterWave = (monsterWave) => {
     monsters.sort((a, b) => {
         return a.spawnTime - b.spawnTime;
     })
+    console.log(monsters)
 }
 
 const randomSpawnTime = time => {

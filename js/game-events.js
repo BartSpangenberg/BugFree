@@ -41,6 +41,8 @@ const enableWaveButton = () => {
 
 const setLevelData = () => {
     hotGuns = [];
+    levelStartX = roadLevelStartPoints[level - 1].levelStartX
+    levelStartY = roadLevelStartPoints[level - 1].levelStartY
 
     // Road needs to be made specific for level
     createRoad();
@@ -53,7 +55,6 @@ const setWaveData = () => {
 const startWave = () => {
     waveStarted = true;
     startGameTimer();
-
 }
 
 const startLevel = () => {

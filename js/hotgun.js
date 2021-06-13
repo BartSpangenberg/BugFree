@@ -1,7 +1,7 @@
 class Hotgun {
     constructor() {
         this.name = 'Basic hotGun';
-        this.damage = 100;
+        this.damage = 20;
         this.range = 100; 
         this.loadingTime = 200;
         this.loaded = true;
@@ -124,7 +124,6 @@ const checkRange = () => {
 }
 
 const shootBullet = (monster, hotGun) => {
-
     if (hotGun.loaded) {
         // Change values
         monster.health -= hotGun.damage;
