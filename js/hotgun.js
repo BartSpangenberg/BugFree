@@ -26,20 +26,32 @@ class HotGun {
     aim(monster) {
         this.targetX = monster.monsterX;
         this.targetY = monster.monsterY;
-        this.framesVisible = 10;
+        this.framesVisible = this.animationTime;
+    }
+
+    shoot(monster) {
+        if (this.loaded) {
+            this.aim(monster);
+            monster.health -= this.damage;
+            this.loaded = false;
+            this.loadGun();
+            checkIfMonsterIsAlive(monster);
+        }
     }
 }
 
 class BigGun extends HotGun {
     constructor() {
         super();
-        this.name = 'basicGun';
+        this.name = 'bigGun';
         this.damage = 20;
         this.range = 75; 
         this.loadingTime = 200;
         this.radius = 15;
         this.shotColor = 'red'; 
         this.cost = 100;
+        this.animationTime = 20;
+        
     }
 
     drawHotGun() {
@@ -49,7 +61,7 @@ class BigGun extends HotGun {
         ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
         ctx.fill();
         ctx.closePath();
-    }  
+    }
 
     shotAnimation() {
         if (this.framesVisible > 0) {
@@ -66,16 +78,17 @@ class BigGun extends HotGun {
     }
 }
 
-class DoubleGun extends HotGun {
+class QuickGun extends HotGun {
     constructor() {
         super();
         this.name = 'doubleGun';
         this.damage = 20;
         this.range = 100; 
-        this.loadingTime = 200;
+        this.loadingTime = 50;
         this.radius = 20;
         this.shotColor = 'yellow'; 
         this.cost = 250;
+        this.animationTime = 1;
     }
 
     drawHotGun() {
@@ -112,6 +125,7 @@ class Sniper extends HotGun {
         this.radius = 10;
         this.shotColor = 'red'; 
         this.cost = 400;
+        this.animationTime = 30;
     }
 
     drawHotGun() {
@@ -138,16 +152,123 @@ class Sniper extends HotGun {
     }
 }
 
-class Slower extends HotGun {
+class Gandalf extends HotGun {
     constructor() {
         super();
-        this.name = 'slower';
+        this.name = 'gandalf';
         this.damage = 0;
         this.range = 125; 
-        this.loadingTime = 0;
+        this.loadingTime = 500;
         this.radius = 22;
         this.shotColor = 'transparent'; 
-        this.cost = 750;
+        this.cost = 100;
+        this.animationTime = 10;  // does nothing, since shotColor is invisible
+    }
+
+    drawHotGun() {
+        ctx.beginPath();
+        ctx.fillStyle = '#20FAF0';
+        ctx.globalAlpha = 0.9;
+        ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+    }
+
+    shotAnimation() {
+        if (this.framesVisible > 0) {
+            this.framesVisible--; 
+            ctx.beginPath();
+            ctx.globalAlpha = 1;
+            ctx.moveTo(this.hotGunX, this.hotGunY);
+            ctx.lineTo(this.targetX, this.targetY);
+            ctx.strokeStyle = this.shotColor;
+            ctx.setLineDash([0]);
+            ctx.stroke();
+            ctx.closePath();
+        }
+    }
+}
+
+class Bazooka extends HotGun {
+    constructor() {
+        super();
+        this.name = 'bazooka';
+        this.damage = 20;
+        this.surroundingPercentage = 0.5;
+        this.range = 125; 
+        this.loadingTime = 1000;
+        this.radius = 22;
+        this.shotColor = 'red'; 
+        this.cost = 100;
+        this.animationTime = 30;  // does nothing, since shotColor is invisible
+        this.splashRange = 100;
+    }
+
+    drawHotGun() {
+        ctx.beginPath();
+        ctx.fillStyle = '#20FAF0';
+        ctx.globalAlpha = 0.9;
+        ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+    }  
+
+    shoot(monster) {
+        if (this.loaded) {
+            // Check if other monsters are in range of this monster
+            // IF there are monsters in range, reduce the health of those monsters
+            monsters.forEach(fellowMonster => {
+                if ( monster.monsterX - this.splashRange < fellowMonster.monsterX  && fellowMonster.monsterX < monster.monsterX + this.splashRange ) {
+                    if ( monster.monsterY - this.splashRange < fellowMonster.monsterY  && fellowMonster.monsterY < monster.monsterY + this.splashRange ) {
+                        console.log("I run")
+                        fellowMonster.health -= this.damage * this.surroundingPercentage;
+                        checkIfMonsterIsAlive(fellowMonster);
+                    }
+                }
+            })
+
+
+            this.aim(monster);
+            monster.health -= this.damage;
+            this.loaded = false;
+            this.loadGun();
+            checkIfMonsterIsAlive(monster);
+        }
+    }
+
+    shotAnimation() {
+        if (this.framesVisible > 0) {
+            this.framesVisible--; 
+            ctx.beginPath();
+            ctx.globalAlpha = 1;
+            ctx.moveTo(this.hotGunX, this.hotGunY);
+            ctx.lineTo(this.targetX, this.targetY);
+            ctx.strokeStyle = this.shotColor;
+            ctx.setLineDash([0]);
+            ctx.stroke();
+            ctx.closePath();
+            // splash damage
+            ctx.beginPath();
+            ctx.arc(this.targetX, this.targetY, this.splashRange, 0, 2 * Math.PI);
+            ctx.fillStyle = "rgba(255, 99, 71, 0.3)";
+            ctx.fill();
+            ctx.closePath();
+            ctx.globalAlpha = 1;
+        }
+    }
+}
+
+class Lazer extends HotGun {
+    constructor() {
+        super();
+        this.name = 'lazer';
+        this.damage = 1;
+        this.range = 125; 
+        this.loadingTime = 10;
+        this.radius = 22;
+        this.shotColor = 'red'; 
+        this.cost = 100;
+        this.animationTime = 10;  
     }
 
     drawHotGun() {
@@ -167,53 +288,14 @@ class Slower extends HotGun {
             ctx.moveTo(this.hotGunX, this.hotGunY);
             ctx.lineTo(this.targetX, this.targetY);
             ctx.strokeStyle = this.shotColor;
+            ctx.lineWidth = 3;
             ctx.setLineDash([0]);
             ctx.stroke();
+            ctx.lineWidth = 1;
             ctx.closePath();
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -295,108 +377,19 @@ const placeGun = (x, y, newHotGun) => {
 const checkRange = () => {
     let output = false;
     monsters.forEach(monster => {
+        monster.currentSpeed = monster.speed;
         hotGuns.forEach(hotGun => {
             if ( hotGun.hotGunX - hotGun.range < monster.monsterX && monster.monsterX < hotGun.hotGunX + hotGun.range ) {
                 if ( hotGun.hotGunY - hotGun.range < monster.monsterY && monster.monsterY < hotGun.hotGunY + hotGun.range ) {
-                    shootBullet(monster, hotGun);
+                    if (hotGun.name === 'gandalf') {
+                        monster.currentSpeed = monster.speed * 0.2;
+                    }
+                    else {
+                        hotGun.shoot(monster);
+                    }
                 }
             }
         })
     })
     return output
 }
-
-const shootBullet = (monster, hotGun) => {
-    if (hotGun.loaded) {
-        // Change values
-        monster.health -= hotGun.damage;
-        hotGun.loaded = false;
-        // console.log('Gun Fired', monster.health)
-        hotGun.loadGun();
-        checkIfMonsterIsAlive(monster);
-        hotGun.aim(monster);
-    }
-}
-
-
-// // Functions that apply to all guns
-// const checkHotGunSpaceAvailable = (centerX, centerY, selectedHotGun) => {
-
-//     // ?? How to get access to the selectedHotGun radius without having to create a new object first or giving it in manually?
-//     // Current solution: Make if condition for every possible gun --> very inefficient
-//     let corners = [];
-//     let output = true;
-//     // Create array for for points
-//     if (selectedHotGun === 'basicGun') {
-//         let radius = 15;
-//         corners.push({
-//             X: centerX - radius,
-//             Y: centerY - radius // 25 is the radius of the basicGun
-//         })    
-//         corners.push({
-//             X: centerX + radius,
-//             Y: centerY - radius // 25 is the radius of the basicGun
-//         })    
-//         corners.push({
-//             X: centerX + radius,
-//             Y: centerY + radius // 25 is the radius of the basicGun
-//         })    
-//         corners.push({
-//             X: centerX - radius,
-//             Y: centerY + radius // 25 is the radius of the basicGun
-//         })    
-//     }
-
-//     corners.forEach(corner => {
-//         // check all road parts
-//         roadParts.forEach(roadPart => {
-//             if ( roadPart.startX <= corner.X && corner.X <= roadPart.startX + roadPart.width) {
-//                 if (roadPart.startY <= corner.Y && corner.Y <= roadPart.startY + roadPart.height) {                   
-//                     output = false;
-//                 }
-//             }
-//         })
-        
-//         // check other guns
-//         hotGuns.forEach(hotGun => {
-//             if ( hotGun.hotGunX - hotGun.radius <= corner.X && corner.X <= hotGun.hotGunX + hotGun.radius) {
-//                 if (hotGun.hotGunY - hotGun.radius <= corner.Y && corner.Y <= hotGun.hotGunY + hotGun.radius) {                   
-//                     output = false;
-//                 }
-//             }
-//         })
-
-//         // WRITER CODE CHECK IF CORRNERS ARE INSIDE OF THE CANVAS
-//     })
-    
-//     if ( corners[0].X < 0 || canvas.width < corners[1].X || corners[0].Y < 0 || canvas.height < corners[3].Y ) {
-//         output = false;
-//     }
-//     return output;
-// }
-
-// const placeGun = (x, y, selectedGunObject) => {
-//     // If there multiple hotguns, write logic to create a different hotGun based on the string value (selectedHotGun)
-//     let newHotGun = null;
-    
-//     // sick!
-//     instanceOfAllHotGuns.forEach(hotGun => {
-//         if (hotGun.name === selectedGunObject) {
-//             newHotGun = new hotGun.constructor();            
-//         }
-//     })
-
-//     console.log(newHotGun)
-//     if (newHotGun.cost <= money) {
-//         money -= newHotGun.cost;
-//         newHotGun.hotGunX = x;
-//         newHotGun.hotGunY = y;
-//         hotGuns.push(newHotGun);
-//         selectedHotGun = null;
-//         hotGunImage.style.display = "none";     
-//     }
-// }
-
-
-
-

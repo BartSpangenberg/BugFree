@@ -9,6 +9,7 @@ class Monster {
         this.spawnTime = undefined;
         this.color = '#F58B36'
         this.speed = 2;    
+        this.currentSpeed = this.speed;
         this.health = 100;
         this.maxHealth = 100;
         this.radius = 15;
@@ -39,8 +40,8 @@ class Monster {
 }
 
 const moveMonster = monster => {
-    monster.monsterX += monster.directionX * monster.speed;
-    monster.monsterY += monster.directionY * monster.speed;
+    monster.monsterX += monster.directionX * monster.currentSpeed;
+    monster.monsterY += monster.directionY * monster.currentSpeed;
 }
 
 const checkMonsterCollision = monster => {
@@ -59,7 +60,6 @@ const checkMonsterCollision = monster => {
     }
         // Checks for collision with end point
 }
-
 
 const monsterAction = () => {
     monsters.forEach(monster => {

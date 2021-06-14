@@ -1,8 +1,3 @@
-// // ?? JQuery stuff
-// const { JSDOM } = require( "jsdom" );
-// const { window } = new JSDOM( "" );
-// const $ = require( "jquery" )( window );
-
 // Canvas elements
 const startSection = document.querySelector("#startscreen");
 const inBetweenSection = document.querySelector("#in-between");
@@ -48,7 +43,7 @@ let userIsPlacingGun = false;
 
 
 // HotGun info
-let instanceOfAllHotGuns = [new BigGun, new DoubleGun, new Sniper, new Slower];
+let instanceOfAllHotGuns = [new BigGun, new QuickGun, new Sniper, new Gandalf, new Lazer, new Bazooka];
 let selectedHotGun = null;
 
 // Arrays of objects
@@ -158,7 +153,7 @@ window.addEventListener('load', () => {
 
     // Click on tower --> change the cursor style
     gun1Element.addEventListener('click', () => {
-        selectedHotGun = 'basicGun';
+        selectedHotGun = 'bigGun';
         userIsPlacingGun = true;
         hotGunImage.src ='../images/biggun.png';   
         hotGunImage.style.display = "block";        
@@ -179,7 +174,21 @@ window.addEventListener('load', () => {
     })
 
     gun4Element.addEventListener('click', () => {
-        selectedHotGun = 'slower';
+        selectedHotGun = 'bazooka';
+        userIsPlacingGun = true;
+        hotGunImage.src ='../images/slower.png';   
+        hotGunImage.style.display = "block";        
+    })
+
+    gun5Element.addEventListener('click', () => {
+        selectedHotGun = 'lazer';
+        userIsPlacingGun = true;
+        hotGunImage.src ='../images/slower.png';   
+        hotGunImage.style.display = "block";        
+    })
+
+    gun6Element.addEventListener('click', () => {
+        selectedHotGun = 'gandalf';
         userIsPlacingGun = true;
         hotGunImage.src ='../images/slower.png';   
         hotGunImage.style.display = "block";        
@@ -191,7 +200,6 @@ window.addEventListener('load', () => {
         if (event.key === "Escape") {
             userIsPlacingGun = false;
             hotGunImage.style.display = "none";        
-
         }
     })
 
@@ -201,7 +209,6 @@ window.addEventListener('load', () => {
             let canvasTop = canvasGameElement.offsetTop + gameSectionElement.offsetTop; // + canvas.clientTop; Add when border is applied to the canvas
             let x = event.pageX - canvasLeft; // event.pageX is actual location  
             let y = event.pageY - canvasTop;
-            console.log('y:', y, 'newy:', y - 50)
             hotGunImage.style.top = y - createTemporaryHotGunObject().range + 50 + 'px';
             hotGunImage.style.left = x - createTemporaryHotGunObject().range + 'px';
         }
