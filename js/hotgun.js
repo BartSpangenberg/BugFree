@@ -15,6 +15,7 @@ class HotGun {
         this.dps = 1000 / this.loadingTime * this.damage;
         this.shotsPerSecond = 1000 / this.loadingTime;
         this.cost = 100;
+        this.pointer = null;
     }
 
     loadGun() {
@@ -54,6 +55,7 @@ class HotGun {
 }
 
 const checkHotGunSpaceAvailable = (centerX, centerY, selectedHotGun) => {
+
     // ?? How to get access to the selectedHotGun radius without having to create a new object first or giving it in manually?
     // Current solution: Make if condition for every possible gun --> very inefficient
     let corners = [];
@@ -97,34 +99,52 @@ const checkHotGunSpaceAvailable = (centerX, centerY, selectedHotGun) => {
                 }
             }
         })
+
+        // WRITER CODE CHECK IF CORRNERS ARE INSIDE OF THE CANVAS
     })
+    
+    if ( corners[0].X < 0 || canvas.width < corners[1].X || corners[0].Y < 0 || canvas.height < corners[3].Y ) {
+        output = false;
+    }
     return output;
 }
 
-const placeGun = (x, y, selectedHotGun) => {
+const placeGun = (x, y, selectedGunObject) => {
     // If there multiple hotguns, write logic to create a different hotGun based on the string value (selectedHotGun)
     let newHotGun = null;
-
-    // old solution
-    // if (selectedHotGun === 'basicGun') {
-    //     hotGun = new HotGun; // can I put the arguments name in the location of HotGun somehow? or do I need to create conditions for all of them
-    // }
-
+    
     // sick!
     instanceOfAllHotGuns.forEach(hotGun => {
-        if (hotGun.name === selectedHotGun) {
+        if (hotGun.name === selectedGunObject) {
             newHotGun = new hotGun.constructor();            
         }
     })
 
-    // This is fine
     if (newHotGun.cost <= money) {
         money -= newHotGun.cost;
         newHotGun.hotGunX = x;
         newHotGun.hotGunY = y;
         hotGuns.push(newHotGun);
+        hotGuns.push(newHotGun);
+        selectedHotGun = null;
+        console.log(selectedHotGun, 'test')
+        hotGunImage.style.display = "none";     
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const checkRange = () => {
     let output = false;

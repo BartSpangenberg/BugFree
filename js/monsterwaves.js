@@ -1,21 +1,21 @@
 const monsterWaves = [
 [{
-        amountOfNormalMonsters: 5,
-        waveTime: 3
+        amountOfNormalMonsters: 20,
+        waveTime: 5
     },
     {
-        amountOfNormalMonsters: 10,
-        waveTime: 3
+        amountOfNormalMonsters: 40,
+        waveTime: 5
     }
 ],
 [
     {
-        amountOfNormalMonsters: 20,
-        waveTime: 3
+        amountOfNormalMonsters: 30,
+        waveTime: 6
     },
     {
-        amountOfNormalMonsters: 50,
-        waveTime: 3
+        amountOfNormalMonsters: 60,
+        waveTime: 10
     }    
 ]
 ]

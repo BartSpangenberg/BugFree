@@ -1,3 +1,8 @@
+// // ?? JQuery stuff
+// const { JSDOM } = require( "jsdom" );
+// const { window } = new JSDOM( "" );
+// const $ = require( "jquery" )( window );
+
 // Canvas elements
 const startSection = document.querySelector("#startscreen");
 const inBetweenSection = document.querySelector("#in-between");
@@ -12,6 +17,13 @@ const nextLevelBtn = document.querySelector('#next-level');
 const nextWaveBtn = document.querySelector('#next-wave');
 const playAgainVictoryBtn = document.querySelector('#play-again-victory');
 const playAgainGameOverBtn = document.querySelector('#play-again-game-over');
+const gun1Element = document.querySelector('#gun1');
+const gun2Element = document.querySelector('#gun2');
+const gun3Element = document.querySelector('#gun3');
+const gun4Element = document.querySelector('#gun4');
+const gun5Element = document.querySelector('#gun5');
+const gun6Element = document.querySelector('#gun6');
+const hotGunImage = document.querySelector('#cursor-follow');
 
 // create context
 const ctxStats = canvasStatsElement.getContext('2d');
@@ -31,10 +43,13 @@ let textColor = 'white';
 let statColor = 'yellow';
 let levelStartX = null, levelStartY = null;
 let waveStarted = false;
+let canvasLoaded = false; // Not used I think
+let userIsPlacingGun = false;
+
 
 // HotGun info
 let instanceOfAllHotGuns = [new HotGun];
-let selectedHotGun = 'basicGun';
+let selectedHotGun = null;
 
 // Arrays of objects
 let monsters = [];
@@ -105,26 +120,19 @@ const animate = () => {
 
 
 window.addEventListener('load', () => {
-    canvasGameElement.addEventListener('click', (event) => {
-        let canvasLeft = canvasGameElement.offsetLeft + gameSectionElement.offsetLeft ; // + canvas.clientLeft; Add  when border is applied // CanvasLeft = distance  to left side screen
-        let canvasTop = canvasGameElement.offsetTop + gameSectionElement.offsetTop; // + canvas.clientTop; Add when border is applied to the canvas
-        let x = event.pageX - canvasLeft; // event.pageX is actual location  
-        let y = event.pageY - canvasTop;
-        if (checkHotGunSpaceAvailable(x, y, selectedHotGun)) {
-            placeGun(x, y, selectedHotGun);
-        }
-    } )
-
     startGameBtn.addEventListener('click', () => {
         turnStartScreenOff();
         loadInBetweenScreen();
     })
 
     nextLevelBtn.addEventListener('click', () => {
-        turnInBetweenScreenOff();
-        loadGameScreen();
-        setLevelData();
-        startLevel();
+        // ?? Not exactly sure why this works, helps to prevent the bug that a gun is placed when next level button is clicked
+        setTimeout(() => {
+            turnInBetweenScreenOff();
+            loadGameScreen();
+            setLevelData();
+            startLevel();
+        }, 0)
     })
 
     nextWaveBtn.addEventListener('click', () => {
@@ -148,4 +156,33 @@ window.addEventListener('load', () => {
         enableWaveButton();
     })
 
+    // Click on tower --> change the cursor style
+    gun1Element.addEventListener('click', () => {
+        selectedHotGun = 'basicGun';
+        hotGunImage.src ='../images/hotGun-test-place-gun.png';   
+        hotGunImage.style.display = "block";        
+    })
+
+    window.addEventListener('mousemove', (event) => { 
+        let canvasLeft = canvasGameElement.offsetLeft + gameSectionElement.offsetLeft ; // + canvas.clientLeft; Add  when border is applied // CanvasLeft = distance  to left side screen
+        let canvasTop = canvasGameElement.offsetTop + gameSectionElement.offsetTop; // + canvas.clientTop; Add when border is applied to the canvas
+        let x = event.pageX - canvasLeft; // event.pageX is actual location  
+        let y = event.pageY - canvasTop;
+        // changeHotGunPrototypePosition(x + 100, y + 50);
+        hotGunImage.style.top = y + -50 + 'px';
+        hotGunImage.style.left = x + -100 + 'px';
+    })
+
+    window.addEventListener('click', (event) => {
+    console.log(selectedHotGun)
+       if (selectedHotGun) {
+            let canvasLeft = canvasGameElement.offsetLeft + gameSectionElement.offsetLeft ; // + canvas.clientLeft; Add  when border is applied // CanvasLeft = distance  to left side screen
+            let canvasTop = canvasGameElement.offsetTop + gameSectionElement.offsetTop; // + canvas.clientTop; Add when border is applied to the canvas
+            let x = event.pageX - canvasLeft; // event.pageX is actual location  
+            let y = event.pageY - canvasTop;
+            if (checkHotGunSpaceAvailable(x, y, selectedHotGun)) {
+                placeGun(x, y, selectedHotGun);
+            }
+        }
+    })
 })

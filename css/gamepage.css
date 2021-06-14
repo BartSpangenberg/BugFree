@@ -3,6 +3,11 @@
   display: none;
 }
 
+#cursor-follow {
+  display: none;
+  position: absolute;
+}
+
 #scores {
   width: 50%;
 }

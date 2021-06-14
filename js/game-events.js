@@ -117,3 +117,19 @@ const calculateOneShotDamage = () => {
     }, 0)
 }
 
+const changeCursorToDefault = () => {
+
+}
+
+const changeCursorToHotGun = () => {
+
+}
+
+const selectHotGun = () => {
+
+}
+
+const changeHotGunPrototypePosition = (x, y) => {
+    hotGunImage.style.top = y + 'px';
+    hotGunImage.style.left = x + 'px';
+}
