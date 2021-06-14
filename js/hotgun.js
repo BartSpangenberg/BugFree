@@ -1,20 +1,11 @@
 class HotGun {
     constructor() {
-        this.name = 'basicGun';
-        this.damage = 20;
-        this.range = 100; 
-        this.loadingTime = 200;
-        this.radius = 15;
-        this.shotColor = 'red'; 
-        this.cost = 100;
         this.loaded = true;
         this.hotGunX = null;
         this.hotGunY = null;
         this.framesVisible = null;
         this.targetX = undefined;
         this.targetY = undefined;
-        this.dps = 1000 / this.loadingTime * this.damage;
-        this.shotsPerSecond = 1000 / this.loadingTime;
     }
 
     loadGun() {
@@ -51,7 +42,8 @@ class BigGun extends HotGun {
         this.shotColor = 'red'; 
         this.cost = 100;
         this.animationTime = 20;
-        
+        this.dps = 1000 / this.loadingTime * this.damage;
+        this.shotsPerSecond = 1000 / this.loadingTime
     }
 
     drawHotGun() {
@@ -89,6 +81,8 @@ class QuickGun extends HotGun {
         this.shotColor = 'yellow'; 
         this.cost = 250;
         this.animationTime = 1;
+        this.dps = 1000 / this.loadingTime * this.damage;
+        this.shotsPerSecond = 1000 / this.loadingTime
     }
 
     drawHotGun() {
@@ -124,8 +118,10 @@ class Sniper extends HotGun {
         this.loadingTime = 1000;
         this.radius = 10;
         this.shotColor = 'red'; 
-        this.cost = 400;
+        this.cost = 25;
         this.animationTime = 30;
+        this.dps = 1000 / this.loadingTime * this.damage;
+        this.shotsPerSecond = 1000 / this.loadingTime
     }
 
     drawHotGun() {
@@ -157,12 +153,14 @@ class Gandalf extends HotGun {
         super();
         this.name = 'gandalf';
         this.damage = 0;
-        this.range = 125; 
+        this.range = 75; 
         this.loadingTime = 500;
         this.radius = 22;
         this.shotColor = 'transparent'; 
         this.cost = 100;
         this.animationTime = 10;  // does nothing, since shotColor is invisible
+        this.dps = 1000 / this.loadingTime * this.damage;
+        this.shotsPerSecond = 1000 / this.loadingTime
     }
 
     drawHotGun() {
@@ -193,15 +191,17 @@ class Bazooka extends HotGun {
     constructor() {
         super();
         this.name = 'bazooka';
-        this.damage = 20;
-        this.surroundingPercentage = 0.5;
+        this.damage = 500;
+        this.surroundingPercentage = 0.2;
         this.range = 125; 
-        this.loadingTime = 1000;
+        this.loadingTime = 3000;
         this.radius = 22;
         this.shotColor = 'red'; 
         this.cost = 100;
         this.animationTime = 30;  // does nothing, since shotColor is invisible
         this.splashRange = 100;
+        this.dps = 1000 / this.loadingTime * this.damage;
+        this.shotsPerSecond = 1000 / this.loadingTime
     }
 
     drawHotGun() {
@@ -227,9 +227,9 @@ class Bazooka extends HotGun {
                 }
             })
 
-
             this.aim(monster);
             monster.health -= this.damage;
+            console.log(monster)
             this.loaded = false;
             this.loadGun();
             checkIfMonsterIsAlive(monster);
@@ -262,13 +262,15 @@ class Lazer extends HotGun {
     constructor() {
         super();
         this.name = 'lazer';
-        this.damage = 1;
+        this.damage = 5;
         this.range = 125; 
-        this.loadingTime = 10;
+        this.loadingTime = 5;
         this.radius = 22;
         this.shotColor = 'red'; 
         this.cost = 100;
         this.animationTime = 10;  
+        this.dps = 1000 / this.loadingTime * this.damage;
+        this.shotsPerSecond = 1000 / this.loadingTime
     }
 
     drawHotGun() {
@@ -366,6 +368,7 @@ const placeGun = (x, y, newHotGun) => {
     console.log(newHotGun)
     if (newHotGun.cost <= money) {
         money -= newHotGun.cost;
+        arsenalValue += newHotGun.cost;
         newHotGun.hotGunX = x;
         newHotGun.hotGunY = y;
         hotGuns.push(newHotGun);
@@ -377,7 +380,9 @@ const placeGun = (x, y, newHotGun) => {
 const checkRange = () => {
     let output = false;
     monsters.forEach(monster => {
-        monster.currentSpeed = monster.speed;
+        
+        setMonsterSpeed(monster);
+
         hotGuns.forEach(hotGun => {
             if ( hotGun.hotGunX - hotGun.range < monster.monsterX && monster.monsterX < hotGun.hotGunX + hotGun.range ) {
                 if ( hotGun.hotGunY - hotGun.range < monster.monsterY && monster.monsterY < hotGun.hotGunY + hotGun.range ) {
@@ -386,6 +391,7 @@ const checkRange = () => {
                     }
                     else {
                         hotGun.shoot(monster);
+                        console.log(monster)
                     }
                 }
             }

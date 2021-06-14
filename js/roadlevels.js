@@ -9,7 +9,7 @@ const roadLevelStartPoints = [
     }
 ]
 
-const startMoney = [500, 1000];
+const startMoney = [5000, 1000];
 
 const roadLevels = [
     [

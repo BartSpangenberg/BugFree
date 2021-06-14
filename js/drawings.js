@@ -105,12 +105,11 @@ const drawGunStats = () => {
     
     ctxGuns.fillStyle = statColor;
     ctxGuns.fillText(`${money} $`, 105, 40);
-    ctxGuns.fillText(`${dps} damage`, 500, 40);
-    ctxGuns.fillText(`${shotsPerSecond} shots`, 875, 40);
+    ctxGuns.fillText(`${Math.round(dps)} damage`, 500, 40);
+    ctxGuns.fillText(`${Math.ceil(shotsPerSecond)} shots`, 875, 40);
     ctxGuns.fillText(`${oneShotDamage} damage`, 500, 70);
-    ctxGuns.fillText(`${oneShotDamage} $`, 875, 70);
+    ctxGuns.fillText(`${arsenalValue} $`, 875, 70);
     
-
     ctxGuns.closePath();
 }
 
