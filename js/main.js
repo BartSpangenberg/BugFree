@@ -48,7 +48,7 @@ let userIsPlacingGun = false;
 
 
 // HotGun info
-let instanceOfAllHotGuns = [new HotGun];
+let instanceOfAllHotGuns = [new BigGun, new DoubleGun, new Sniper, new Slower];
 let selectedHotGun = null;
 
 // Arrays of objects
@@ -159,29 +159,63 @@ window.addEventListener('load', () => {
     // Click on tower --> change the cursor style
     gun1Element.addEventListener('click', () => {
         selectedHotGun = 'basicGun';
-        hotGunImage.src ='../images/hotGun-test-place-gun.png';   
+        userIsPlacingGun = true;
+        hotGunImage.src ='../images/biggun.png';   
         hotGunImage.style.display = "block";        
     })
 
-    window.addEventListener('mousemove', (event) => { 
-        let canvasLeft = canvasGameElement.offsetLeft + gameSectionElement.offsetLeft ; // + canvas.clientLeft; Add  when border is applied // CanvasLeft = distance  to left side screen
-        let canvasTop = canvasGameElement.offsetTop + gameSectionElement.offsetTop; // + canvas.clientTop; Add when border is applied to the canvas
-        let x = event.pageX - canvasLeft; // event.pageX is actual location  
-        let y = event.pageY - canvasTop;
-        // changeHotGunPrototypePosition(x + 100, y + 50);
-        hotGunImage.style.top = y + -50 + 'px';
-        hotGunImage.style.left = x + -100 + 'px';
+    gun2Element.addEventListener('click', () => {
+        selectedHotGun = 'doubleGun';
+        userIsPlacingGun = true;
+        hotGunImage.src ='../images/doublegun.png';   
+        hotGunImage.style.display = "block";        
     })
 
-    window.addEventListener('click', (event) => {
-    console.log(selectedHotGun)
-       if (selectedHotGun) {
+    gun3Element.addEventListener('click', () => {
+        selectedHotGun = 'sniper';
+        userIsPlacingGun = true;
+        hotGunImage.src ='../images/sniper.png';   
+        hotGunImage.style.display = "block";        
+    })
+
+    gun4Element.addEventListener('click', () => {
+        selectedHotGun = 'slower';
+        userIsPlacingGun = true;
+        hotGunImage.src ='../images/slower.png';   
+        hotGunImage.style.display = "block";        
+    })
+
+    // escape
+    window.addEventListener('keydown', (event) => {
+        console.log('test')
+        if (event.key === "Escape") {
+            userIsPlacingGun = false;
+            hotGunImage.style.display = "none";        
+
+        }
+    })
+
+    window.addEventListener('mousemove', (event) => { 
+        if (userIsPlacingGun) {
             let canvasLeft = canvasGameElement.offsetLeft + gameSectionElement.offsetLeft ; // + canvas.clientLeft; Add  when border is applied // CanvasLeft = distance  to left side screen
             let canvasTop = canvasGameElement.offsetTop + gameSectionElement.offsetTop; // + canvas.clientTop; Add when border is applied to the canvas
             let x = event.pageX - canvasLeft; // event.pageX is actual location  
             let y = event.pageY - canvasTop;
-            if (checkHotGunSpaceAvailable(x, y, selectedHotGun)) {
-                placeGun(x, y, selectedHotGun);
+            console.log('y:', y, 'newy:', y - 50)
+            hotGunImage.style.top = y - createTemporaryHotGunObject().range + 50 + 'px';
+            hotGunImage.style.left = x - createTemporaryHotGunObject().range + 'px';
+        }
+    })
+
+    window.addEventListener('click', (event) => {
+       if (userIsPlacingGun) {
+            let canvasLeft = canvasGameElement.offsetLeft + gameSectionElement.offsetLeft ; // + canvas.clientLeft; Add  when border is applied // CanvasLeft = distance  to left side screen
+            let canvasTop = canvasGameElement.offsetTop + gameSectionElement.offsetTop; // + canvas.clientTop; Add when border is applied to the canvas
+            let x = event.pageX - canvasLeft; // event.pageX is actual location  
+            let y = event.pageY - canvasTop;
+            let temporaryHotGun = createTemporaryHotGunObject();
+            if (checkHotGunSpaceAvailable(x, y, temporaryHotGun)) {
+                placeGun(x, y, temporaryHotGun);
             }
         }
     })
