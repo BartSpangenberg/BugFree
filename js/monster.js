@@ -5,6 +5,7 @@ class Monster {
         this.directionX = 0;
         this.directionY = 1;
         this.spawnTime = undefined;
+        this.monsterAngle =  0;
     }
 
    drawHealthMeter() {
@@ -12,16 +13,23 @@ class Monster {
            ctx.beginPath();
            ctx.globalAlpha = 0.8;
            ctx.fillStyle = healthMeterBgColor;
-           ctx.fillRect(this.monsterX - this.radius, this.monsterY - 1.5 * this.radius, this.radius*2 ,  1 / 3 * this. radius);
+           ctx.fillRect(this.monsterX - this.radius, this.monsterY - this.healthMeterY, this.radius * 2 ,  1 / 3 * this. radius);
            ctx.fill();
            ctx.fillStyle = healthMeterColor;
-           ctx.fillRect(this.monsterX - this.radius, this.monsterY - 1.5 * this.radius, this.health * this.radius * 2 / this.maxHealth,  1 / 3 * this. radius);
+           ctx.fillRect(this.monsterX - this.radius, this.monsterY - this.healthMeterY, this.health * this.radius * 2 / this.maxHealth,  1 / 3 * this. radius);
            ctx.fill();
            ctx.closePath();
        }
    }
-}
 
+   setImageDirection() {
+        this.monsterAngle = this.directionX === 0 && this.directionY === 1 ? 0 
+                          : this.directionX === 0 && this.directionY === -1 ? Math.PI
+                          : this.directionX === -1 && this.directionY === 0 ? 0.5 * Math.PI
+                          : -0.5 * Math.PI
+        
+   }
+}
 
 class BasicMonster extends Monster {
     constructor() {
@@ -36,15 +44,30 @@ class BasicMonster extends Monster {
         this.radius = 15;
         this.points = 100;
         this.money = 25;
+        this.healthMeterY = 40;
     }
 
     drawMonster() {
+        // old 
+        // ctx.beginPath();
+        // ctx.fillStyle = this.color;
+        // ctx.globalAlpha = 1;
+        // ctx.arc(this.monsterX, this.monsterY, this.radius, 0, 2 * Math.PI);
+        // ctx.fill();
+        // ctx.closePath();
+        this.setImageDirection();
+
         ctx.beginPath();
-        ctx.fillStyle = this.color;
         ctx.globalAlpha = 1;
-        ctx.arc(this.monsterX, this.monsterY, this.radius, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
+        ctx.save();  
+        ctx.translate(this.monsterX, this.monsterY);  
+        // ctx.rotate(this.convertDegreesToRadians(this.gunAngle));  
+        ctx.rotate(this.monsterAngle)
+        ctx.translate(-this.monsterX - (basicMonsterImage.width / 2) , -this.monsterY - (basicMonsterImage.height / 2) );  
+        ctx.drawImage(basicMonsterImage, this.monsterX , this.monsterY);  
+        ctx.restore();  
+        ctx.closePath()
+
    } 
 }
 
@@ -78,7 +101,7 @@ class SpeedMonster extends Monster {
         super();
         this.name = "speedMonster";
         this.description = "Blablabla";
-        this.color = '#FA8700'
+        this.color = '#FA8700';
         this.speed = 4;
         this.currentSpeed = this.speed;
         this.maxHealth = 500;
@@ -192,7 +215,6 @@ class InvisibleMonster extends Monster {
             setInterval(() => {
                 this.color = 'transparent';
                 this.invisible = true;
-                
                 setTimeout(() => {
                  this.color = 'black';
                  this.invisible = false;
@@ -208,7 +230,7 @@ class FlyingMonster extends Monster {
         super();
         this.name = "flyingMonster";
         this.description = "Blablabla";
-        this.color = '#E3A640'
+        this.color = '#E3A640';
         this.speed = 0.75;    
         this.currentSpeed = this.speed;
         this.maxHealth = 500;
@@ -230,7 +252,6 @@ class FlyingMonster extends Monster {
         ctx.closePath();
    } 
 }
-
 
 // Monster functions
 const moveMonster = monster => {

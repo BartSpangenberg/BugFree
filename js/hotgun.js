@@ -31,6 +31,10 @@ class HotGun {
             }
         }
     }
+
+    convertDegreesToRadians(degrees)  {  
+        return degrees * 0.01745;  
+    }  
 }
 
 class BigGun extends HotGun {
@@ -46,15 +50,40 @@ class BigGun extends HotGun {
         this.animationTime = 20;
         this.dps = 1000 / this.loadingTime * this.damage;
         this.shotsPerSecond = 1000 / this.loadingTime
+        this.gunAngle = 270;
     }
 
     drawHotGun() {
+        // old gun
+        // ctx.beginPath();
+        // ctx.fillStyle = '#39FF14';
+        // ctx.globalAlpha = 0.9;
+        // ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
+        // ctx.fill();
+        // ctx.closePath()
+        // console.log(Math.atan2(this.targetY / this.targetX))
+
+        this.gunAngle = Math.atan( (this.targetY - this.hotGunY ) / (this.targetX - this.hotGunX )) //- Math.PI
+        if (this.targetX < this.hotGunX) {
+            this.gunAngle -= 0.5 * Math.PI;
+        } 
+        else {
+            this.gunAngle += 0.5 * Math.PI
+        }
+        console.log(this.gunAngle)
+        
         ctx.beginPath();
-        ctx.fillStyle = '#39FF14';
-        ctx.globalAlpha = 0.9;
-        ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
+        ctx.globalAlpha = 1;
+        ctx.save();  
+        ctx.translate(this.hotGunX, this.hotGunY);  
+        // ctx.rotate(this.convertDegreesToRadians(this.gunAngle));  
+        ctx.rotate(this.gunAngle)
+        ctx.translate(-this.hotGunX - this.range , -this.hotGunY - this.range );  
+        ctx.drawImage(basicGunImage, this.hotGunX , this.hotGunY);  
+        ctx.restore();  
+        ctx.closePath()
+
+        // this.gunAngle++
     }
 
     shotAnimation() {
@@ -155,7 +184,7 @@ class Gandalf extends HotGun {
         super();
         this.name = 'gandalf';
         this.damage = 0;
-        this.range = 75; 
+        this.range = 125; 
         this.loadingTime = 500;
         this.radius = 22;
         this.shotColor = 'transparent'; 
@@ -167,7 +196,7 @@ class Gandalf extends HotGun {
 
     drawHotGun() {
         ctx.beginPath();
-        ctx.fillStyle = '#20FAF0';
+        ctx.fillStyle = 'green';
         ctx.globalAlpha = 0.9;
         ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
         ctx.fill();
@@ -219,7 +248,7 @@ class Bazooka extends HotGun {
         if (this.loaded) {
             if (!monster.invisible) {
                 // Check if other monsters are in range of this monster
-                // IF there are monsters in range, reduce the health of those monsters
+                // If there are monsters in range, reduce the health of those monsters
                 monsters.forEach(fellowMonster => {
                     if ( monster.monsterX - this.splashRange < fellowMonster.monsterX  && fellowMonster.monsterX < monster.monsterX + this.splashRange ) {
                         if ( monster.monsterY - this.splashRange < fellowMonster.monsterY  && fellowMonster.monsterY < monster.monsterY + this.splashRange ) {
@@ -388,7 +417,7 @@ const checkRange = () => {
             if ( hotGun.hotGunX - hotGun.range < monster.monsterX && monster.monsterX < hotGun.hotGunX + hotGun.range ) {
                 if ( hotGun.hotGunY - hotGun.range < monster.monsterY && monster.monsterY < hotGun.hotGunY + hotGun.range ) {
                     if (hotGun.name === 'gandalf') {
-                        monster.currentSpeed = monster.speed * 0.2;
+                        monster.currentSpeed = monster.speed * speedChangeGandalf;
                     }
                     else {
                         hotGun.shoot(monster);

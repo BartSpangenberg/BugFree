@@ -20,6 +20,11 @@ const gun5Element = document.querySelector('#gun5');
 const gun6Element = document.querySelector('#gun6');
 const hotGunImage = document.querySelector('#cursor-follow');
 
+// Images
+let basicGunImage = new Image();
+let basicGunImageRange = new Image();
+let basicMonsterImage = new Image();
+
 // create context
 const ctxStats = canvasStatsElement.getContext('2d');
 const ctx = canvasGameElement.getContext('2d');
@@ -40,7 +45,7 @@ let levelStartX = null, levelStartY = null;
 let waveStarted = false;
 let canvasLoaded = false; // Not used I think
 let userIsPlacingGun = false;
-
+let speedChangeGandalf = 0.4;
 
 // HotGun info
 let instanceOfAllHotGuns = [new BigGun, new QuickGun, new Sniper, new Gandalf, new Lazer, new Bazooka];
@@ -115,6 +120,11 @@ const animate = () => {
 
 
 window.addEventListener('load', () => {
+    // Load images
+    basicGunImage.src = '../images/basic-gun-no-border.png';
+    basicGunImageRange.src = '../images/basicgun-range.png';
+    basicMonsterImage.src = '../images/basic-monster.png'
+
     startGameBtn.addEventListener('click', () => {
         turnStartScreenOff();
         loadInBetweenScreen();
@@ -153,7 +163,7 @@ window.addEventListener('load', () => {
     gun1Element.addEventListener('click', () => {
         selectedHotGun = 'bigGun';
         userIsPlacingGun = true;
-        hotGunImage.src ='../images/biggun.png';   
+        hotGunImage.src ='../images/basicgun-range.png';   
         hotGunImage.style.display = "block";        
     })
 
@@ -192,7 +202,7 @@ window.addEventListener('load', () => {
         hotGunImage.style.display = "block";        
     })
 
-    // escape
+    // Remove selected hotGun
     window.addEventListener('keydown', (event) => {
         if (event.key === "Escape") {
             userIsPlacingGun = false;
