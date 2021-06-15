@@ -20,7 +20,6 @@ const drawRoadElementCollison = roadElement => {
     ctx.globalAlpha = 0.5;
     ctx.fillRect(roadElement.collisionX, roadElement.collisionY, roadElement.collisionSideSize, roadElement.collisionSideSize);
     ctx.closePath();
-    // console.log( roadElement.collisionX, roadElement.collisionY, roadElement.collisionSideSize, roadElement.collisionSideSize )
 }
 
 const drawFullRoad = () => {

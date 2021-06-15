@@ -22,11 +22,13 @@ class HotGun {
 
     shoot(monster) {
         if (this.loaded) {
-            this.aim(monster);
-            monster.health -= this.damage;
-            this.loaded = false;
-            this.loadGun();
-            checkIfMonsterIsAlive(monster);
+            if (!monster.invisible) {
+                this.aim(monster);
+                monster.health -= this.damage;
+                this.loaded = false;
+                this.loadGun();
+                checkIfMonsterIsAlive(monster);
+            }
         }
     }
 }
@@ -35,9 +37,9 @@ class BigGun extends HotGun {
     constructor() {
         super();
         this.name = 'bigGun';
-        this.damage = 20;
+        this.damage = 10;
         this.range = 75; 
-        this.loadingTime = 200;
+        this.loadingTime = 300;
         this.radius = 15;
         this.shotColor = 'red'; 
         this.cost = 100;
@@ -74,9 +76,9 @@ class QuickGun extends HotGun {
     constructor() {
         super();
         this.name = 'doubleGun';
-        this.damage = 20;
+        this.damage = 5;
         this.range = 100; 
-        this.loadingTime = 50;
+        this.loadingTime = 100;
         this.radius = 20;
         this.shotColor = 'yellow'; 
         this.cost = 250;
@@ -215,24 +217,24 @@ class Bazooka extends HotGun {
 
     shoot(monster) {
         if (this.loaded) {
-            // Check if other monsters are in range of this monster
-            // IF there are monsters in range, reduce the health of those monsters
-            monsters.forEach(fellowMonster => {
-                if ( monster.monsterX - this.splashRange < fellowMonster.monsterX  && fellowMonster.monsterX < monster.monsterX + this.splashRange ) {
-                    if ( monster.monsterY - this.splashRange < fellowMonster.monsterY  && fellowMonster.monsterY < monster.monsterY + this.splashRange ) {
-                        console.log("I run")
-                        fellowMonster.health -= this.damage * this.surroundingPercentage;
-                        checkIfMonsterIsAlive(fellowMonster);
+            if (!monster.invisible) {
+                // Check if other monsters are in range of this monster
+                // IF there are monsters in range, reduce the health of those monsters
+                monsters.forEach(fellowMonster => {
+                    if ( monster.monsterX - this.splashRange < fellowMonster.monsterX  && fellowMonster.monsterX < monster.monsterX + this.splashRange ) {
+                        if ( monster.monsterY - this.splashRange < fellowMonster.monsterY  && fellowMonster.monsterY < monster.monsterY + this.splashRange ) {
+                                fellowMonster.health -= this.damage * this.surroundingPercentage;
+                                checkIfMonsterIsAlive(fellowMonster);
+                        }
                     }
-                }
-            })
-
-            this.aim(monster);
-            monster.health -= this.damage;
-            console.log(monster)
-            this.loaded = false;
-            this.loadGun();
-            checkIfMonsterIsAlive(monster);
+                })
+    
+                this.aim(monster);
+                monster.health -= this.damage;
+                this.loaded = false;
+                this.loadGun();
+                checkIfMonsterIsAlive(monster);
+            }
         }
     }
 
@@ -365,7 +367,6 @@ const checkHotGunSpaceAvailable = (centerX, centerY, temporaryHotGun) => {
 }
 
 const placeGun = (x, y, newHotGun) => {
-    console.log(newHotGun)
     if (newHotGun.cost <= money) {
         money -= newHotGun.cost;
         arsenalValue += newHotGun.cost;
@@ -391,7 +392,6 @@ const checkRange = () => {
                     }
                     else {
                         hotGun.shoot(monster);
-                        console.log(monster)
                     }
                 }
             }

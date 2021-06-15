@@ -1,22 +1,24 @@
 class Monster {
     constructor() {
-        this.monsterX = null;
-        this.monsterY = null;
+        this.monsterX = levelStartX + 25;
+        this.monsterY = levelStartY;
         this.directionX = 0;
         this.directionY = 1;
         this.spawnTime = undefined;
     }
 
    drawHealthMeter() {
-        ctx.beginPath();
-        ctx.globalAlpha = 0.8;
-        ctx.fillStyle = healthMeterBgColor;
-        ctx.fillRect(this.monsterX - this.radius, this.monsterY - 1.5 * this.radius, this.radius*2 ,  1 / 3 * this. radius);
-        ctx.fill();
-        ctx.fillStyle = healthMeterColor;
-        ctx.fillRect(this.monsterX - this.radius, this.monsterY - 1.5 * this.radius, this.health * this.radius * 2 / this.maxHealth,  1 / 3 * this. radius);
-        ctx.fill();
-        ctx.closePath();
+       if (!this.invisible) {
+           ctx.beginPath();
+           ctx.globalAlpha = 0.8;
+           ctx.fillStyle = healthMeterBgColor;
+           ctx.fillRect(this.monsterX - this.radius, this.monsterY - 1.5 * this.radius, this.radius*2 ,  1 / 3 * this. radius);
+           ctx.fill();
+           ctx.fillStyle = healthMeterColor;
+           ctx.fillRect(this.monsterX - this.radius, this.monsterY - 1.5 * this.radius, this.health * this.radius * 2 / this.maxHealth,  1 / 3 * this. radius);
+           ctx.fill();
+           ctx.closePath();
+       }
    }
 }
 
@@ -81,7 +83,7 @@ class SpeedMonster extends Monster {
         this.currentSpeed = this.speed;
         this.maxHealth = 500;
         this.health = this.maxHealth;
-        this.radius = 18;monsterAction
+        this.radius = 18;
         this.money = 50;
     }
 
@@ -110,6 +112,9 @@ class HealMonster extends Monster {
         this.money = 50;
         this.healRange = 100;
         this.framesVisible = null;
+        this.healInterval = 4000;
+        this.healPoints = 250;
+        this.randomStartTimeHealing = null;
     }
 
     drawMonster() {
@@ -122,29 +127,36 @@ class HealMonster extends Monster {
    } 
 
    healOtherMonsters() {
-        monsters.forEach(fellowMonster => {
-            if ( this.monsterX - this.healRange < fellowMonster.monsterX  && fellowMonster.monsterX < this.monsterX + this.healRange ) {
-                if ( this.monsterY - this.healRange < fellowMonster.monsterY  && fellowMonster.monsterY < this.monsterY + this.healRange ) {
-                    console.log("I run")
-                    fellowMonster.health = fellowMonster.maxHealth > 500 ? + 250 : fellowMonster.maxHealth;
-                    this.framesVisible = 20;
-                }
-            }
-        })
+
+        setTimeout(() => {
+            setInterval(() => {
+                    monsters.forEach(fellowMonster => {
+                        if ( this.monsterX - this.healRange < fellowMonster.monsterX  && fellowMonster.monsterX < this.monsterX + this.healRange ) {
+                            if ( this.monsterY - this.healRange < fellowMonster.monsterY  && fellowMonster.monsterY < this.monsterY + this.healRange ) {
+                                if ( fellowMonster.maxHealth - this.healPoints < fellowMonster.health ) {
+                                    fellowMonster.health = fellowMonster.maxHealth;
+                                }
+                                else {
+                                    fellowMonster.health += this.healPoints;
+                                }
+                                this.framesVisible = 60;
+                            }
+                        }
+                    })
+            }, this.healInterval) 
+        }, Math.floor(this.randomStartTimeHealing * 1000))
    }
 
-   healAnimation() {
-    if (this.framesVisible > 0) {
-        this.framesVisible--; 
-        ctx.beginPath();
-        ctx.setLineDash([0]);
-        ctx.beginPath();
-        ctx.arc(this.targetX, this.targetY, this.splashRange, 0, 2 * Math.PI);
-        ctx.fillStyle = "rgba(124, 252, 0, 0.3)";
-        ctx.fill();
-        ctx.closePath();
-    }
-}
+   healAnimation(monster) {
+        if (this.framesVisible > 0) {
+            this.framesVisible--; 
+            ctx.beginPath();
+            ctx.arc(monster.monsterX, monster.monsterY, this.healRange, 0, 2 * Math.PI);
+            ctx.fillStyle = "rgba(124, 252, 0, 0.3)";
+            ctx.fill();
+            ctx.closePath();
+        }
+    }   
 }
 
 class InvisibleMonster extends Monster {
@@ -161,7 +173,8 @@ class InvisibleMonster extends Monster {
         this.points = 250;
         this.money = 35;
         this.invisible = false;
-        this.timeInvisible = 100;
+        this.timeInvisible = 3000;
+        this.randomStartTimeInvisibility = null;
     }
 
     drawMonster() {
@@ -172,17 +185,22 @@ class InvisibleMonster extends Monster {
         ctx.fill();
         ctx.closePath();
    } 
-   // ?? Why is this not working
+
    becomeInvisbile() {
-       setInterval(() => {
-           this.color = 'transparent';
-           this.invisible = true;
-           setTimeout(() => {
-            this.color = 'black';
-            this.invisible = false;
-           }, this.timeInvisible)
-       }, this.timeInvisible * 3 ) 
-   }
+
+        setTimeout(() => {
+            setInterval(() => {
+                this.color = 'transparent';
+                this.invisible = true;
+                
+                setTimeout(() => {
+                 this.color = 'black';
+                 this.invisible = false;
+                }, this.timeInvisible)
+            }, this.timeInvisible * 3 ) 
+        }, Math.floor(this.randomStartTimeInvisibility * 1000))
+    }
+
 }
 
 class FlyingMonster extends Monster {
@@ -191,13 +209,16 @@ class FlyingMonster extends Monster {
         this.name = "flyingMonster";
         this.description = "Blablabla";
         this.color = '#E3A640'
-        this.speed = 1.5;    
+        this.speed = 0.75;    
         this.currentSpeed = this.speed;
         this.maxHealth = 500;
         this.health = this.maxHealth;
         this.radius = 10;
         this.points = 1000;
         this.money = 75;
+        this.directionX = 0;
+        this.directionY = 1;
+        this.monsterX = createRandomCoordinate(canvas.width);
     }
 
     drawMonster() {
@@ -223,8 +244,10 @@ const checkMonsterCollision = monster => {
         // Check for collision with direction change rectangle
         if ( roadPart.collisionX < monster.monsterX && monster.monsterX < roadPart.collisionX + roadPart.collisionSideSize ) {
             if ( monster.monsterY < roadPart.collisionY + roadPart.collisionSideSize && roadPart.collisionY < monster.monsterY  ) {
-                monster.directionX = roadPart.directionChangeX;
-                monster.directionY = roadPart.directionChangeY;
+                if (monster.name !== 'flyingMonster') {
+                    monster.directionX = roadPart.directionChangeX;
+                    monster.directionY = roadPart.directionChangeY;
+                }
             }
         }
     })
@@ -237,19 +260,18 @@ const checkMonsterCollision = monster => {
 const monsterAction = () => {
     monsters.forEach(monster => {
         if (monster.spawnTime < gameTime) {
-            monster.drawMonster()
+            monster.drawMonster();
             monster.drawHealthMeter();
             moveMonster(monster);
             checkMonsterCollision(monster);
             if (monster.name === 'healMonster') {
-                monster.healAnimation();
+                monster.healAnimation(monster);
             }
         }
     })
 }
 
 const createMonsterWave = (monsterWave) => {
-    console.log(levelStartX)
     for (let i = 0; i < monsterWave.amountOfBasicMonsters; i++) {
         let monster = new BasicMonster();
         monsters.push(monster);
@@ -262,12 +284,15 @@ const createMonsterWave = (monsterWave) => {
     
     for (let i = 0; i < monsterWave.amountOfInvisibleMonsters; i++) {
         let monster = new InvisibleMonster();
+        monster.randomStartTimeInvisibility = randomTime(monsterWave.waveTime);
         monster.becomeInvisbile();
         monsters.push(monster);
     }    
     
     for (let i = 0; i < monsterWave.amountOfHealMonsters; i++) {
         let monster = new HealMonster();
+        monster.randomStartTimeHealing = randomTime(monsterWave.waveTime);
+        monster.healOtherMonsters();
         monsters.push(monster);
     }    
     
@@ -282,23 +307,19 @@ const createMonsterWave = (monsterWave) => {
     }    
     
     monsters.forEach(monster => {
-        monster.spawnTime = randomSpawnTime(monsterWave.waveTime)
-        console.log(monster.monsterX, 'test')
-        console.log(monster)
-        monster.monsterX = 35;
-        monster.monsterY = 35;
-        console.log(monster.monsterX, 'test2')
-        console.log(monster)
+        monster.spawnTime = randomTime(monsterWave.waveTime)
     })
-    monsters[0].monsterX = 35;
 
     monsters.sort((a, b) => {
         return a.spawnTime - b.spawnTime;
     })
-    console.log(monsters)
 }
 
-const randomSpawnTime = time => {
+const createRandomCoordinate  = pixelDistance => {
+    return Math.floor(Math.random() * (pixelDistance - 50)) + 25;
+}
+
+const randomTime = time => {
     return Math.random() * time;
 }
 
@@ -315,6 +336,6 @@ const setMonsterSpeed = (monster) => {
         monster.currentSpeed = monster.maxHealth / 2 < monster.health ? monster.speed : monster.speed * 2;
     }
     else {
-        monster.currentSpeed = monster.Speed;
+        monster.currentSpeed = monster.speed;
     }
 }

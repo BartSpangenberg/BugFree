@@ -137,14 +137,12 @@ window.addEventListener('load', () => {
     })
 
     playAgainVictoryBtn.addEventListener('click', () => { // ?? Can I create the same event listener for 2 differen buttons?
-        console.log('I run victory btn')
         resetGame();
         loadInBetweenScreen();
         turnEndScreensOff();
     })
 
     playAgainGameOverBtn.addEventListener('click', () => {
-        console.log('I run game over button')
         resetGame();
         loadInBetweenScreen();
         turnEndScreensOff();
@@ -196,7 +194,6 @@ window.addEventListener('load', () => {
 
     // escape
     window.addEventListener('keydown', (event) => {
-        console.log('test')
         if (event.key === "Escape") {
             userIsPlacingGun = false;
             hotGunImage.style.display = "none";        

@@ -44,7 +44,6 @@ const setLevelData = () => {
     roadParts = [];
     levelStartX = roadLevelStartPoints[level - 1].levelStartX;
     levelStartY = roadLevelStartPoints[level - 1].levelStartY;
-    console.log('I run', levelStartX);
     money = startMoney[level - 1];
 
     // Road needs to be made specific for level
