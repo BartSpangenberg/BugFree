@@ -64,6 +64,8 @@ class BasicMonster extends Monster {
         // ctx.rotate(this.convertDegreesToRadians(this.gunAngle));  
         ctx.rotate(this.monsterAngle)
         ctx.translate(-this.monsterX - (basicMonsterImage.width / 2) , -this.monsterY - (basicMonsterImage.height / 2) );  
+        ctx.shadowBlur = 5;
+        ctx.shadowColor = monsterShadow;
         ctx.drawImage(basicMonsterImage, this.monsterX , this.monsterY);  
         ctx.restore();  
         ctx.closePath()

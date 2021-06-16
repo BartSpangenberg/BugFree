@@ -21,9 +21,11 @@ const gun6Element = document.querySelector('#gun6');
 const hotGunImage = document.querySelector('#cursor-follow');
 
 // Images
+let towerFoundation = new Image();
 let basicGunImage = new Image();
 let basicGunImageRange = new Image();
 let basicMonsterImage = new Image();
+let bullet = new Image();
 
 // create context
 const ctxStats = canvasStatsElement.getContext('2d');
@@ -38,9 +40,12 @@ let gameIsOver = false;
 let collisionOffSet = 20;
 let healthMeterColor = 'green';
 let healthMeterBgColor = 'white';
-let bgColor = 'black';
+let bgColor =  '#026633'
+let roadColor = '#6E3B2E'
 let textColor = 'white';
 let statColor = 'yellow';
+let roadShadow = '#2C0C00';
+let monsterShadow = 'black';
 let levelStartX = null, levelStartY = null;
 let waveStarted = false;
 let canvasLoaded = false; // Not used I think
@@ -103,9 +108,9 @@ const animate = () => {
         }
     }
 
-    roadParts.forEach(roadPart => {
-        drawRoadElementCollison(roadPart);
-    })
+    // roadParts.forEach(roadPart => {
+    //     drawRoadElementCollison(roadPart);
+    // })
 
     //Logic for changing the position of the monsters
     if (gameIsOver) {
@@ -121,9 +126,11 @@ const animate = () => {
 
 window.addEventListener('load', () => {
     // Load images
-    basicGunImage.src = '../images/basic-gun-no-border.png';
-    basicGunImageRange.src = '../images/basicgun-range.png';
+    towerFoundation.src = '../images/tower-foundation.png'
+    basicGunImage.src = '../images/basic-tower-final-tower.png';
+    basicGunImageRange.src = '../images/baisc-tower-final-range.png';
     basicMonsterImage.src = '../images/basic-monster.png'
+    bullet.src = '../images/bullet.png';
 
     startGameBtn.addEventListener('click', () => {
         turnStartScreenOff();
@@ -163,7 +170,7 @@ window.addEventListener('load', () => {
     gun1Element.addEventListener('click', () => {
         selectedHotGun = 'bigGun';
         userIsPlacingGun = true;
-        hotGunImage.src ='../images/basicgun-range.png';   
+        hotGunImage.src ='../images/baisc-tower-final-range.png';
         hotGunImage.style.display = "block";        
     })
 

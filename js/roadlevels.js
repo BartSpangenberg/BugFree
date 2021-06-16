@@ -31,7 +31,7 @@ const roadLevels = [
             collisionSide: 'right',
             directionChangeX: 0,
             directionChangeY: -1,
-            color: '#5D12FC'
+            color: 'blue'
         }, 
         {
             startX: 300,
@@ -51,7 +51,7 @@ const roadLevels = [
             collisionSide: 'right',
             directionChangeX: 0,
             directionChangeY: 1,
-            color: '#5D12FC'
+            color: 'blue'
         }, 
         {
             startX: 900,
@@ -71,7 +71,7 @@ const roadLevels = [
             collisionSide: 'left',
             directionChangeX: 0,
             directionChangeY: -1,
-            color: '#5D12FC'
+            color: 'blueC'
         }, 
         {
             startX: 650,
@@ -91,7 +91,7 @@ const roadLevels = [
             collisionSide: 'left',
             directionChangeX: 0,
             directionChangeY: 1,
-            color: '#5D12FC'
+            color: 'blue'
         },
         {
             startX: 500,
@@ -111,7 +111,7 @@ const roadLevels = [
             collisionSide: 'left',
             directionChangeX: 0,
             directionChangeY: -1,
-            color: '#5D12FC'
+            color: 'blue'
         },
         {
             startX: 300,
@@ -131,7 +131,7 @@ const roadLevels = [
             collisionSide: 'left',
             directionChangeX: 0,
             directionChangeY: 1,
-            color: '#5D12FC'
+            color: 'blue'
         },
         {
             startX: 50,

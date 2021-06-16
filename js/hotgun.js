@@ -6,6 +6,9 @@ class HotGun {
         this.framesVisible = null;
         this.targetX = undefined;
         this.targetY = undefined;
+        this.targetRadius = undefined;
+        this.shotDistancePercentage = 0;
+        this.shotDistancePercentageOffset = 0.2;
     }
 
     loadGun() {
@@ -15,6 +18,7 @@ class HotGun {
     }
 
     aim(monster) {
+        this.targetRadius = monster.radius;
         this.targetX = monster.monsterX;
         this.targetY = monster.monsterY;
         this.framesVisible = this.animationTime;
@@ -24,6 +28,7 @@ class HotGun {
         if (this.loaded) {
             if (!monster.invisible) {
                 this.aim(monster);
+                this.shotDistancePercentage = this.shotDistancePercentageOffset;
                 monster.health -= this.damage;
                 this.loaded = false;
                 this.loadGun();
@@ -51,6 +56,7 @@ class BigGun extends HotGun {
         this.dps = 1000 / this.loadingTime * this.damage;
         this.shotsPerSecond = 1000 / this.loadingTime
         this.gunAngle = 270;
+        this.gunOffSet = 20;
     }
 
     drawHotGun() {
@@ -63,6 +69,13 @@ class BigGun extends HotGun {
         // ctx.closePath()
         // console.log(Math.atan2(this.targetY / this.targetX))
 
+        // Draw the platform
+        ctx.beginPath();
+        ctx.globalAlpha = 1;
+        ctx.drawImage(towerFoundation, this.hotGunX - towerFoundation.width / 2, this.hotGunY - towerFoundation.height / 2);  
+        ctx.closePath()
+
+        // Calculate the rotation
         this.gunAngle = Math.atan( (this.targetY - this.hotGunY ) / (this.targetX - this.hotGunX )) //- Math.PI
         if (this.targetX < this.hotGunX) {
             this.gunAngle -= 0.5 * Math.PI;
@@ -70,32 +83,50 @@ class BigGun extends HotGun {
         else {
             this.gunAngle += 0.5 * Math.PI
         }
-        console.log(this.gunAngle)
-        
+
+        // Draw the gun
         ctx.beginPath();
         ctx.globalAlpha = 1;
         ctx.save();  
         ctx.translate(this.hotGunX, this.hotGunY);  
-        // ctx.rotate(this.convertDegreesToRadians(this.gunAngle));  
         ctx.rotate(this.gunAngle)
-        ctx.translate(-this.hotGunX - this.range , -this.hotGunY - this.range );  
-        ctx.drawImage(basicGunImage, this.hotGunX , this.hotGunY);  
+        ctx.translate(-(this.hotGunX + (basicGunImage.width / 2)), -(this.hotGunY + (basicGunImage.height / 2)));  
+        ctx.drawImage(basicGunImage, this.hotGunX, this.hotGunY);  
         ctx.restore();  
         ctx.closePath()
 
-        // this.gunAngle++
     }
 
     shotAnimation() {
         if (this.framesVisible > 0) {
             this.framesVisible--; 
+            // ctx.beginPath();
+            // ctx.globalAlpha = 1;
+            // ctx.moveTo(this.hotGunX, this.hotGunY);
+            // ctx.lineTo(this.targetX, this.targetY);
+            // ctx.strokeStyle = this.shotColor;
+            // ctx.setLineDash([0]);
+            // ctx.stroke();
+            // ctx.closePath();
+
+            // Step 1: calculate distance between gun start point and radius of the monster
+            this.shotDistancePercentage += 0.8 / this.animationTime;
+            // this.shotDistancePercentage += (0.8 / this.animationTime) + 0.2;
+            // console.elol
+            let targetDistanceX = this.targetX - this.hotGunX; // - monster.radius - this.gunOffSet 
+            let targetDistanceY = this.targetY -  this.hotGunY; // - monster.radius - this.gunOffSet 
+            let targetDistance = Math.sqrt(Math.pow(targetDistanceX ,2) + Math.pow(targetDistanceY ,2));
+            let bulletX = Math.cos(this.gunAngle - Math.PI * 0.5) * targetDistance * this.shotDistancePercentage;
+            let bulletY = Math.sin(this.gunAngle - Math.PI * 0.5) * targetDistance * this.shotDistancePercentage;
+                    
             ctx.beginPath();
             ctx.globalAlpha = 1;
-            ctx.moveTo(this.hotGunX, this.hotGunY);
-            ctx.lineTo(this.targetX, this.targetY);
-            ctx.strokeStyle = this.shotColor;
-            ctx.setLineDash([0]);
-            ctx.stroke();
+            ctx.save();  
+            ctx.translate(bulletX + this.hotGunX, bulletY + this.hotGunY);  
+            ctx.rotate(this.gunAngle)
+            ctx.translate(-bulletX - this.hotGunX - bullet.width, -bulletY - this.hotGunY );  
+            ctx.drawImage(bullet, bulletX  + this.hotGunX , bulletY + this.hotGunY);  
+            ctx.restore();  
             ctx.closePath();
         }
     }

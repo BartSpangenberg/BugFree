@@ -1,3 +1,7 @@
+body {
+  background-color: #026633;
+}
+
 #game {
   position: relative;
   display: none;

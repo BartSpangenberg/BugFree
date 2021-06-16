@@ -1,6 +1,6 @@
 const monsterWaves = [
 [{
-        amountOfBasicMonsters: 10,
+        amountOfBasicMonsters: 1,
         amountOfSpeedMonsters: 0,
         amountOfInvisibleMonsters: 0,
         amountOfHealMonsters: 0,

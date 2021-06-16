@@ -6,10 +6,32 @@ const drawBoard = () => {
     ctx.closePath();
 }
 
+// changes made
+const drawRoadElementBackground = roadElement => {
+    ctx.beginPath();
+    // ctx.setLineDash([0]);
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = roadShadow;
+    ctx.fillRect(roadElement.startX, roadElement.startY, roadElement.width, roadElement.height)
+    ctx.closePath();
+    // ctx.shadowBlur = 0;
+
+
+    // ctx.beginPath();
+    // ctx.globalAlpha = 0.7;
+    // ctx.fillStyle = 'yellow';
+    // ctx.fillRect(roadElement.startX, roadElement.startY, roadElement.width, roadElement.height)
+    // ctx.closePath();
+
+}
+
+
+
 const drawRoadElement = roadElement => {
     ctx.beginPath();
-    ctx.globalAlpha = 0.7;
-    ctx.fillStyle = roadElement.color;
+    ctx.shadowBlur = 0;
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = roadColor;
     ctx.fillRect(roadElement.startX, roadElement.startY, roadElement.width, roadElement.height)
     ctx.closePath();
 }
@@ -24,9 +46,12 @@ const drawRoadElementCollison = roadElement => {
 
 const drawFullRoad = () => {
     roadParts.forEach(roadPart => {
+        drawRoadElementBackground(roadPart);
+    })
+    roadParts.forEach(roadPart => {
         drawRoadElement(roadPart);
     })
-    drawMonsterPit();
+    // drawMonsterPit();
     drawHeatChamber();
 }
 

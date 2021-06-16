@@ -50,6 +50,7 @@ const createRoad = () => {
 const drawMonsterPit = () => {
 
     ctx.beginPath();
+    ctx.shadowBlur = 0;
     ctx.setLineDash([0]);
     ctx.strokeStyle = '#cf1020';
     ctx.arc(levelStartX + 25, levelStartY + 25, 24, 0, 2 * Math.PI);
