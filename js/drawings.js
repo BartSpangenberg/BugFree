@@ -10,8 +10,12 @@ const drawBoard = () => {
 const drawRoadElementBackground = roadElement => {
     ctx.beginPath();
     // ctx.setLineDash([0]);
-    ctx.shadowBlur = 10;
+    ctx.shadowBlur = 2;
     ctx.shadowColor = roadShadow;
+    ctx.stroke();
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = roadEdgeColor;
+    ctx.strokeRect(roadElement.startX, roadElement.startY, roadElement.width, roadElement.height)
     ctx.fillRect(roadElement.startX, roadElement.startY, roadElement.width, roadElement.height)
     ctx.closePath();
     // ctx.shadowBlur = 0;
@@ -89,20 +93,23 @@ const drawScoreBoard = () => {
     ctxStats.beginPath();
     ctxStats.fillStyle = bgColor;
     ctxStats.fillRect(0, 0, canvasStatsElement.width, canvasStatsElement.height);
-    ctxStats.font = '20px Arial';
-    
     ctxStats.fillStyle = textColor;
+    ctxStats.font = 'bold 30px Gugi';
     ctxStats.fillText(`Level:`, 20, 30);
+    ctxStats.fillStyle = statColor;
+    ctxStats.fillText(`#${level}`, 115, 30);
+
+    ctxStats.fillStyle = textColor;
+    ctxStats.font = 'bold 20px Gugi';
     ctxStats.fillText(`Score:`, 200, 30);
-    ctxStats.fillText(`Highscore:`, 400, 30);
-    ctxStats.fillText(`Wave:`, 650, 30);
-    ctxStats.font = '20px Arial';
+    ctxStats.fillText(`Highscore:`, 410, 30);
+    ctxStats.fillText(`Wave:`, 660, 30);
+    ctxStats.font = 'bold20px Gugi';
 
     ctxStats.fillStyle = statColor;
-    ctxStats.fillText(`#${level}`, 85, 30);
-    ctxStats.fillText(`${score} points`, 270, 30);
-    ctxStats.fillText(`${highScore} points`, 505, 30);
-    ctxStats.fillText(`#${wave}`, 720, 30);
+    ctxStats.fillText(`${score}`, 270, 30);
+    ctxStats.fillText(`${highScore}`, 520, 30);
+    ctxStats.fillText(`#${wave}`, 730, 30);
     ctxStats.closePath();
 }
 
@@ -111,20 +118,24 @@ const drawGunStats = () => {
     ctxGuns.fillStyle = bgColor;
     ctxGuns.fillRect(0, 0, canvasGunElement.width, canvasGunElement.height);
     ctxGuns.fillStyle = textColor;
-    ctxGuns.font = '20px Arial';
+    ctxGuns.font = 'bold 30px Gugi';
     ctxGuns.fillStyle = textColor;
-    ctxGuns.fillText(`Money:`, 30, 40);
-    ctxGuns.fillText(`Damage per second:`, 250, 40);
-    ctxGuns.fillText(`Shots per second:`, 700, 40);
-    ctxGuns.fillText(`Combined 1 shot damage:`, 250, 70);
-    ctxGuns.fillText(`Arsenal value:`, 700, 70);
+    ctxGuns.fillText(`Money:`, 40, 40);
+    ctxGuns.fillStyle = statColor;
+    ctxGuns.fillText(`${money} $`, 38, 80);
+
+    ctxGuns.font = 'bold 20px Gugi';
+    ctxGuns.fillStyle = textColor;
+    ctxGuns.fillText(`Damage per second:`, 220, 40);
+    ctxGuns.fillText(`Shots per second:`, 650, 40);
+    ctxGuns.fillText(`Combined 1 shot damage:`, 220, 70);
+    ctxGuns.fillText(`Arsenal value:`, 650, 70);
     
     ctxGuns.fillStyle = statColor;
-    ctxGuns.fillText(`${money} $`, 105, 40);
-    ctxGuns.fillText(`${Math.round(dps)} damage`, 500, 40);
-    ctxGuns.fillText(`${Math.ceil(shotsPerSecond)} shots`, 875, 40);
-    ctxGuns.fillText(`${oneShotDamage} damage`, 500, 70);
-    ctxGuns.fillText(`${arsenalValue} $`, 875, 70);
+    ctxGuns.fillText(`${Math.round(dps)} dmg`, 480, 40);
+    ctxGuns.fillText(`${Math.ceil(shotsPerSecond)} shots`, 835, 40);
+    ctxGuns.fillText(`${oneShotDamage} dmg`, 480, 70);
+    ctxGuns.fillText(`${arsenalValue} $`, 835, 70);
     
     ctxGuns.closePath();
 }

@@ -84,6 +84,7 @@ const resetGame = () => {
     gameIsOver = false;
     heatMeter = 0;
     waveStarted = false;
+    gandalfPlaced = false;
 
 // Arrays of objects
     hotGuns = [];

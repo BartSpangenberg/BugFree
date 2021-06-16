@@ -29,6 +29,11 @@ class HotGun {
     shoot(monster) {
         if (this.loaded) {
             if (!monster.invisible) {
+                if (monster.name = 'sniper') {
+                    boom.volume = 0.1
+                    boom.play();
+                    console.log("I run")
+                }
                 this.aim(monster);
                 this.shotDistancePercentage = this.shotDistancePercentageOffset;
                 monster.health -= this.damage;
@@ -137,12 +142,12 @@ class QuickGun extends HotGun {
     constructor() {
         super();
         this.name = 'doubleGun';
-        this.damage = 5;
+        this.damage = 8;
         this.range = 100; 
         this.loadingTime = 100;
         this.radius = 20;
         this.shotColor = 'yellow'; 
-        this.cost = 250;
+        this.cost = 300;
         this.animationTime = 1;
         this.dps = 1000 / this.loadingTime * this.damage;
         this.shotsPerSecond = 1000 / this.loadingTime;
@@ -172,12 +177,12 @@ class Sniper extends HotGun {
     constructor() {
         super();
         this.name = 'sniper';
-        this.damage = 500;
+        this.damage = 300;
         this.range = 175; 
-        this.loadingTime = 1000;
+        this.loadingTime = 2500;
         this.radius = 10;
         this.shotColor = 'red'; 
-        this.cost = 25;
+        this.cost = 500;
         this.animationTime = 10;
         this.dps = 1000 / this.loadingTime * this.damage;
         this.shotsPerSecond = 1000 / this.loadingTime;
@@ -185,15 +190,6 @@ class Sniper extends HotGun {
         this.gunImage = sniperGunImage;
         this.gunBarrelLength = 20;
     }
-
-    // drawHotGun() {
-    //     ctx.beginPath();
-    //     ctx.fillStyle = '#FAD51F';
-    //     ctx.globalAlpha = 0.9;
-    //     ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
-    //     ctx.fill();
-    //     ctx.closePath();
-    // }  
 
     shotAnimation() {
         if (this.framesVisible > 0) {
@@ -221,21 +217,12 @@ class Gandalf extends HotGun {
         this.loadingTime = 500;
         this.radius = 22;
         this.shotColor = 'transparent'; 
-        this.cost = 100;
+        this.cost = 1000;
         this.animationTime = 10;  // does nothing, since shotColor is invisible
         this.dps = 1000 / this.loadingTime * this.damage;
         this.shotsPerSecond = 1000 / this.loadingTime
         this.gunImage = gandalfImage;
     }
-
-    // drawHotGun() {
-    //     ctx.beginPath();
-    //     ctx.fillStyle = 'green';
-    //     ctx.globalAlpha = 0.9;
-    //     ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
-    //     ctx.fill();
-    //     ctx.closePath();
-    // }
 
     shotAnimation() {
         if (this.framesVisible > 0) {
@@ -285,7 +272,7 @@ class Bazooka extends HotGun {
         this.loadingTime = 3000;
         this.radius = 22;
         this.shotColor = 'black'; 
-        this.cost = 100;
+        this.cost = 500;
         this.animationTime = 20;  // does nothing, since shotColor is invisible
         this.splashRange = 100;
         this.dps = 1000 / this.loadingTime * this.damage;
@@ -294,15 +281,6 @@ class Bazooka extends HotGun {
         this.gunImage = bazookaGunImage;
         this.gunBarrelLength = 22;
     }
-
-    // drawHotGun() {
-    //     ctx.beginPath();
-    //     ctx.fillStyle = '#20FAF0';
-    //     ctx.globalAlpha = 0.9;
-    //     ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
-    //     ctx.fill();
-    //     ctx.closePath();
-    // }  
 
     shoot(monster) {
         if (this.loaded) {
@@ -365,7 +343,7 @@ class Lazer extends HotGun {
         this.loadingTime = 5;
         this.radius = 22;
         this.shotColor = 'red'; 
-        this.cost = 100;
+        this.cost = 750;
         this.animationTime = 10;  
         this.dps = 1000 / this.loadingTime * this.damage;
         this.shotsPerSecond = 1000 / this.loadingTime;
@@ -373,15 +351,6 @@ class Lazer extends HotGun {
         this.gunImage = lazerGunImage;
         this.gunBarrelLength = 23;
     }
-
-    // drawHotGun() {
-    //     ctx.beginPath();
-    //     ctx.fillStyle = '#20FAF0';
-    //     ctx.globalAlpha = 0.9;
-    //     ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
-    //     ctx.fill();
-    //     ctx.closePath();
-    // }  
 
     shotAnimation() {
         if (this.framesVisible > 0) {

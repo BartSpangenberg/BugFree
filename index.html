@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="./css/victory.css">
     <link rel="stylesheet" href="./css/gameover.css">
     <link rel="stylesheet" href="./css/gamepage.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+
 
 </head>
 <body>
@@ -40,11 +43,12 @@
         <article id="stats">
             <canvas id="stats-canvas" width="1000" height="50"></canvas>
         </article>
-        <article id="wave" class="flex-row">
+        <article id="wave" class="flex-column">
             <div id="wave-info">
                 <button id="next-wave">Next wave</button>
             </div>
         </article>
+        <span id="escape">Press escape</span>
         <article id="game-board">
             <canvas id="canvas" width="1000" height="500"></canvas>
             <img id="cursor-follow" src="" alt="">
@@ -53,12 +57,90 @@
             <canvas id="gun-canvas" width="1000" height="100"></canvas>
         </article>
         <article id="hotguns" class="flex-row space-around-row">
-            <button id="gun1">Big Gun</button>
-            <button id="gun2">Quick Gun</button>
-            <button id="gun3">Sniper</button>
-            <button id="gun4">Bazooka</button>
-            <button id="gun5">Lazer</button>
-            <button id="gun6">Gandalf</button>
+            <div id="gun-div">
+                <button id="gun1"></button>
+                <span id="gun-hover1">
+                    <h6>Big Gun</h6>
+                    <ul>
+                        <p>A cheap but effective gun for small bugs.</p>
+                        <li><img src="./images/gun-icon.png" alt="Gun"> Damage: 10</li>
+                        <li><img src="./images/bullet-icon.png" alt="Bullet"> Loading time: 300ms</li>
+                        <li><img src="./images/money-icon.png" alt="Money"> Cost: 100</li>
+                        <li><img src="./images/range-icon.png" alt="Range"> Range: 75</li>
+                        <li><img src="./images/key-icon.png" alt="Keyboard shortcut"> Shortcut: press 2</li>
+                    </ul>
+                </span>
+            </div>
+            <div>
+                <button id="gun2"></button>
+                <span id="gun-hover2">
+                    <h6>Machine Gun</h6>
+                    <ul>
+                        <p>High firiring speed, for high bug-quanity.</p>
+                        <li><img src="./images/gun-icon.png" alt="Gun"> Damage: 8</li>
+                        <li><img src="./images/bullet-icon.png" alt="Bullet"> Loading time: 100ms</li>
+                        <li><img src="./images/money-icon.png" alt="Money"> Cost: 300</li>
+                        <li><img src="./images/range-icon.png" alt="Range"> Range: 100</li>
+                        <li><img src="./images/key-icon.png" alt="Keyboard shortcut"> Shortcut: press 2</li>
+                    </ul>
+                </span>
+            </div>
+            <div>
+                <button id="gun3"></button>
+                <span id="gun-hover3">
+                    <h6>Sniper</h6>
+                    <ul>
+                        <p>Long range dmg, ideal for hard to find bugs.</p>
+                        <li><img src="./images/gun-icon.png" alt="Gun"> Damage: 300</li>
+                        <li><img src="./images/bullet-icon.png" alt="Bullet"> Loading time: 2,5s</li>
+                        <li><img src="./images/money-icon.png" alt="Money"> Cost: 500</li>
+                        <li><img src="./images/range-icon.png" alt="Range"> Range: 175</li>
+                        <li><img src="./images/key-icon.png" alt="Keyboard shortcut"> Shortcut: press 3</li>
+                    </ul>
+                </span>
+            </div>
+            <div>
+                <button id="gun4"></button>
+                <span id="gun-hover4">
+                    <h6>Rocketlauncher</h6>
+                    <ul>
+                        <p>Deals dmg to bugs around the target.</p>
+                        <li><img src="./images/gun-icon.png" alt="Gun"> Damage: 500</li>
+                        <li><img src="./images/bullet-icon.png" alt="Bullet"> Loading time: 3s</li>
+                        <li><img src="./images/money-icon.png" alt="Money"> Cost: 500</li>
+                        <li><img src="./images/range-icon.png" alt="Range"> Range: 125</li>
+                        <li><img src="./images/key-icon.png" alt="Keyboard shortcut"> Shortcut: press 4</li>
+                    </ul>
+                </span>
+            </div>
+            <div>
+                <button id="gun5"></button>
+                <span id="gun-hover5">
+                    <h6>Lazer Gun</h6>
+                    <ul>
+                        <p>Effective debugging weapon with high dmg.</p>
+                        <li><img src="./images/gun-icon.png" alt="Gun"> Damage: High</li>
+                        <li><img src="./images/bullet-icon.png" alt="Bullet"> Loading time: 0s</li>
+                        <li><img src="./images/money-icon.png" alt="Money"> Cost: 750</li>
+                        <li><img src="./images/range-icon.png" alt="Range"> Range: 125</li>
+                        <li><img src="./images/key-icon.png" alt="Keyboard shortcut"> Shortcut: press 5</li>
+                    </ul>
+                </span>
+            </div>
+            <div>
+                <button id="gun6"></button>
+                <span id="gun-hover6">
+                    <h6>Gandalf the Grey</h6>
+                    <ul>
+                        <p>Reduces the bugs speed tremendously.</p>
+                        <li><img src="./images/gun-icon.png" alt="Gun"> Damage: Mental dmg</li>
+                        <li><img src="./images/bullet-icon.png" alt="Bullet"> Loading time: 0s</li>
+                        <li><img src="./images/money-icon.png" alt="Money"> Cost: 1000</li>
+                        <li><img src="./images/range-icon.png" alt="Range"> Range: 75</li>
+                        <li><img src="./images/key-icon.png" alt="Keyboard shortcut"> Shortcut: press 6</li>
+                    </ul>
+                </span>
+            </div>
         </article>
     </section>
     

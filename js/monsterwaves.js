@@ -1,69 +1,49 @@
 const monsterWaves = [
 [{
-        amountOfBasicMonsters: 3,
-        amountOfSpeedMonsters: 0,
-        amountOfInvisibleMonsters: 4,
-        amountOfHealMonsters: 1,
-        amountOfBigMonsters: 0,
-        amountOfFlyingMonsters: 2,
-        waveTime: 5
-    },
-    {
-        amountOfBasicMonsters: 0,
+        amountOfBasicMonsters: 25,
         amountOfSpeedMonsters: 0,
         amountOfInvisibleMonsters: 0,
-        amountOfHealMonsters: 0,
-        amountOfBigMonsters: 0,
-        amountOfFlyingMonsters: 10,
-        waveTime: 5
-    },
-    {
-        amountOfBasicMonsters: 0,
-        amountOfSpeedMonsters: 0,
-        amountOfInvisibleMonsters: 10,
         amountOfHealMonsters: 0,
         amountOfBigMonsters: 0,
         amountOfFlyingMonsters: 0,
-        waveTime: 5
-    },
-    {
-        amountOfBasicMonsters: 0,
-        amountOfSpeedMonsters: 0,
-        amountOfInvisibleMonsters: 0,
-        amountOfHealMonsters: 10,
-        amountOfBigMonsters: 0,
-        amountOfFlyingMonsters: 0,
-        waveTime: 5
-    },
-    {
-        amountOfBasicMonsters: 0,
-        amountOfSpeedMonsters: 0,
-        amountOfInvisibleMonsters: 0,
-        amountOfHealMonsters: 0,
-        amountOfBigMonsters: 5,
-        amountOfFlyingMonsters: 0,
-        waveTime: 5
-    },
-    {
-        amountOfBasicMonsters: 0,
-        amountOfSpeedMonsters: 10,
-        amountOfInvisibleMonsters: 0,
-        amountOfHealMonsters: 0,
-        amountOfBigMonsters: 0,
-        amountOfFlyingMonsters: 20,
-        waveTime: 5
+        waveTime: 15
     },
     {
         amountOfBasicMonsters: 20,
+        amountOfSpeedMonsters: 1,
+        amountOfInvisibleMonsters: 0,
+        amountOfHealMonsters: 0,
+        amountOfBigMonsters: 0,
+        amountOfFlyingMonsters: 0,
+        waveTime: 20
+    },
+    {
+        amountOfBasicMonsters: 30,
+        amountOfSpeedMonsters: 5,
+        amountOfInvisibleMonsters: 0,
+        amountOfHealMonsters: 0,
+        amountOfBigMonsters: 0,
+        amountOfFlyingMonsters: 0,
+        waveTime: 20
+    },
+    {
+        amountOfBasicMonsters: 50,
         amountOfSpeedMonsters: 10,
-        amountOfInvisibleMonsters: 5,
-        amountOfHealMonsters: 10,
-        amountOfBigMonsters: 3,
-        amountOfFlyingMonsters: 20,
-        waveTime: 15
-    }
-    
-    
+        amountOfInvisibleMonsters: 0,
+        amountOfHealMonsters: 0,
+        amountOfBigMonsters: 0,
+        amountOfFlyingMonsters: 0,
+        waveTime: 25
+    },
+    {
+        amountOfBasicMonsters: 100,
+        amountOfSpeedMonsters: 25,
+        amountOfInvisibleMonsters: 0,
+        amountOfHealMonsters: 0,
+        amountOfBigMonsters: 0,
+        amountOfFlyingMonsters: 0,
+        waveTime: 30
+    } 
 ],
 [
     {

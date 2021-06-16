@@ -19,6 +19,12 @@ const gun4Element = document.querySelector('#gun4');
 const gun5Element = document.querySelector('#gun5');
 const gun6Element = document.querySelector('#gun6');
 const hotGunImage = document.querySelector('#cursor-follow');
+const gun1ElementHover = document.querySelector('#gun-hover1');
+const gun2ElementHover = document.querySelector('#gun-hover2');
+const gun3ElementHover = document.querySelector('#gun-hover3');
+const gun4ElementHover = document.querySelector('#gun-hover4');
+const gun5ElementHover = document.querySelector('#gun-hover5');
+const gun6ElementHover = document.querySelector('#gun-hover6');
 
 // Images
 let towerFoundationBasic = new Image();
@@ -26,23 +32,19 @@ let towerFoundationQuick = new Image();
 let towerFoundationLazer = new Image();
 let towerFoundationBazooka = new Image();
 let towerFoundationSniper = new Image();
-
 let basicGunImage = new Image();
 let quickGunImage = new Image();
 let sniperGunImage = new Image();
 let lazerGunImage = new Image();
 let bazookaGunImage = new Image();
 let gandalfImage = new Image();
-
 let basicGunImageRange = new Image();
 let quickGunImageRange = new Image();
 let sniperGunImageRange = new Image();
 let lazerGunImageRange = new Image();
 let bazookaGunImageRange = new Image();
 let gandalfImageRange = new Image();
-
 let bullet = new Image();
-
 let basicMonsterImage = new Image();
 let bigMonsterImage = new Image();
 let invisibleMonsterImage = new Image();
@@ -50,6 +52,9 @@ let invisibleStateMonsterImage = new Image();
 let healMonsterImage = new Image();
 let speedMonsterImage = new Image();
 let flyingMonsterImage = new Image();
+
+// audio
+let boom = new Audio('../audio/boom.mp3');
 
 // create context
 const ctxStats = canvasStatsElement.getContext('2d');
@@ -64,17 +69,18 @@ let gameIsOver = false;
 let collisionOffSet = 20;
 let healthMeterColor = 'green';
 let healthMeterBgColor = 'white';
-let bgColor =  '#026633'
-let roadColor = '#6E3B2E'
-let textColor = 'white';
-let statColor = 'yellow';
+let bgColor =  '#58BC82';
+let roadEdgeColor = "#5A3825";
+let roadColor = '#C5AA5B'
+let textColor = '#072400';
+let statColor = '#9F7700';
 let roadShadow = '#2C0C00';
 let monsterShadow = 'black';
 let levelStartX = null, levelStartY = null;
 let waveStarted = false;
 let canvasLoaded = false; // Not used I think
 let userIsPlacingGun = false;
-let speedChangeGandalf = 0.4;
+let speedChangeGandalf = 0.3;
 let gandalfPlaced = false;
 
 // HotGun info
@@ -177,7 +183,7 @@ window.addEventListener('load', () => {
     bigMonsterImage.src = './images/big-monster.png'
     healMonsterImage.src = './images/heal-monster.png'
     speedMonsterImage.src = './images/speed-monster.png';
-    flyingMonsterImage.src = './images/flying-monster.png'
+    flyingMonsterImage.src = './images/flying-monster.png';
 
     bullet.src = './images/bullet.png';
 
@@ -258,6 +264,56 @@ window.addEventListener('load', () => {
         hotGunImage.style.display = "block";        
     })
 
+        // Click on tower --> change the cursor style
+        gun1Element.addEventListener('mouseover', () => {
+            gun1ElementHover.style.display = "block";
+        })
+
+        gun1Element.addEventListener('mouseout', () => {
+            gun1ElementHover.style.display = "none";
+        })
+    
+        gun2Element.addEventListener('mouseover', () => {
+            gun2ElementHover.style.display = "block";
+        })
+
+        gun2Element.addEventListener('mouseout', () => {
+            gun2ElementHover.style.display = "none";
+        })
+    
+        gun3Element.addEventListener('mouseover', () => {
+            gun3ElementHover.style.display = "block";
+        })
+
+        gun3Element.addEventListener('mouseout', () => {
+            gun3ElementHover.style.display = "none";
+        })
+    
+        gun4Element.addEventListener('mouseover', () => {
+            gun4ElementHover.style.display = "block";
+        })
+
+        gun4Element.addEventListener('mouseout', () => {
+            gun4ElementHover.style.display = "none";
+        })
+    
+        gun5Element.addEventListener('mouseover', () => {
+            gun5ElementHover.style.display = "block";
+        })
+
+        gun5Element.addEventListener('mouseout', () => {
+            gun5ElementHover.style.display = "none";
+        })
+    
+        gun6Element.addEventListener('mouseover', () => {
+            gun6ElementHover.style.display = "block";
+        })
+
+        gun6Element.addEventListener('mouseout', () => {
+            gun6ElementHover.style.display = "none";
+        })
+    
+
     // Remove selected hotGun
     window.addEventListener('keydown', (event) => {
         if (event.key === "Escape") {
@@ -265,6 +321,56 @@ window.addEventListener('load', () => {
             hotGunImage.style.display = "none";        
         }
     })
+    window.addEventListener('keydown', (event) => {
+        if (event.key === "1") {
+            selectedHotGun = 'bigGun';
+            userIsPlacingGun = true;
+            hotGunImage.src ='./images/baisc-tower-final-range.png';
+            hotGunImage.style.display = "block";        
+        }
+    })
+    window.addEventListener('keydown', (event) => {
+        if (event.key === "2") {
+            selectedHotGun = 'doubleGun';
+            userIsPlacingGun = true;
+            hotGunImage.src ='./images/quick-gun-range.png';
+            hotGunImage.style.display = "block";       
+        }
+    })
+    window.addEventListener('keydown', (event) => {
+        if (event.key === "3") {
+            selectedHotGun = 'sniper';
+            userIsPlacingGun = true;
+            hotGunImage.src ='./images/sniper-range.png';
+            hotGunImage.style.display = "block";           
+        }
+    })
+    window.addEventListener('keydown', (event) => {
+        if (event.key === "4") {
+            selectedHotGun = 'bazooka';
+            userIsPlacingGun = true;
+            hotGunImage.src ='./images/bazooka-range.png';
+            hotGunImage.style.display = "block";          
+        }
+    })
+    window.addEventListener('keydown', (event) => {
+        if (event.key === "5") {
+            selectedHotGun = 'lazer';
+            userIsPlacingGun = true;
+            hotGunImage.src ='./images/lazer-range.png';
+            hotGunImage.style.display = "block";           
+        }
+    })
+    window.addEventListener('keydown', (event) => {
+        if (event.key === "6") {
+            selectedHotGun = 'gandalf';
+            userIsPlacingGun = true;
+            hotGunImage.src ='./images/gandalf-range.png';
+            hotGunImage.style.display = "block";            
+        }
+    })
+
+
 
     window.addEventListener('mousemove', (event) => { 
         if (userIsPlacingGun) {

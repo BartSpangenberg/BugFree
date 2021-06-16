@@ -31,13 +31,6 @@ class Monster {
    }
 
    drawMonster() {
-    // old 
-    // ctx.beginPath();
-    // ctx.fillStyle = this.color;
-    // ctx.globalAlpha = 1;
-    // ctx.arc(this.monsterX, this.monsterY, this.radius, 0, 2 * Math.PI);
-    // ctx.fill();
-    // ctx.closePath();
     this.setImageDirection();
 
     ctx.beginPath();
@@ -47,7 +40,7 @@ class Monster {
     // ctx.rotate(this.convertDegreesToRadians(this.gunAngle));  
     ctx.rotate(this.monsterAngle)
     ctx.translate(-this.monsterX - (this.monsterImage.width / 2) , -this.monsterY - (this.monsterImage.height / 2) );  
-    ctx.shadowBlur = 5;
+    ctx.shadowBlur = 2;
     ctx.shadowColor = monsterShadow;
     ctx.drawImage(this.monsterImage, this.monsterX , this.monsterY);  
     ctx.restore();  
@@ -67,7 +60,7 @@ class BasicMonster extends Monster {
         this.health = this.maxHealth;
         this.radius = 15;
         this.points = 100;
-        this.money = 25;
+        this.money = 20;
         this.healthMeterY = 40;
         this.monsterImage = basicMonsterImage;
     }
@@ -103,6 +96,7 @@ class SpeedMonster extends Monster {
         this.health = this.maxHealth;
         this.radius = 18;
         this.money = 50;
+        this.points = 500;
         this.healthMeterY = 30;
         this.monsterImage = speedMonsterImage;
     }
@@ -170,12 +164,13 @@ class InvisibleMonster extends Monster {
         this.description = "Blablabla";
         this.color = 'black'
         this.speed = 2;    
+        this.points = 400;
         this.currentSpeed = this.speed;
         this.maxHealth = 250;
         this.health = this.maxHealth;
         this.radius = 15;
         this.points = 250;
-        this.money = 35;
+        this.money = 75;
         this.invisible = false;
         this.timeInvisible = 3000;
         this.randomStartTimeInvisibility = null;
@@ -323,7 +318,7 @@ const checkIfMonsterIsAlive = (monster) => {
 
 const setMonsterSpeed = (monster) => {
     if (monster.name === 'speedMonster') {
-        monster.currentSpeed = monster.maxHealth / 2 < monster.health ? monster.speed : monster.speed * 2;
+        monster.currentSpeed = monster.maxHealth / 2 < monster.health ? monster.speed : monster.speed * 1.5;
     }
     else {
         monster.currentSpeed = monster.speed;

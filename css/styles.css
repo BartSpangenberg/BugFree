@@ -1,5 +1,10 @@
 body {
   height: 100vh;
+  background-color: #58bc82;
+  background-repeat: no-repeat;
+  background-image: url("../images/bgright.png"), url("../images/bgleft.png");
+  background-position: right, left;
+  background-size: contain;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,9 +42,4 @@ h3 {
 
 .space-around-row {
   justify-content: space-around;
-}
-
-#hotguns button {
-  width: 75px;
-  height: 75px;
 }
