@@ -15,14 +15,6 @@ const drawRoadElementBackground = roadElement => {
     ctx.fillRect(roadElement.startX, roadElement.startY, roadElement.width, roadElement.height)
     ctx.closePath();
     // ctx.shadowBlur = 0;
-
-
-    // ctx.beginPath();
-    // ctx.globalAlpha = 0.7;
-    // ctx.fillStyle = 'yellow';
-    // ctx.fillRect(roadElement.startX, roadElement.startY, roadElement.width, roadElement.height)
-    // ctx.closePath();
-
 }
 
 

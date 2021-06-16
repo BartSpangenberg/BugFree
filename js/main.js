@@ -21,11 +21,35 @@ const gun6Element = document.querySelector('#gun6');
 const hotGunImage = document.querySelector('#cursor-follow');
 
 // Images
-let towerFoundation = new Image();
+let towerFoundationBasic = new Image();
+let towerFoundationQuick = new Image();
+let towerFoundationLazer = new Image();
+let towerFoundationBazooka = new Image();
+let towerFoundationSniper = new Image();
+
 let basicGunImage = new Image();
+let quickGunImage = new Image();
+let sniperGunImage = new Image();
+let lazerGunImage = new Image();
+let bazookaGunImage = new Image();
+let gandalfImage = new Image();
+
 let basicGunImageRange = new Image();
-let basicMonsterImage = new Image();
+let quickGunImageRange = new Image();
+let sniperGunImageRange = new Image();
+let lazerGunImageRange = new Image();
+let bazookaGunImageRange = new Image();
+let gandalfImageRange = new Image();
+
 let bullet = new Image();
+
+let basicMonsterImage = new Image();
+let bigMonsterImage = new Image();
+let invisibleMonsterImage = new Image();
+let invisibleStateMonsterImage = new Image();
+let healMonsterImage = new Image();
+let speedMonsterImage = new Image();
+let flyingMonsterImage = new Image();
 
 // create context
 const ctxStats = canvasStatsElement.getContext('2d');
@@ -51,6 +75,7 @@ let waveStarted = false;
 let canvasLoaded = false; // Not used I think
 let userIsPlacingGun = false;
 let speedChangeGandalf = 0.4;
+let gandalfPlaced = false;
 
 // HotGun info
 let instanceOfAllHotGuns = [new BigGun, new QuickGun, new Sniper, new Gandalf, new Lazer, new Bazooka];
@@ -77,7 +102,7 @@ const animate = () => {
     drawAllBoards();
     drawFullRoad();
     drawHotGuns();
-    drawHotGunRange();
+    // drawHotGunRange();
 
     if (waveStarted) {
         if (!monsters.length) {
@@ -126,10 +151,34 @@ const animate = () => {
 
 window.addEventListener('load', () => {
     // Load images
-    towerFoundation.src = '../images/tower-foundation.png'
+    towerFoundationBasic.src = '../images/tower-foundation.png'
+    towerFoundationQuick.src = '../images/tower-foundation-quick-gun.png';
+    towerFoundationLazer.src = '../images/foundation-lazer.png';
+    towerFoundationBazooka.src = '../images/foundation-bazooka.png';
+    towerFoundationSniper.src = '../images/foundation-sniper.png';
+
     basicGunImage.src = '../images/basic-tower-final-tower.png';
+    quickGunImage.src = '../images/quick-gun.png';
+    sniperGunImage.src = '../images/sniper.png';
+    lazerGunImage.src = '../images/lazer.png';
+    bazookaGunImage.src = '../images/bazooka.png';
+    gandalfImage.src = '../images/gandalf.png';
+
     basicGunImageRange.src = '../images/baisc-tower-final-range.png';
+    quickGunImageRange.src = '../images/quick-gun-range.png';
+    sniperGunImageRange.src = '../images/sniper-range.png';
+    lazerGunImageRange.src = '../images/lazer-range.png';
+    bazookaGunImageRange.src = '../images/bazooka-range.png';
+    gandalfImageRange.src = '../images/gandalf-range.png';
+
     basicMonsterImage.src = '../images/basic-monster.png'
+    invisibleMonsterImage.src = '../images/invisible-monster.png'
+    invisibleStateMonsterImage.src = '../images/invisible-state-invisible-monster.png';
+    bigMonsterImage.src = '../images/big-monster.png'
+    healMonsterImage.src = '../images/heal-monster.png'
+    speedMonsterImage.src = '../images/speed-monster.png';
+    flyingMonsterImage.src = '../images/flying-monster.png'
+
     bullet.src = '../images/bullet.png';
 
     startGameBtn.addEventListener('click', () => {
@@ -177,35 +226,35 @@ window.addEventListener('load', () => {
     gun2Element.addEventListener('click', () => {
         selectedHotGun = 'doubleGun';
         userIsPlacingGun = true;
-        hotGunImage.src ='../images/doublegun.png';   
+        hotGunImage.src ='../images/quick-gun-range.png';
         hotGunImage.style.display = "block";        
     })
 
     gun3Element.addEventListener('click', () => {
         selectedHotGun = 'sniper';
         userIsPlacingGun = true;
-        hotGunImage.src ='../images/sniper.png';   
+        hotGunImage.src ='../images/sniper-range.png';
         hotGunImage.style.display = "block";        
     })
 
     gun4Element.addEventListener('click', () => {
         selectedHotGun = 'bazooka';
         userIsPlacingGun = true;
-        hotGunImage.src ='../images/slower.png';   
+        hotGunImage.src ='../images/bazooka-range.png';
         hotGunImage.style.display = "block";        
     })
 
     gun5Element.addEventListener('click', () => {
         selectedHotGun = 'lazer';
         userIsPlacingGun = true;
-        hotGunImage.src ='../images/slower.png';   
+        hotGunImage.src ='../images/lazer-range.png';
         hotGunImage.style.display = "block";        
     })
 
     gun6Element.addEventListener('click', () => {
         selectedHotGun = 'gandalf';
         userIsPlacingGun = true;
-        hotGunImage.src ='../images/slower.png';   
+        hotGunImage.src ='../images/gandalf-range.png';
         hotGunImage.style.display = "block";        
     })
 

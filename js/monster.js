@@ -29,6 +29,30 @@ class Monster {
                           : -0.5 * Math.PI
         
    }
+
+   drawMonster() {
+    // old 
+    // ctx.beginPath();
+    // ctx.fillStyle = this.color;
+    // ctx.globalAlpha = 1;
+    // ctx.arc(this.monsterX, this.monsterY, this.radius, 0, 2 * Math.PI);
+    // ctx.fill();
+    // ctx.closePath();
+    this.setImageDirection();
+
+    ctx.beginPath();
+    ctx.globalAlpha = 1;
+    ctx.save();  
+    ctx.translate(this.monsterX, this.monsterY);  
+    // ctx.rotate(this.convertDegreesToRadians(this.gunAngle));  
+    ctx.rotate(this.monsterAngle)
+    ctx.translate(-this.monsterX - (this.monsterImage.width / 2) , -this.monsterY - (this.monsterImage.height / 2) );  
+    ctx.shadowBlur = 5;
+    ctx.shadowColor = monsterShadow;
+    ctx.drawImage(this.monsterImage, this.monsterX , this.monsterY);  
+    ctx.restore();  
+    ctx.closePath()
+    } 
 }
 
 class BasicMonster extends Monster {
@@ -45,32 +69,8 @@ class BasicMonster extends Monster {
         this.points = 100;
         this.money = 25;
         this.healthMeterY = 40;
+        this.monsterImage = basicMonsterImage;
     }
-
-    drawMonster() {
-        // old 
-        // ctx.beginPath();
-        // ctx.fillStyle = this.color;
-        // ctx.globalAlpha = 1;
-        // ctx.arc(this.monsterX, this.monsterY, this.radius, 0, 2 * Math.PI);
-        // ctx.fill();
-        // ctx.closePath();
-        this.setImageDirection();
-
-        ctx.beginPath();
-        ctx.globalAlpha = 1;
-        ctx.save();  
-        ctx.translate(this.monsterX, this.monsterY);  
-        // ctx.rotate(this.convertDegreesToRadians(this.gunAngle));  
-        ctx.rotate(this.monsterAngle)
-        ctx.translate(-this.monsterX - (basicMonsterImage.width / 2) , -this.monsterY - (basicMonsterImage.height / 2) );  
-        ctx.shadowBlur = 5;
-        ctx.shadowColor = monsterShadow;
-        ctx.drawImage(basicMonsterImage, this.monsterX , this.monsterY);  
-        ctx.restore();  
-        ctx.closePath()
-
-   } 
 }
 
 class BigMonster extends Monster {
@@ -86,16 +86,9 @@ class BigMonster extends Monster {
         this.radius = 30;
         this.points = 2500;
         this.money = 250;
+        this.healthMeterY = 50;
+        this.monsterImage = bigMonsterImage;
     }
-
-    drawMonster() {
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = 1;
-        ctx.arc(this.monsterX, this.monsterY, this.radius, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
-   } 
 }
 
 class SpeedMonster extends Monster {
@@ -110,16 +103,9 @@ class SpeedMonster extends Monster {
         this.health = this.maxHealth;
         this.radius = 18;
         this.money = 50;
+        this.healthMeterY = 30;
+        this.monsterImage = speedMonsterImage;
     }
-
-    drawMonster() {
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = 1;
-        ctx.arc(this.monsterX, this.monsterY, this.radius, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
-   } 
 }
 
 class HealMonster extends Monster {
@@ -140,16 +126,9 @@ class HealMonster extends Monster {
         this.healInterval = 4000;
         this.healPoints = 250;
         this.randomStartTimeHealing = null;
+        this.monsterImage = healMonsterImage;
+        this.healthMeterY = 35;
     }
-
-    drawMonster() {
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = 1;
-        ctx.arc(this.monsterX, this.monsterY, this.radius, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
-   } 
 
    healOtherMonsters() {
 
@@ -194,32 +173,27 @@ class InvisibleMonster extends Monster {
         this.currentSpeed = this.speed;
         this.maxHealth = 250;
         this.health = this.maxHealth;
-        this.radius = 12;
+        this.radius = 15;
         this.points = 250;
         this.money = 35;
         this.invisible = false;
         this.timeInvisible = 3000;
         this.randomStartTimeInvisibility = null;
+        this.monsterImage = invisibleMonsterImage;
+        this.healthMeterY = 30;
     }
-
-    drawMonster() {
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = 1;
-        ctx.arc(this.monsterX, this.monsterY, this.radius, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
-   } 
 
    becomeInvisbile() {
 
         setTimeout(() => {
             setInterval(() => {
                 this.color = 'transparent';
+                this.monsterImage = invisibleStateMonsterImage;
                 this.invisible = true;
                 setTimeout(() => {
                  this.color = 'black';
                  this.invisible = false;
+                 this.monsterImage = invisibleMonsterImage;
                 }, this.timeInvisible)
             }, this.timeInvisible * 3 ) 
         }, Math.floor(this.randomStartTimeInvisibility * 1000))
@@ -237,22 +211,15 @@ class FlyingMonster extends Monster {
         this.currentSpeed = this.speed;
         this.maxHealth = 500;
         this.health = this.maxHealth;
-        this.radius = 10;
+        this.radius = 15;
         this.points = 1000;
         this.money = 75;
         this.directionX = 0;
         this.directionY = 1;
         this.monsterX = createRandomCoordinate(canvas.width);
+        this.monsterImage = flyingMonsterImage;
+        this.healthMeterY = 24;
     }
-
-    drawMonster() {
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = 1;
-        ctx.arc(this.monsterX, this.monsterY, this.radius, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
-   } 
 }
 
 // Monster functions
@@ -347,7 +314,7 @@ const randomTime = time => {
 }
 
 const checkIfMonsterIsAlive = (monster) => {
-    if (monster.health < 0) {
+    if (monster.health <= 0) {
         score += monster.points;
         money += monster.money;
         monsters.splice(monsters.indexOf(monster), 1);

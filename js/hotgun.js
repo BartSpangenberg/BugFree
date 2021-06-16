@@ -9,6 +9,8 @@ class HotGun {
         this.targetRadius = undefined;
         this.shotDistancePercentage = 0;
         this.shotDistancePercentageOffset = 0.2;
+        this.gunAngle = 270;
+        this.gunOffSet = 20;
     }
 
     loadGun() {
@@ -40,39 +42,14 @@ class HotGun {
     convertDegreesToRadians(degrees)  {  
         return degrees * 0.01745;  
     }  
-}
-
-class BigGun extends HotGun {
-    constructor() {
-        super();
-        this.name = 'bigGun';
-        this.damage = 10;
-        this.range = 75; 
-        this.loadingTime = 300;
-        this.radius = 15;
-        this.shotColor = 'red'; 
-        this.cost = 100;
-        this.animationTime = 20;
-        this.dps = 1000 / this.loadingTime * this.damage;
-        this.shotsPerSecond = 1000 / this.loadingTime
-        this.gunAngle = 270;
-        this.gunOffSet = 20;
-    }
 
     drawHotGun() {
-        // old gun
-        // ctx.beginPath();
-        // ctx.fillStyle = '#39FF14';
-        // ctx.globalAlpha = 0.9;
-        // ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
-        // ctx.fill();
-        // ctx.closePath()
-        // console.log(Math.atan2(this.targetY / this.targetX))
-
         // Draw the platform
         ctx.beginPath();
         ctx.globalAlpha = 1;
-        ctx.drawImage(towerFoundation, this.hotGunX - towerFoundation.width / 2, this.hotGunY - towerFoundation.height / 2);  
+        ctx.shadowBlur = 5;
+        ctx.shadowColor = roadShadow;
+        ctx.drawImage(this.towerFoundation, this.hotGunX - this.towerFoundation.width / 2, this.hotGunY - this.towerFoundation.height / 2);  
         ctx.closePath()
 
         // Calculate the rotation
@@ -90,12 +67,36 @@ class BigGun extends HotGun {
         ctx.save();  
         ctx.translate(this.hotGunX, this.hotGunY);  
         ctx.rotate(this.gunAngle)
-        ctx.translate(-(this.hotGunX + (basicGunImage.width / 2)), -(this.hotGunY + (basicGunImage.height / 2)));  
-        ctx.drawImage(basicGunImage, this.hotGunX, this.hotGunY);  
+        ctx.translate(-(this.hotGunX + (this.gunImage.width / 2)), -(this.hotGunY + (this.gunImage.height / 2)));  
+        ctx.shadowBlur = 5;
+        ctx.shadowColor = roadShadow;
+        ctx.drawImage(this.gunImage, this.hotGunX, this.hotGunY);  
         ctx.restore();  
         ctx.closePath()
 
     }
+
+
+}
+
+class BigGun extends HotGun {
+    constructor() {
+        super();
+        this.name = 'bigGun';
+        this.damage = 10;
+        this.range = 75; 
+        this.loadingTime = 300;
+        this.radius = 15;
+        this.shotColor = 'red'; 
+        this.cost = 100;
+        this.animationTime = 20;
+        this.dps = 1000 / this.loadingTime * this.damage;
+        this.shotsPerSecond = 1000 / this.loadingTime
+        this.towerFoundation = towerFoundationBasic;
+        this.gunImage = basicGunImage;
+    }
+
+
 
     shotAnimation() {
         if (this.framesVisible > 0) {
@@ -144,24 +145,20 @@ class QuickGun extends HotGun {
         this.cost = 250;
         this.animationTime = 1;
         this.dps = 1000 / this.loadingTime * this.damage;
-        this.shotsPerSecond = 1000 / this.loadingTime
+        this.shotsPerSecond = 1000 / this.loadingTime;
+        this.towerFoundation = towerFoundationQuick;
+        this.gunImage = quickGunImage;
+        this.gunBarrelLength = 32;
     }
-
-    drawHotGun() {
-        ctx.beginPath();
-        ctx.fillStyle = '#C132FC';
-        ctx.globalAlpha = 0.9;
-        ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
-    }  
 
     shotAnimation() {
         if (this.framesVisible > 0) {
             this.framesVisible--; 
             ctx.beginPath();
             ctx.globalAlpha = 1;
-            ctx.moveTo(this.hotGunX, this.hotGunY);
+            let gunBarrelX = Math.cos(this.gunAngle - Math.PI * 0.5) * this.gunBarrelLength;
+            let gunBarrelY = Math.sin(this.gunAngle - Math.PI * 0.5) * this.gunBarrelLength;
+            ctx.moveTo(this.hotGunX + gunBarrelX, this.hotGunY + gunBarrelY);
             ctx.lineTo(this.targetX, this.targetY);
             ctx.strokeStyle = this.shotColor;
             ctx.setLineDash([0]);
@@ -176,31 +173,36 @@ class Sniper extends HotGun {
         super();
         this.name = 'sniper';
         this.damage = 500;
-        this.range = 200; 
+        this.range = 175; 
         this.loadingTime = 1000;
         this.radius = 10;
         this.shotColor = 'red'; 
         this.cost = 25;
-        this.animationTime = 30;
+        this.animationTime = 10;
         this.dps = 1000 / this.loadingTime * this.damage;
-        this.shotsPerSecond = 1000 / this.loadingTime
+        this.shotsPerSecond = 1000 / this.loadingTime;
+        this.towerFoundation = towerFoundationSniper;
+        this.gunImage = sniperGunImage;
+        this.gunBarrelLength = 20;
     }
 
-    drawHotGun() {
-        ctx.beginPath();
-        ctx.fillStyle = '#FAD51F';
-        ctx.globalAlpha = 0.9;
-        ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
-    }  
+    // drawHotGun() {
+    //     ctx.beginPath();
+    //     ctx.fillStyle = '#FAD51F';
+    //     ctx.globalAlpha = 0.9;
+    //     ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
+    //     ctx.fill();
+    //     ctx.closePath();
+    // }  
 
     shotAnimation() {
         if (this.framesVisible > 0) {
             this.framesVisible--; 
             ctx.beginPath();
             ctx.globalAlpha = 1;
-            ctx.moveTo(this.hotGunX, this.hotGunY);
+            let gunBarrelX = Math.cos(this.gunAngle - Math.PI * 0.5) * this.gunBarrelLength;
+            let gunBarrelY = Math.sin(this.gunAngle - Math.PI * 0.5) * this.gunBarrelLength;
+            ctx.moveTo(this.hotGunX + gunBarrelX, this.hotGunY + gunBarrelY);
             ctx.lineTo(this.targetX, this.targetY);
             ctx.strokeStyle = this.shotColor;
             ctx.setLineDash([0]);
@@ -215,7 +217,7 @@ class Gandalf extends HotGun {
         super();
         this.name = 'gandalf';
         this.damage = 0;
-        this.range = 125; 
+        this.range = 75; 
         this.loadingTime = 500;
         this.radius = 22;
         this.shotColor = 'transparent'; 
@@ -223,16 +225,17 @@ class Gandalf extends HotGun {
         this.animationTime = 10;  // does nothing, since shotColor is invisible
         this.dps = 1000 / this.loadingTime * this.damage;
         this.shotsPerSecond = 1000 / this.loadingTime
+        this.gunImage = gandalfImage;
     }
 
-    drawHotGun() {
-        ctx.beginPath();
-        ctx.fillStyle = 'green';
-        ctx.globalAlpha = 0.9;
-        ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
-    }
+    // drawHotGun() {
+    //     ctx.beginPath();
+    //     ctx.fillStyle = 'green';
+    //     ctx.globalAlpha = 0.9;
+    //     ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
+    //     ctx.fill();
+    //     ctx.closePath();
+    // }
 
     shotAnimation() {
         if (this.framesVisible > 0) {
@@ -247,6 +250,29 @@ class Gandalf extends HotGun {
             ctx.closePath();
         }
     }
+
+    drawHotGun() {
+        // Calculate the rotation
+        this.gunAngle = Math.atan( (this.targetY - this.hotGunY ) / (this.targetX - this.hotGunX )) //- Math.PI
+        if (this.targetX < this.hotGunX) {
+            this.gunAngle -= 0.5 * Math.PI;
+        } 
+        else {
+            this.gunAngle += 0.5 * Math.PI
+        }
+
+        // Draw the gun
+        ctx.beginPath();
+        ctx.globalAlpha = 1;
+        ctx.save();  
+        ctx.translate(this.hotGunX, this.hotGunY);  
+        ctx.rotate(this.gunAngle)
+        ctx.translate(-(this.hotGunX + (this.gunImage.width / 2)), -(this.hotGunY + (this.gunImage.height / 2)));  
+        ctx.drawImage(this.gunImage, this.hotGunX, this.hotGunY);  
+        ctx.restore();  
+        ctx.closePath()
+    }
+
 }
 
 class Bazooka extends HotGun {
@@ -258,22 +284,25 @@ class Bazooka extends HotGun {
         this.range = 125; 
         this.loadingTime = 3000;
         this.radius = 22;
-        this.shotColor = 'red'; 
+        this.shotColor = 'black'; 
         this.cost = 100;
-        this.animationTime = 30;  // does nothing, since shotColor is invisible
+        this.animationTime = 20;  // does nothing, since shotColor is invisible
         this.splashRange = 100;
         this.dps = 1000 / this.loadingTime * this.damage;
-        this.shotsPerSecond = 1000 / this.loadingTime
+        this.shotsPerSecond = 1000 / this.loadingTime;
+        this.towerFoundation = towerFoundationBazooka;
+        this.gunImage = bazookaGunImage;
+        this.gunBarrelLength = 22;
     }
 
-    drawHotGun() {
-        ctx.beginPath();
-        ctx.fillStyle = '#20FAF0';
-        ctx.globalAlpha = 0.9;
-        ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
-    }  
+    // drawHotGun() {
+    //     ctx.beginPath();
+    //     ctx.fillStyle = '#20FAF0';
+    //     ctx.globalAlpha = 0.9;
+    //     ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
+    //     ctx.fill();
+    //     ctx.closePath();
+    // }  
 
     shoot(monster) {
         if (this.loaded) {
@@ -303,11 +332,17 @@ class Bazooka extends HotGun {
             this.framesVisible--; 
             ctx.beginPath();
             ctx.globalAlpha = 1;
-            ctx.moveTo(this.hotGunX, this.hotGunY);
+            let gunBarrelX = Math.cos(this.gunAngle - Math.PI * 0.5) * this.gunBarrelLength;
+            let gunBarrelY = Math.sin(this.gunAngle - Math.PI * 0.5) * this.gunBarrelLength;
+            ctx.moveTo(this.hotGunX + gunBarrelX, this.hotGunY + gunBarrelY);
             ctx.lineTo(this.targetX, this.targetY);
             ctx.strokeStyle = this.shotColor;
-            ctx.setLineDash([0]);
+            ctx.lineCap = 'round'
+            ctx.lineWidth = 4;
+            ctx.setLineDash([10, 15])
             ctx.stroke();
+            ctx.setLineDash([0]);
+            ctx.lineWidth = 1;
             ctx.closePath();
             // splash damage
             ctx.beginPath();
@@ -317,6 +352,7 @@ class Bazooka extends HotGun {
             ctx.closePath();
             ctx.globalAlpha = 1;
         }
+
     }
 }
 
@@ -332,24 +368,29 @@ class Lazer extends HotGun {
         this.cost = 100;
         this.animationTime = 10;  
         this.dps = 1000 / this.loadingTime * this.damage;
-        this.shotsPerSecond = 1000 / this.loadingTime
+        this.shotsPerSecond = 1000 / this.loadingTime;
+        this.towerFoundation = towerFoundationLazer;
+        this.gunImage = lazerGunImage;
+        this.gunBarrelLength = 23;
     }
 
-    drawHotGun() {
-        ctx.beginPath();
-        ctx.fillStyle = '#20FAF0';
-        ctx.globalAlpha = 0.9;
-        ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
-    }  
+    // drawHotGun() {
+    //     ctx.beginPath();
+    //     ctx.fillStyle = '#20FAF0';
+    //     ctx.globalAlpha = 0.9;
+    //     ctx.arc(this.hotGunX, this.hotGunY, this.radius, 0, 2 * Math.PI);
+    //     ctx.fill();
+    //     ctx.closePath();
+    // }  
 
     shotAnimation() {
         if (this.framesVisible > 0) {
             this.framesVisible--; 
             ctx.beginPath();
             ctx.globalAlpha = 1;
-            ctx.moveTo(this.hotGunX, this.hotGunY);
+            let gunBarrelX = Math.cos(this.gunAngle - Math.PI * 0.5) * this.gunBarrelLength;
+            let gunBarrelY = Math.sin(this.gunAngle - Math.PI * 0.5) * this.gunBarrelLength;
+            ctx.moveTo(this.hotGunX + gunBarrelX, this.hotGunY + gunBarrelY);
             ctx.lineTo(this.targetX, this.targetY);
             ctx.strokeStyle = this.shotColor;
             ctx.lineWidth = 3;
@@ -401,13 +442,15 @@ const checkHotGunSpaceAvailable = (centerX, centerY, temporaryHotGun) => {
 
     corners.forEach(corner => {
         // check all road parts
-        roadParts.forEach(roadPart => {
-            if ( roadPart.startX <= corner.X && corner.X <= roadPart.startX + roadPart.width) {
-                if (roadPart.startY <= corner.Y && corner.Y <= roadPart.startY + roadPart.height) {                   
-                    output = false;
+        if (temporaryHotGun.name !== 'gandalf') {
+            roadParts.forEach(roadPart => {
+                if ( roadPart.startX <= corner.X && corner.X <= roadPart.startX + roadPart.width) {
+                    if (roadPart.startY <= corner.Y && corner.Y <= roadPart.startY + roadPart.height) {                   
+                        output = false;
+                    }
                 }
-            }
-        })
+            })
+        }
         
         // check other guns
         hotGuns.forEach(hotGun => {
@@ -428,6 +471,15 @@ const checkHotGunSpaceAvailable = (centerX, centerY, temporaryHotGun) => {
 
 const placeGun = (x, y, newHotGun) => {
     if (newHotGun.cost <= money) {
+        if (newHotGun.name === 'gandalf') {
+            if (gandalfPlaced) {
+                alert('There is only 1 Gandalf!')
+                return 0;
+            }
+            else {
+                gandalfPlaced = true;
+            }
+        }
         money -= newHotGun.cost;
         arsenalValue += newHotGun.cost;
         newHotGun.hotGunX = x;
