@@ -136,7 +136,6 @@ const loadInBetweenScreenHtml = () => {
     while (inBetweenSection.firstChild) {
         inBetweenSection.removeChild(inBetweenSection.lastChild);
     }
-    console.log(level)
     inBetweenSection.innerHTML = `
         <h1 class="in-between-header">${levelInformation[level - 1].title}</h1>
         <div class="in-between-flex">

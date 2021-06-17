@@ -322,5 +322,6 @@ const setMonsterSpeed = (monster) => {
     }
     else {
         monster.currentSpeed = monster.speed;
+        console.log(monster.speed)
     }
 }

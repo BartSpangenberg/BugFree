@@ -138,7 +138,6 @@ const animate = () => {
                 level++;
                 wave = 1;
 
-
                 if (monsterWaves.length < level) {
                     if (highScore < score) {
                         highScore = score;
@@ -461,7 +460,6 @@ window.addEventListener('load', () => {
         gameplayDivElement.style.backgroundColor = '#ffbf00';
         gameplayDivElement.style.boxShadow = '0px 5px 3px 3px rgba(0, 0, 0, 0.5)';
         instructionsDivElement.style.display = 'block';
-        console.log("I run")
     })
 
     gameplayDivElement.addEventListener('mouseout', () => {
