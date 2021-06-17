@@ -1,8 +1,56 @@
 #in-between {
   display: none;
+  font-family: "Gugi";
+  color: "#072400";
+  position: relative;
 }
 
-#in-between button {
+.in-between-header {
+  color: #9f7700;
+  font-size: 3em;
+}
+
+.monster-tag {
+  padding: 4px 12px;
+  background-color: #ffbf00;
+  border-radius: 25px;
+  position: absolute;
+  bottom: 30px;
+  left: 150px;
+  font-size: 0.9em;
+}
+
+.in-between-flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.monster-image {
+  width: 300px;
+  height: auto;
+}
+
+/* .in-between-game-info {
+} */
+
+.monster-header {
+  padding: 0px;
+  margin-left: 0px;
+  color: #9f7700;
   font-size: 2em;
-  padding: 30px;
+}
+
+.monster-paragraph {
+  color: #072400;
+}
+
+.fact-header {
+  margin-bottom: 10px;
+  color: #9f7700;
+  font-size: 1.5em;
+}
+
+.fact-paragraph {
+  color: #072400;
 }

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <title>Mans Not HotGun</title>
+    <title>BugFree</title>
 
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/startscreen.css">
@@ -13,30 +13,40 @@
     <link rel="stylesheet" href="./css/victory.css">
     <link rel="stylesheet" href="./css/gameover.css">
     <link rel="stylesheet" href="./css/gamepage.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
     <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
 
 
 </head>
 <body>
+    <button id="music">Music</button>
+    <button id="sound-effects">Sound Effects</button>
     <section id="startscreen">
         <h1>MANS NOT HOTGUN</h1>
         <button id="start-game">Start game</button>
     </section>
 
     <section id="in-between">
-        <h1>READY FOR THE NEXT LEVEL?</h1>
         <button id="next-level">Next level</button>
     </section>
 
     <section id="victory">
-        <h1>VICTORY</h1>
-        <button id="play-again-victory">Play again/button>
+        <div class="end-screen-container">
+            <h1 class="end-header">Your code is entirely Bugfree!</h1>
+            <h4 id="victory-score" class="score-end"></h4>
+            <h4 id="victory-highscore" class="score-end"></h4>
+            <button id="play-again-victory" class="btn">Play again</button>
+        </div>
     </section>
 
-    <section id="game-over">
-        <h1>GAME OVER</h1>
-        <button id="play-again-game-over">Play again</button>
+    <section id="game-over" class ="end-screen-container">
+        <div class="end-screen-container"></div>
+            <h1 class="end-header">Your code has crashed!</h1>
+            <h2 class="end-header-joke">You must be using Chrome or Firefox?</h1>
+            <h4 id="game-over-score" class="score-end"></h4>
+            <h4 id="game-over-highscore" class="score-end"></h4>
+            <button id="play-again-game-over"class="btn">Play again</button>
+        </div>
     </section>
 
     <section id="game">
@@ -144,6 +154,7 @@
         </article>
     </section>
     
+    <script src="./js/sounds.js"></script>
     <script src="./js/game-events.js"></script>
     <script src="./js/roadlevels.js"></script>
     <script src="./js/road.js"></script>

@@ -8,7 +8,7 @@ const canvasStatsElement = document.querySelector('#stats-canvas');
 const canvasGameElement = document.querySelector('#canvas');
 const canvasGunElement = document.querySelector('#gun-canvas');
 const startGameBtn = document.querySelector('#start-game');
-const nextLevelBtn = document.querySelector('#next-level');
+let nextLevelBtn = document.querySelector('#next-level');
 const nextWaveBtn = document.querySelector('#next-wave');
 const playAgainVictoryBtn = document.querySelector('#play-again-victory');
 const playAgainGameOverBtn = document.querySelector('#play-again-game-over');
@@ -25,6 +25,13 @@ const gun3ElementHover = document.querySelector('#gun-hover3');
 const gun4ElementHover = document.querySelector('#gun-hover4');
 const gun5ElementHover = document.querySelector('#gun-hover5');
 const gun6ElementHover = document.querySelector('#gun-hover6');
+const musicButton = document.querySelector('#music');
+const soundEffectButton = document.querySelector('#sound-effects');
+const victoryScoreElement = document.querySelector('#victory-score');
+const victoryHighScoreElement = document.querySelector('#victory-highscore');
+const gameOverScoreElement = document.querySelector('#game-over-score');
+const gameOverHighScoreElement = document.querySelector('#game-over-highscore');
+
 
 // Images
 let towerFoundationBasic = new Image();
@@ -53,9 +60,6 @@ let healMonsterImage = new Image();
 let speedMonsterImage = new Image();
 let flyingMonsterImage = new Image();
 
-// audio
-let boom = new Audio('../audio/boom.mp3');
-
 // create context
 const ctxStats = canvasStatsElement.getContext('2d');
 const ctx = canvasGameElement.getContext('2d');
@@ -69,7 +73,7 @@ let gameIsOver = false;
 let collisionOffSet = 20;
 let healthMeterColor = 'green';
 let healthMeterBgColor = 'white';
-let bgColor =  '#58BC82';
+let bgColor =  'transparent';
 let roadEdgeColor = "#5A3825";
 let roadColor = '#C5AA5B'
 let textColor = '#072400';
@@ -82,6 +86,8 @@ let canvasLoaded = false; // Not used I think
 let userIsPlacingGun = false;
 let speedChangeGandalf = 0.3;
 let gandalfPlaced = false;
+let playMusic = true;
+let playSoundEffects = true;
 
 // HotGun info
 let instanceOfAllHotGuns = [new BigGun, new QuickGun, new Sniper, new Gandalf, new Lazer, new Bazooka];
@@ -105,6 +111,7 @@ let arsenalValue = 0;
 let heatMeter = 0;
 
 const animate = () => {
+    clearBoard();
     drawAllBoards();
     drawFullRoad();
     drawHotGuns();
@@ -124,7 +131,11 @@ const animate = () => {
 
 
                 if (monsterWaves.length < level) {
+                    if (highScore < score) {
+                        highScore = score;
+                    }
                     turnGameScreenOff();
+                    setVictoryScreenData();
                     loadVictoryScreen();
                 }
                 else {
@@ -145,8 +156,12 @@ const animate = () => {
 
     //Logic for changing the position of the monsters
     if (gameIsOver) {
+        if (highScore < score) {
+            highScore = score;
+        }
         gameOver();
         turnGameScreenOff();
+        setGameOverScreenData();
         loadGameOverScreen();
     }
     else {
@@ -189,29 +204,22 @@ window.addEventListener('load', () => {
 
     startGameBtn.addEventListener('click', () => {
         turnStartScreenOff();
+        loadInBetweenScreenHtml();
         loadInBetweenScreen();
-    })
-
-    nextLevelBtn.addEventListener('click', () => {
-        // ?? Not exactly sure why this works, helps to prevent the bug that a gun is placed when next level button is clicked
-        setTimeout(() => {
-            turnInBetweenScreenOff();
-            loadGameScreen();
-            setLevelData();
-            startLevel();
-        }, 0)
     })
 
     nextWaveBtn.addEventListener('click', () => {
         disableWaveButton();
         setWaveData();
         startWave();
+
     })
 
     playAgainVictoryBtn.addEventListener('click', () => { // ?? Can I create the same event listener for 2 differen buttons?
         resetGame();
         loadInBetweenScreen();
         turnEndScreensOff();
+        enableWaveButton();
     })
 
     playAgainGameOverBtn.addEventListener('click', () => {
@@ -370,7 +378,25 @@ window.addEventListener('load', () => {
         }
     })
 
+    musicButton.addEventListener('click', (event) => {
+        if (gameMusic.playStatus) {
+            gameMusic.playStatus = false;
+            gameMusic.sound.pause();
+        }
+        else {
+            gameMusic.playStatus = true;
+            gameMusic.sound.play();
+        }
+    })
 
+    soundEffectButton.addEventListener('click', (event) => {
+        if (playSoundEffects) {
+            playSoundEffects = false;
+        }
+        else {
+            playSoundEffects = true;
+        }
+    })
 
     window.addEventListener('mousemove', (event) => { 
         if (userIsPlacingGun) {

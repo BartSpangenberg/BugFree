@@ -9,7 +9,18 @@ const roadLevelStartPoints = [
     }
 ]
 
-const startMoney = [1000, 1000];
+const startMoney = [5000, 1000];
+
+const levelInformation = [
+    {
+        title: "Are you ready for the next level?",
+        monsterTitle: "Ninja Bug",
+        monsterParagraph: "Ninja bugs do x y z",
+        didYouKnow: "Did you know?",
+        didYouKnowParagraph: "Did you know that x y z",
+        monsterImg: './images/big-monster.png'
+    }
+]
 
 const roadLevels = [
     [

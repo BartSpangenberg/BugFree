@@ -80,6 +80,12 @@ const drawGunShots = () => {
     })
 }
 
+const clearBoard = () => {
+    ctxStats.clearRect(0, 0, canvasStatsElement.width, canvasStatsElement.height)
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctxGuns.clearRect(0, 0, canvasGunElement.width, canvasGunElement.height)
+}
+
 const drawAllBoards = () => {
     calculateDps();
     calculateShotsPerSecond();

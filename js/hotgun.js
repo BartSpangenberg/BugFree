@@ -29,10 +29,25 @@ class HotGun {
     shoot(monster) {
         if (this.loaded) {
             if (!monster.invisible) {
-                if (monster.name = 'sniper') {
-                    boom.volume = 0.1
-                    boom.play();
-                    console.log("I run")
+                if (this.name === 'sniper') {
+                    if (sniperSound.playStatus) {
+                        setSoundEffectTimer(sniperSound);
+                    }
+                }
+                else if (this.name === 'lazer') {
+                    if (lazerSound.playStatus) {
+                        setSoundEffectTimer(lazerSound);
+                    }
+                }
+                else if (this.name === 'bigGun') {
+                    if (basicGunSound.playStatus) {
+                        setSoundEffectTimer(basicGunSound);
+                    }
+                }
+                else if (this.name === 'doubleGun') {
+                    if (quickGunSound.playStatus) {
+                        setSoundEffectTimer(quickGunSound);
+                    }
                 }
                 this.aim(monster);
                 this.shotDistancePercentage = this.shotDistancePercentageOffset;
@@ -77,11 +92,8 @@ class HotGun {
         ctx.shadowColor = roadShadow;
         ctx.drawImage(this.gunImage, this.hotGunX, this.hotGunY);  
         ctx.restore();  
-        ctx.closePath()
-
+        ctx.closePath();
     }
-
-
 }
 
 class BigGun extends HotGun {
@@ -100,8 +112,6 @@ class BigGun extends HotGun {
         this.towerFoundation = towerFoundationBasic;
         this.gunImage = basicGunImage;
     }
-
-
 
     shotAnimation() {
         if (this.framesVisible > 0) {
@@ -295,6 +305,9 @@ class Bazooka extends HotGun {
                         }
                     }
                 })
+                if (bazookaSound.playStatus) {
+                    setSoundEffectTimer(bazookaSound);
+                }
     
                 this.aim(monster);
                 monster.health -= this.damage;
@@ -470,6 +483,9 @@ const checkRange = () => {
                 if ( hotGun.hotGunY - hotGun.range < monster.monsterY && monster.monsterY < hotGun.hotGunY + hotGun.range ) {
                     if (hotGun.name === 'gandalf') {
                         monster.currentSpeed = monster.speed * speedChangeGandalf;
+                        if (gandalfSound.playStatus) {
+                            setSoundEffectTimer(gandalfSound)
+                        }
                     }
                     else {
                         hotGun.shoot(monster);

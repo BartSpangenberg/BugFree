@@ -122,3 +122,61 @@ const changeHotGunPrototypePosition = (x, y) => {
     hotGunImage.style.top = y + 'px';
     hotGunImage.style.left = x + 'px';
 }
+
+const setSoundEffectTimer = (soundObject) => {
+    soundObject.sound.play();
+    soundObject.playStatus = false;
+    setTimeout(() => {
+        soundObject.playStatus = true;
+    }, soundObject.playTimeOut)
+}
+
+const loadInBetweenScreenHtml = () => {
+    while (inBetweenSection.firstChild) {
+        inBetweenSection.removeChild(inBetweenSection.lastChild);
+    }
+
+    inBetweenSection.innerHTML = `
+        <h1 class="in-between-header">${levelInformation[level - 1].title}</h1>
+        <span class="monster-tag">New monster</span>
+        <div class="in-between-flex">
+            <img class="monster-image" src="${levelInformation[level - 1].monsterImg}">
+            <div class="in-between-game-info">
+                <h4 class="monster-header">${levelInformation[level - 1].monsterTitle}</h4>
+                <p class="monster-paragraph">${levelInformation[level - 1].monsterParagraph}</p>
+                <h5 class="fact-header">${levelInformation[level - 1].didYouKnow}</h5>
+                <p class="fact-paragraph">${levelInformation[level - 1].didYouKnowParagraph}</p>
+                <button id="next-level" class="btn">Next level</button>
+            </div>
+        </div>
+    `
+    nextLevelBtn = document.querySelector('#next-level');
+
+    nextLevelBtnClickEvent();
+}
+
+const nextLevelBtnClickEvent = () => {
+    nextLevelBtn.addEventListener('click', () => {
+        // ?? Not exactly sure why this works, helps to prevent the bug that a gun is placed when next level button is clicked
+        
+        setTimeout(() => {
+            turnInBetweenScreenOff();
+            loadGameScreen();
+            setLevelData();
+            startLevel();
+        }, 0)
+    })
+}
+
+const setVictoryScreenData = () => {
+    victoryScoreElement.innerText = `Score: ${score}`
+    victoryHighScoreElement.innerText = `Highscore: ${highScore}`
+}
+
+const setGameOverScreenData = () => {
+    gameOverScoreElement.innerText = `Score: ${score}`
+    gameOverHighScoreElement.innerText = `Highscore: ${highScore}`
+}
+
+
+// transition, with transform, opacity

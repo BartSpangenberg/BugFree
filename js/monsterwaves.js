@@ -1,12 +1,12 @@
 const monsterWaves = [
 [{
-        amountOfBasicMonsters: 25,
-        amountOfSpeedMonsters: 0,
+        amountOfBasicMonsters: 15,
+        amountOfSpeedMonsters: 1,
         amountOfInvisibleMonsters: 0,
         amountOfHealMonsters: 0,
         amountOfBigMonsters: 0,
         amountOfFlyingMonsters: 0,
-        waveTime: 15
+        waveTime: 1
     },
     {
         amountOfBasicMonsters: 20,
@@ -64,6 +64,6 @@ const monsterWaves = [
         amountOfFlyingMonsters: 0,
         waveTime: 5
     }    
-]
+    ]
 ]
 

@@ -43,3 +43,57 @@ h3 {
 .space-around-row {
   justify-content: space-around;
 }
+
+#music {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+#sound-effects {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+}
+
+.btn {
+  height: 75px;
+  width: 150px;
+  font-size: 1.2em;
+  background-color: #ffbf00;
+  font-family: "Gugi";
+  border: none;
+  box-shadow: 0px 3px 5px 2px rgba(1, 1, 1, 0.4);
+}
+
+.btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 5px 2px rgba(1, 1, 1, 0.5);
+}
+
+.end-screen-container {
+  font-family: "Gugi";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../images/code.png");
+  background-image: contain;
+}
+
+.end-header {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.score-end {
+  margin: 10px;
+}
+
+.end-screen-container button {
+  margin-top: 30px;
+}
+
+.end-header-joke {
+  font-size: 2em;
+}
