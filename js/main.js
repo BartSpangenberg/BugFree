@@ -3,6 +3,7 @@ const startSection = document.querySelector("#startscreen");
 const inBetweenSection = document.querySelector("#in-between");
 const victorySection = document.querySelector("#victory");
 const gameOverSection = document.querySelector("#game-over");
+const gameOverSectionContainer = document.querySelector("#game-over-flex");
 const gameSectionElement = document.querySelector("#game");
 const canvasStatsElement = document.querySelector('#stats-canvas');
 const canvasGameElement = document.querySelector('#canvas');
@@ -148,6 +149,7 @@ const animate = () => {
                 }
                 else {
                     turnGameScreenOff();
+                    loadInBetweenScreenHtml();
                     loadInBetweenScreen();
                 }
             }
@@ -158,9 +160,9 @@ const animate = () => {
         }
     }
 
-    // roadParts.forEach(roadPart => {
-    //     drawRoadElementCollison(roadPart);
-    // })
+    roadParts.forEach(roadPart => {
+        drawRoadElementCollison(roadPart);
+    })
 
     //Logic for changing the position of the monsters
     if (gameIsOver) {
@@ -227,6 +229,7 @@ window.addEventListener('load', () => {
     playAgainVictoryBtn.addEventListener('click', () => { // ?? Can I create the same event listener for 2 differen buttons?
         resetGame();
         loadInBetweenScreen();
+        loadInBetweenScreenHtml();
         turnEndScreensOff();
         enableWaveButton();
     })
@@ -234,6 +237,7 @@ window.addEventListener('load', () => {
     playAgainGameOverBtn.addEventListener('click', () => {
         resetGame();
         loadInBetweenScreen();
+        loadInBetweenScreenHtml();
         turnEndScreensOff();
         enableWaveButton();
     })

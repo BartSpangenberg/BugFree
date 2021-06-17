@@ -6,10 +6,26 @@ const roadLevelStartPoints = [
     {
         levelStartX: 900,
         levelStartY: 0
+    },
+    {
+        levelStartX: 500,
+        levelStartY: 0
+    },
+    {
+        levelStartX: 0,
+        levelStartY: 0
+    },
+    {
+        levelStartX: 700,
+        levelStartY: 0
+    },
+    {
+        levelStartX: 200,
+        levelStartY: 0
     }
 ]
 
-const startMoney = [5000, 1000];
+const startMoney = [5000, 5000, 3000, 4000, 5000, 6000];
 
 const levelInformation = [
     {
@@ -17,47 +33,47 @@ const levelInformation = [
         monsterTitle: "Regular bug",
         monsterParagraph: "Ninja bugs do x y z",
         didYouKnow: "Did you know?",
-        didYouKnowParagraph: "Did you know that x y z",
+        didYouKnowParagraph: "Did you know that you can de-select a gun by pressing ESCAPE.",
         monsterImg: './images/basic.png'
     },
     {
-        title: "Are you ready for the next level?",
+        title: "Good Start! But you have along way to go.",
         monsterTitle: "Lightning fast bug",
-        monsterParagraph: "Ninja bugs do x y z",
+        monsterParagraph: "Be careful! Those bugs will move faster if they receive damage.",
         didYouKnow: "Did you know?",
-        didYouKnowParagraph: "Did you know that x y z",
+        didYouKnowParagraph: "That you can select guns by pressing your arrow keys.",
         monsterImg: './images/speed.png'
     },
     {
         title: "Are you ready for the next level?",
         monsterTitle: "Medic Bug",
-        monsterParagraph: "Ninja bugs do x y z",
+        monsterParagraph: "Those bugs care about their fellow bugs. They heal them.",
         didYouKnow: "Did you know?",
-        didYouKnowParagraph: "Did you know that x y z",
+        didYouKnowParagraph: "That you can put Gandalf on the road.",
         monsterImg: './images/heal.png'
     },
     {
         title: "Are you ready for the next level?",
         monsterTitle: "Huge Bug",
-        monsterParagraph: "Ninja bugs do x y z",
+        monsterParagraph: "Those Bugs are huge, do you have enough firepower?",
         didYouKnow: "Did you know?",
-        didYouKnowParagraph: "Did you know that x y z",
+        didYouKnowParagraph: "Did you know that a bazooka deals splash damage.",
         monsterImg: './images/big.png'
     },
     {
         title: "Are you ready for the next level?",
         monsterTitle: "Ninja Bug",
-        monsterParagraph: "Ninja bugs do x y z",
+        monsterParagraph: "These are tricky bugs! They might become invisible.",
         didYouKnow: "Did you know?",
-        didYouKnowParagraph: "Did you know that x y z",
+        didYouKnowParagraph: "Did you know that team Safari is about to win?",
         monsterImg: './images/ninja.png'
     },
     {
         title: "Are you ready for the next level?",
         monsterTitle: "Flying Bug",
-        monsterParagraph: "Ninja bugs do x y z",
+        monsterParagraph: "Those bugs will not follow the roads. They Fly!",
         didYouKnow: "Did you know?",
-        didYouKnowParagraph: "Did you know that x y z",
+        didYouKnowParagraph: "Did you know Manish's age is undefined?",
         monsterImg: './images/flying.png'
     }
 ]
@@ -82,7 +98,6 @@ const roadLevels = [
             collisionSide: 'right',
             directionChangeX: 0,
             directionChangeY: -1,
-            color: 'blue'
         }, 
         {
             startX: 300,
@@ -92,7 +107,6 @@ const roadLevels = [
             collisionSide: 'top',
             directionChangeX: 1,
             directionChangeY: 0,
-            color: 'blue'
         }, 
         {
             startX: 350,
@@ -102,7 +116,6 @@ const roadLevels = [
             collisionSide: 'right',
             directionChangeX: 0,
             directionChangeY: 1,
-            color: 'blue'
         }, 
         {
             startX: 900,
@@ -112,7 +125,6 @@ const roadLevels = [
             collisionSide: 'bottom',
             directionChangeX: -1,
             directionChangeY: 0,
-            color: 'blue'
         }, 
         {
             startX: 650,
@@ -122,7 +134,6 @@ const roadLevels = [
             collisionSide: 'left',
             directionChangeX: 0,
             directionChangeY: -1,
-            color: 'blueC'
         }, 
         {
             startX: 650,
@@ -132,7 +143,6 @@ const roadLevels = [
             collisionSide: 'top',
             directionChangeX: -1,
             directionChangeY: 0,
-            color: 'blue'
         },         
         {
             startX: 500,
@@ -142,7 +152,6 @@ const roadLevels = [
             collisionSide: 'left',
             directionChangeX: 0,
             directionChangeY: 1,
-            color: 'blue'
         },
         {
             startX: 500,
@@ -152,7 +161,6 @@ const roadLevels = [
             collisionSide: 'bottom',
             directionChangeX: -1,
             directionChangeY: 0,
-            color: 'blue'
         },
         {
             startX: 300,
@@ -162,7 +170,6 @@ const roadLevels = [
             collisionSide: 'left',
             directionChangeX: 0,
             directionChangeY: -1,
-            color: 'blue'
         },
         {
             startX: 300,
@@ -172,7 +179,6 @@ const roadLevels = [
             collisionSide: 'top',
             directionChangeX: -1,
             directionChangeY: 0,
-            color: 'blue'
         },
         {
             startX: 50,
@@ -182,7 +188,6 @@ const roadLevels = [
             collisionSide: 'left',
             directionChangeX: 0,
             directionChangeY: 1,
-            color: 'blue'
         },
         {
             startX: 50,
@@ -192,7 +197,6 @@ const roadLevels = [
             collisionSide: 'bottom',
             directionChangeX: 0,
             directionChangeY: 1,
-            color: 'blue'
         }   
     ],
     [
@@ -204,7 +208,6 @@ const roadLevels = [
             collisionSide: 'bottom',
             directionChangeX: -1,
             directionChangeY: 0,
-            color: 'blue'
         }, 
         {
             startX: 750,
@@ -214,7 +217,6 @@ const roadLevels = [
             collisionSide: 'left',
             directionChangeX: 0,
             directionChangeY: -1,
-            color: 'green'
         }, 
         {
             startX: 750,
@@ -224,7 +226,6 @@ const roadLevels = [
             collisionSide: 'top',
             directionChangeX: -1,
             directionChangeY: 0,
-            color: 'blue'
         }, 
         {
             startX: 250,
@@ -234,7 +235,6 @@ const roadLevels = [
             collisionSide: 'left',
             directionChangeX: 0,
             directionChangeY: 1,
-            color: 'green'
         }, 
         {
             startX: 250,
@@ -244,7 +244,6 @@ const roadLevels = [
             collisionSide: 'bottom',
             directionChangeX: 1,
             directionChangeY: 0,
-            color: 'blue'
         }, 
         {
             startX: 300,
@@ -254,7 +253,6 @@ const roadLevels = [
             collisionSide: 'right',
             directionChangeX: 0,
             directionChangeY: -1,
-            color: 'green'
         }, 
         {
             startX: 600,
@@ -264,7 +262,6 @@ const roadLevels = [
             collisionSide: 'top',
             directionChangeX: -1,
             directionChangeY: 0,
-            color: 'blue'
         }, 
         {
             startX: 350,
@@ -274,7 +271,6 @@ const roadLevels = [
             collisionSide: 'left',
             directionChangeX: 0,
             directionChangeY: 1,
-            color: 'green'
         }, 
         {
             startX: 350,
@@ -284,7 +280,6 @@ const roadLevels = [
             collisionSide: 'bottom',
             directionChangeX: -1,
             directionChangeY: 0,
-            color: 'blue'
         }, 
         {
             startX: 100,
@@ -294,7 +289,6 @@ const roadLevels = [
             collisionSide: 'left',
             directionChangeX: 0,
             directionChangeY: 1,
-            color: 'green'
         }, 
         {
             startX: 100,
@@ -304,7 +298,446 @@ const roadLevels = [
             collisionSide: 'bottom',
             directionChangeX: 0,
             directionChangeY: 1,
-            color: 'blue'
         }, 
+    ],
+    [
+        {
+            startX: 500,
+            startY: 0,
+            width: 50,
+            height: 150, 
+            collisionSide: 'bottom',
+            directionChangeX: -1,
+            directionChangeY: 0,
+        }, 
+        {
+            startX: 50,
+            startY: 100,
+            width: 500,
+            height: 50, 
+            collisionSide: 'left',
+            directionChangeX: 0,
+            directionChangeY: 1,
+        },  
+        {
+            startX: 50,
+            startY: 150,
+            width: 50,
+            height: 300, 
+            collisionSide: 'bottom',
+            directionChangeX: 1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 100,
+            startY: 400,
+            width: 350,
+            height: 50, 
+            collisionSide: 'right',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        },   
+        {
+            startX: 400,
+            startY: 200,
+            width: 50,
+            height: 200, 
+            collisionSide: 'top',
+            directionChangeX: 1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 450,
+            startY: 200,
+            width: 200,
+            height: 50, 
+            collisionSide: 'right',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        },   
+        {
+            startX: 600,
+            startY: 50,
+            width: 50,
+            height: 150, 
+            collisionSide: 'top',
+            directionChangeX: 1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 650,
+            startY: 50,
+            width: 300,
+            height: 50, 
+            collisionSide: 'right',
+            directionChangeX: 0,
+            directionChangeY: 1,
+        },   
+        {
+            startX: 900,
+            startY: 100,
+            width: 50,
+            height: 300, 
+            collisionSide: 'bottom',
+            directionChangeX: -1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 500,
+            startY: 350,
+            width: 400,
+            height: 50, 
+            collisionSide: 'left',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        },   
+        {
+            startX: 500,
+            startY: 350,
+            width: 50,
+            height: 200, 
+            collisionSide: 'bottom',
+            directionChangeX: 0,
+            directionChangeY: 1,
+        }
+    ], 
+    [
+        {
+            startX: 0,
+            startY: 0,
+            width: 50,
+            height: 200, 
+            collisionSide: 'bottom',
+            directionChangeX: 1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 50,
+            startY: 150,
+            width: 200,
+            height: 50, 
+            collisionSide: 'right',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        },   
+        {
+            startX: 200,
+            startY: 0,
+            width: 50,
+            height: 150, 
+            collisionSide: 'top',
+            directionChangeX: 1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 250,
+            startY: 0,
+            width: 750,
+            height: 50, 
+            collisionSide: 'right',
+            directionChangeX: 0,
+            directionChangeY: 1,
+        },   
+        {
+            startX: 950,
+            startY: 50,
+            width: 50,
+            height: 450, 
+            collisionSide: 'bottom',
+            directionChangeX: -1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 300,
+            startY: 450,
+            width: 650,
+            height: 50, 
+            collisionSide: 'left',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        },   
+        {
+            startX: 300,
+            startY: 150,
+            width: 50,
+            height: 300, 
+            collisionSide: 'top',
+            directionChangeX: 1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 350,
+            startY: 150,
+            width: 550,
+            height: 50, 
+            collisionSide: 'right',
+            directionChangeX: 0,
+            directionChangeY: 1,
+        },   
+        {
+            startX: 850,
+            startY: 200,
+            width: 50,
+            height: 200, 
+            collisionSide: 'bottom',
+            directionChangeX: -1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 400,
+            startY: 350,
+            width: 450,
+            height: 50, 
+            collisionSide: 'left',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        },   
+        {
+            startX: 400,
+            startY: 250,
+            width: 50,
+            height: 100, 
+            collisionSide: 'top',
+            directionChangeX: 1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 450,
+            startY: 250,
+            width: 350,
+            height: 50, 
+            collisionSide: 'right',
+            directionChangeX: 0,
+            directionChangeY: 1,
+        },   
+        {
+            startX: 750,
+            startY: 300,
+            width: 50,
+            height: 300, 
+            collisionSide: 'bottom',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        }  
+    ],
+    [
+        {
+            startX: 700,
+            startY: 0,
+            width: 50,
+            height: 250, 
+            collisionSide: 'bottom',
+            directionChangeX: -1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 450,
+            startY: 200,
+            width: 250,
+            height: 50, 
+            collisionSide: 'left',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        },   
+        {
+            startX: 450,
+            startY: 100,
+            width: 50,
+            height: 100, 
+            collisionSide: 'top',
+            directionChangeX: 1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 500,
+            startY: 100,
+            width: 400,
+            height: 50, 
+            collisionSide: 'right',
+            directionChangeX: 0,
+            directionChangeY: 1,
+        },   
+        {
+            startX: 850,
+            startY: 150,
+            width: 50,
+            height: 300, 
+            collisionSide: 'bottom',
+            directionChangeX: -1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 200,
+            startY: 400,
+            width: 650,
+            height: 50, 
+            collisionSide: 'left',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        },   
+        {
+            startX: 200,
+            startY: 50,
+            width: 50,
+            height: 350, 
+            collisionSide: 'top',
+            directionChangeX: 1,
+            directionChangeY: 0,
+        },  
+        {
+            startX: 250,
+            startY: 50,
+            width: 150,
+            height: 50, 
+            collisionSide: 'right',
+            directionChangeX: 0,
+            directionChangeY: 1,
+        },    
+        {
+            startX: 350,
+            startY: 100,
+            width: 50,
+            height: 150, 
+            collisionSide: 'bottom',
+            directionChangeX: -1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 50,
+            startY: 200,
+            width: 300,
+            height: 50, 
+            collisionSide: 'left',
+            directionChangeX: 0,
+            directionChangeY: 1,
+        },   
+        {
+            startX: 50,
+            startY: 250,
+            width: 50,
+            height: 350, 
+            collisionSide: 'bottom',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        },   
+    ],
+    [
+        {
+            startX: 200,
+            startY: 0,
+            width: 50,
+            height: 350, 
+            collisionSide: 'bottom',
+            directionChangeX: -1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 0,
+            startY: 300,
+            width: 200,
+            height: 50, 
+            collisionSide: 'left',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        },   
+        {
+            startX: 0,
+            startY: 100,
+            width: 50,
+            height: 200, 
+            collisionSide: 'top',
+            directionChangeX: 1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 50,
+            startY: 100,
+            width: 950,
+            height: 50, 
+            collisionSide: 'right',
+            directionChangeX: 0,
+            directionChangeY: 1,
+        },   
+        {
+            startX: 950,
+            startY: 150,
+            width: 50,
+            height: 200, 
+            collisionSide: 'bottom',
+            directionChangeX: -1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 750,
+            startY: 300,
+            width: 200,
+            height: 50, 
+            collisionSide: 'left',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        },   
+        {
+            startX: 750,
+            startY: 0,
+            width: 50,
+            height: 600, 
+            collisionSide: 'top',
+            directionChangeX: -1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 300,
+            startY: 0,
+            width: 450,
+            height: 50, 
+            collisionSide: 'left',
+            directionChangeX: 0,
+            directionChangeY: 1,
+        },   
+        {
+            startX: 300,
+            startY: 50,
+            width: 50,
+            height: 350, 
+            collisionSide: 'bottom',
+            directionChangeX: 1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 350,
+            startY: 350,
+            width: 350,
+            height: 50, 
+            collisionSide: 'right',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        },   
+        {
+            startX: 650,
+            startY: 200,
+            width: 50,
+            height: 150, 
+            collisionSide: 'top',
+            directionChangeX: -1,
+            directionChangeY: 0,
+        },   
+        {
+            startX: 450,
+            startY: 200,
+            width: 200,
+            height: 50, 
+            collisionSide: 'left',
+            directionChangeX: 0,
+            directionChangeY: 1,
+        },   
+        {
+            startX: 450,
+            startY: 250,
+            width: 50,
+            height: 400, 
+            collisionSide: 'bottom',
+            directionChangeX: 0,
+            directionChangeY: -1,
+        }   
     ]
 ]

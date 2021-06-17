@@ -62,12 +62,15 @@ h3 {
 
 .end-screen-container {
   font-family: "Gugi";
+  height: auto;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-image: url("../images/code.png");
   background-image: contain;
+  text-align: center;
 }
 
 .end-header {

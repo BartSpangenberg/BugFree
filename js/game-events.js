@@ -13,6 +13,7 @@ const turnGameScreenOff = () => {
 const turnEndScreensOff = () => {
     gameOverSection.style.display = "none";
     victorySection.style.display = "none";
+    gameOverSectionContainer.style.display = "flex";
 }
 
 const loadInBetweenScreen = () => {
@@ -135,11 +136,11 @@ const loadInBetweenScreenHtml = () => {
     while (inBetweenSection.firstChild) {
         inBetweenSection.removeChild(inBetweenSection.lastChild);
     }
-
+    console.log(level)
     inBetweenSection.innerHTML = `
         <h1 class="in-between-header">${levelInformation[level - 1].title}</h1>
         <div class="in-between-flex">
-        <span class="monster-tag">New monster</span>
+        <span class="monster-tag">New Bug</span>
         <img class="monster-image" src="${levelInformation[level - 1].monsterImg}">
         <div class="in-between-game-info">
                 <h4 class="monster-header">${levelInformation[level - 1].monsterTitle}</h4>
@@ -178,4 +179,3 @@ const setGameOverScreenData = () => {
     gameOverHighScoreElement.innerText = `Highscore: ${highScore}`
 }
 
-// transition, with transform, opacity
