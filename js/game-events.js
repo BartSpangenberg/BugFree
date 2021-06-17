@@ -138,10 +138,10 @@ const loadInBetweenScreenHtml = () => {
 
     inBetweenSection.innerHTML = `
         <h1 class="in-between-header">${levelInformation[level - 1].title}</h1>
-        <span class="monster-tag">New monster</span>
         <div class="in-between-flex">
-            <img class="monster-image" src="${levelInformation[level - 1].monsterImg}">
-            <div class="in-between-game-info">
+        <span class="monster-tag">New monster</span>
+        <img class="monster-image" src="${levelInformation[level - 1].monsterImg}">
+        <div class="in-between-game-info">
                 <h4 class="monster-header">${levelInformation[level - 1].monsterTitle}</h4>
                 <p class="monster-paragraph">${levelInformation[level - 1].monsterParagraph}</p>
                 <h5 class="fact-header">${levelInformation[level - 1].didYouKnow}</h5>
@@ -177,6 +177,5 @@ const setGameOverScreenData = () => {
     gameOverScoreElement.innerText = `Score: ${score}`
     gameOverHighScoreElement.innerText = `Highscore: ${highScore}`
 }
-
 
 // transition, with transform, opacity

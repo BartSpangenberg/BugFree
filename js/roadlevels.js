@@ -14,11 +14,51 @@ const startMoney = [5000, 1000];
 const levelInformation = [
     {
         title: "Are you ready for the next level?",
+        monsterTitle: "Regular bug",
+        monsterParagraph: "Ninja bugs do x y z",
+        didYouKnow: "Did you know?",
+        didYouKnowParagraph: "Did you know that x y z",
+        monsterImg: './images/basic.png'
+    },
+    {
+        title: "Are you ready for the next level?",
+        monsterTitle: "Lightning fast bug",
+        monsterParagraph: "Ninja bugs do x y z",
+        didYouKnow: "Did you know?",
+        didYouKnowParagraph: "Did you know that x y z",
+        monsterImg: './images/speed.png'
+    },
+    {
+        title: "Are you ready for the next level?",
+        monsterTitle: "Medic Bug",
+        monsterParagraph: "Ninja bugs do x y z",
+        didYouKnow: "Did you know?",
+        didYouKnowParagraph: "Did you know that x y z",
+        monsterImg: './images/heal.png'
+    },
+    {
+        title: "Are you ready for the next level?",
+        monsterTitle: "Huge Bug",
+        monsterParagraph: "Ninja bugs do x y z",
+        didYouKnow: "Did you know?",
+        didYouKnowParagraph: "Did you know that x y z",
+        monsterImg: './images/big.png'
+    },
+    {
+        title: "Are you ready for the next level?",
         monsterTitle: "Ninja Bug",
         monsterParagraph: "Ninja bugs do x y z",
         didYouKnow: "Did you know?",
         didYouKnowParagraph: "Did you know that x y z",
-        monsterImg: './images/big-monster.png'
+        monsterImg: './images/ninja.png'
+    },
+    {
+        title: "Are you ready for the next level?",
+        monsterTitle: "Flying Bug",
+        monsterParagraph: "Ninja bugs do x y z",
+        didYouKnow: "Did you know?",
+        didYouKnowParagraph: "Did you know that x y z",
+        monsterImg: './images/flying.png'
     }
 ]
 

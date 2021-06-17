@@ -15,15 +15,56 @@
     <link rel="stylesheet" href="./css/gamepage.css">
     <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
     <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
-
-
 </head>
 <body>
-    <button id="music">Music</button>
-    <button id="sound-effects">Sound Effects</button>
+    <img id="music" class="volume" src="./images/music.png" alt="Music">
+    <img  id="sound-effects" class="volume" src="./images/sound-effect.png" alt="Sound effect">
+
     <section id="startscreen">
-        <h1>MANS NOT HOTGUN</h1>
-        <button id="start-game">Start game</button>
+        <h1 id="game-title">BUGFREE</h1>
+        
+        <div id="startscreen-flex">
+            <div id="situation" class="flex-middle">
+                <h2 id="situation-text">Situation</h2>
+            </div>
+            
+            <div id="mission" class="flex-middle">
+                <h2 id="mission-text">Mission</h2>
+            </div>
+            
+            <div id="execution" class="flex-middle">
+                <h2 id="execution-text">Execution</h2>
+            </div>
+            
+            <div id="gameplay" class="flex-middle">
+                <h2 id="situation-text">Gameplay</h2>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="flex-middle" id="instructions">
+                <div class="instructions">
+                    <div>
+                        <img src="./images/ninja.png">
+                        <h5>Monster Bugs</h5>
+                        <p>They run at lightning speed, eliminate them for money!</p>
+                    </div>
+                    <div>
+                        <img src="./images/lazer-bg.png">
+                        <h5>Defence Guns</h5>
+                        <p>All guns have special abilities, use them to your advantage.</p>
+                    </div>
+                    <div>
+                        <img src="./images/gandalf.png">
+                        <h5>Gandalf</h5>
+                        <p>He makes sure that the bugs won't pass. There is only 1 Gandalf!</p>
+                    </div>
+                </div>
+            </div>
+            <button id="start-game" class="btn">START GAME</button>
+            
+
+        </div>
     </section>
 
     <section id="in-between">

@@ -1,8 +1,64 @@
 #startscreen {
   display: block;
+  font-family: "Gugi";
 }
 
-#startscreen button {
-  font-size: 3em;
-  padding: 30px;
+#game-title {
+  font-size: 4em;
+  text-decoration: underline;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+#startscreen-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.flex-middle {
+  width: 600px;
+  background-color: rgba(255, 191, 0, 0.5);
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 3px 3px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+#instructions {
+  display: none;
+  height: 224px;
+  position: absolute;
+  top: 0px;
+  opacity: 1;
+  background-color: #ffbf00;
+  box-shadow: 0px 2px 3px 3px rgba(0, 0, 0, 0.5);
+}
+
+.instructions {
+  display: flex;
+}
+
+.instructions div {
+  width: 200px;
+}
+
+.instructions img {
+  width: 80px;
+  height: auto;
+  margin-top: 10px;
+}
+
+.instructions h5 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+.instructions p {
+  padding: 5px;
 }

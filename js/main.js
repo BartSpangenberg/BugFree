@@ -31,6 +31,14 @@ const victoryScoreElement = document.querySelector('#victory-score');
 const victoryHighScoreElement = document.querySelector('#victory-highscore');
 const gameOverScoreElement = document.querySelector('#game-over-score');
 const gameOverHighScoreElement = document.querySelector('#game-over-highscore');
+const situationDivElement = document.querySelector('#situation'); 
+const missionDivElement = document.querySelector('#mission'); 
+const executionDivElement = document.querySelector('#execution'); 
+const gameplayDivElement = document.querySelector('#gameplay'); 
+const situationTextElement = document.querySelector('#situation-text'); 
+const missionTextElement = document.querySelector('#mission-text'); 
+const executionTextElement = document.querySelector('#execution-text'); 
+const instructionsDivElement = document.querySelector('#instructions'); 
 
 
 // Images
@@ -170,7 +178,8 @@ const animate = () => {
 }
 
 
-window.addEventListener('load', () => {
+window.addEventListener('load', () => {    
+    gameMusic.sound.play();
     // Load images
     towerFoundationBasic.src = './images/tower-foundation.png'
     towerFoundationQuick.src = './images/tower-foundation-quick-gun.png';
@@ -378,10 +387,11 @@ window.addEventListener('load', () => {
         }
     })
 
-    musicButton.addEventListener('click', (event) => {
+    musicButton.addEventListener('click', () => {
         if (gameMusic.playStatus) {
             gameMusic.playStatus = false;
             gameMusic.sound.pause();
+            musicButton.src = './images.music-off.png'
         }
         else {
             gameMusic.playStatus = true;
@@ -389,13 +399,71 @@ window.addEventListener('load', () => {
         }
     })
 
-    soundEffectButton.addEventListener('click', (event) => {
+    soundEffectButton.addEventListener('click', () => {
         if (playSoundEffects) {
             playSoundEffects = false;
+            soundEffectButton.src = './images.sound-effect-off.png'
         }
         else {
             playSoundEffects = true;
         }
+    })
+
+    situationDivElement.addEventListener('mouseover', () => {
+        situationTextElement.innerText = "You are building your dream project. However, Monster Bugs try to enter your codebase.";
+        situationTextElement.style.fontSize = '1em'
+        situationDivElement.style.backgroundColor = '#ffbf00';
+        situationDivElement.style.boxShadow = '0px 5px 3px 3px rgba(0, 0, 0, 0.5)';
+    })
+
+    situationDivElement.addEventListener('mouseout', () => {
+        situationTextElement.innerText = "Situation";
+        situationTextElement.style.fontSize = '1.6em'
+        situationDivElement.style.backgroundColor = 'rgba(255, 191, 0, 0.5)';
+        situationDivElement.style.boxShadow = '0px 2px 3px 3px rgba(0, 0, 0, 0.2)';
+    })
+
+    missionDivElement.addEventListener('mouseover', () => {
+        missionTextElement.innerText = "Eliminate all the Monster Bugs before they reach your code.";
+        missionTextElement.style.fontSize = '1em'
+        missionDivElement.style.backgroundColor = '#ffbf00';
+        missionDivElement.style.boxShadow = '0px 5px 3px 3px rgba(0, 0, 0, 0.5)';
+    })
+
+    missionDivElement.addEventListener('mouseout', () => {
+        missionTextElement.innerText = "Mission";
+        missionTextElement.style.fontSize = '1.6em'
+        missionDivElement.style.backgroundColor = 'rgba(255, 191, 0, 0.5)';
+        missionDivElement.style.boxShadow = '0px 2px 3px 3px rgba(0, 0, 0, 0.2)';
+    })
+
+
+    executionDivElement.addEventListener('mouseover', () => {
+        executionTextElement.innerText = "Spend your money wisely by placing Guns in strategic positions.";
+        executionTextElement.style.fontSize = '1em'
+        executionDivElement.style.backgroundColor = '#ffbf00';
+        executionDivElement.style.boxShadow = '0px 5px 3px 3px rgba(0, 0, 0, 0.5)';
+    })
+
+    executionDivElement.addEventListener('mouseout', () => {
+        executionTextElement.innerText = "Execution";
+        executionTextElement.style.fontSize = '1.6em'
+        executionDivElement.style.backgroundColor = 'rgba(255, 191, 0, 0.5)';
+        executionDivElement.style.boxShadow = '0px 2px 3px 3px rgba(0, 0, 0, 0.2)';
+    })
+
+
+    gameplayDivElement.addEventListener('mouseover', () => {
+        gameplayDivElement.style.backgroundColor = '#ffbf00';
+        gameplayDivElement.style.boxShadow = '0px 5px 3px 3px rgba(0, 0, 0, 0.5)';
+        instructionsDivElement.style.display = 'block';
+        console.log("I run")
+    })
+
+    gameplayDivElement.addEventListener('mouseout', () => {
+        gameplayDivElement.style.backgroundColor = 'rgba(255, 191, 0, 0.5)';
+        gameplayDivElement.style.boxShadow = '0px 2px 3px 3px rgba(0, 0, 0, 0.2)';
+        instructionsDivElement.style.display = 'none';
     })
 
     window.addEventListener('mousemove', (event) => { 
