@@ -41,7 +41,7 @@ const levelInformation = [
         monsterTitle: "LIGHTNING FAST BUG",
         monsterParagraph: "Be careful! Those bugs will move faster if they receive damage.",
         didYouKnow: "Did you know?",
-        didYouKnowParagraph: "That you can select guns by pressing your arrow keys.",
+        didYouKnowParagraph: "That you can select guns by pressing 1, 2, 3, 4, 5 & 6 on the keyboard.",
         monsterImg: './images/speed.png'
     },
     {
