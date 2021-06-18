@@ -6,6 +6,7 @@
 
 .in-between-header {
   font-size: 3em;
+  text-decoration: underline;
 }
 
 .monster-tag {
@@ -33,25 +34,28 @@
 
 .in-between-game-info {
   text-align: center;
+  width: 350px;
 }
 
 .monster-header {
   padding: 0px;
   margin-left: 0px;
-  color: #9f7700;
+  color: #ffd148;
   font-size: 2em;
 }
 
 .monster-paragraph {
   color: #072400;
+  font-size: 1.2em;
 }
 
 .fact-header {
   margin-bottom: 10px;
-  color: #9f7700;
+  color: #ffd148;
   font-size: 1.5em;
 }
 
 .fact-paragraph {
   color: #072400;
+  font-size: 1.2em;
 }

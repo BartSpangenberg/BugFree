@@ -30,15 +30,15 @@ const startMoney = [5000, 5000, 3000, 4000, 5000, 6000];
 const levelInformation = [
     {
         title: "Are you ready for the next level?",
-        monsterTitle: "Regular bug",
-        monsterParagraph: "Ninja bugs do x y z",
+        monsterTitle: "SMALL BUG",
+        monsterParagraph: "Small bugs occur regularly, luckily they are easy to eliminate.",
         didYouKnow: "Did you know?",
         didYouKnowParagraph: "Did you know that you can de-select a gun by pressing ESCAPE.",
         monsterImg: './images/basic.png'
     },
     {
         title: "Good Start! But you have along way to go.",
-        monsterTitle: "Lightning fast bug",
+        monsterTitle: "LIGHTNING FAST BUG",
         monsterParagraph: "Be careful! Those bugs will move faster if they receive damage.",
         didYouKnow: "Did you know?",
         didYouKnowParagraph: "That you can select guns by pressing your arrow keys.",
@@ -46,7 +46,7 @@ const levelInformation = [
     },
     {
         title: "Are you ready for the next level?",
-        monsterTitle: "Medic Bug",
+        monsterTitle: "MEDIC BUG",
         monsterParagraph: "Those bugs care about their fellow bugs. They heal them.",
         didYouKnow: "Did you know?",
         didYouKnowParagraph: "That you can put Gandalf on the road.",
@@ -54,7 +54,7 @@ const levelInformation = [
     },
     {
         title: "Are you ready for the next level?",
-        monsterTitle: "Huge Bug",
+        monsterTitle: "HUGE BUG",
         monsterParagraph: "Those Bugs are huge, do you have enough firepower?",
         didYouKnow: "Did you know?",
         didYouKnowParagraph: "Did you know that a bazooka deals splash damage.",
@@ -62,18 +62,18 @@ const levelInformation = [
     },
     {
         title: "Are you ready for the next level?",
-        monsterTitle: "Ninja Bug",
+        monsterTitle: "NINJA BUG",
         monsterParagraph: "These are tricky bugs! They might become invisible.",
         didYouKnow: "Did you know?",
-        didYouKnowParagraph: "Did you know that team Safari is about to win?",
+        didYouKnowParagraph: "Did you know that you're outperforming 95% of the players.",
         monsterImg: './images/ninja.png'
     },
     {
         title: "Are you ready for the next level?",
-        monsterTitle: "Flying Bug",
+        monsterTitle: "FLYING BUG",
         monsterParagraph: "Those bugs will not follow the roads. They Fly!",
         didYouKnow: "Did you know?",
-        didYouKnowParagraph: "Did you know Manish's age is undefined?",
+        didYouKnowParagraph: "Did you that you're at the final level? Good luck!",
         monsterImg: './images/flying.png'
     }
 ]

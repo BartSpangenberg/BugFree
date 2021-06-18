@@ -86,7 +86,7 @@ let bgColor =  'transparent';
 let roadEdgeColor = "#5A3825";
 let roadColor = '#C5AA5B'
 let textColor = '#072400';
-let statColor = '#9F7700';
+let statColor = '#ffd148';
 let roadShadow = '#2C0C00';
 let monsterShadow = 'black';
 let levelStartX = null, levelStartY = null;
@@ -162,9 +162,9 @@ const animate = (cancelAnimation) => {
         }
     }
 
-    roadParts.forEach(roadPart => {
-        drawRoadElementCollison(roadPart);
-    })
+    // roadParts.forEach(roadPart => {
+    //     drawRoadElementCollison(roadPart);
+    // })
 
     //Logic for changing the position of the monsters
     if (gameIsOver) {
