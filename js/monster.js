@@ -30,14 +30,12 @@ class Monster {
         
    }
 
-   drawMonster() {
+    drawMonster() {
     this.setImageDirection();
-
     ctx.beginPath();
     ctx.globalAlpha = 1;
     ctx.save();  
     ctx.translate(this.monsterX, this.monsterY);  
-    // ctx.rotate(this.convertDegreesToRadians(this.gunAngle));  
     ctx.rotate(this.monsterAngle)
     ctx.translate(-this.monsterX - (this.monsterImage.width / 2) , -this.monsterY - (this.monsterImage.height / 2) );  
     ctx.shadowBlur = 2;
@@ -221,6 +219,7 @@ class FlyingMonster extends Monster {
 const moveMonster = monster => {
     monster.monsterX += monster.directionX * monster.currentSpeed;
     monster.monsterY += monster.directionY * monster.currentSpeed;
+    // console.log('x', monster.monsterX, 'x-direction', monster.directionX, 'speed', monster.currentSpeed )
 }
 
 const checkMonsterCollision = monster => {
@@ -318,10 +317,11 @@ const checkIfMonsterIsAlive = (monster) => {
 
 const setMonsterSpeed = (monster) => {
     if (monster.name === 'speedMonster') {
+        console.log(" I run")
         monster.currentSpeed = monster.maxHealth / 2 < monster.health ? monster.speed : monster.speed * 1.5;
     }
     else {
+        // console.log(monster.speed)
         monster.currentSpeed = monster.speed;
-        console.log(monster.speed)
     }
 }

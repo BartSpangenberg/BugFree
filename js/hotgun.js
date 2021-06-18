@@ -102,7 +102,7 @@ class BigGun extends HotGun {
         this.name = 'bigGun';
         this.damage = 10;
         this.range = 75; 
-        this.loadingTime = 300;
+        this.loadingTime = 1000;
         this.radius = 15;
         this.shotColor = 'red'; 
         this.cost = 100;

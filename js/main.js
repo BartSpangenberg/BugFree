@@ -119,7 +119,12 @@ let oneShotDamage = 0;
 let arsenalValue = 0; 
 let heatMeter = 0;
 
-const animate = () => {
+const animate = (cancelAnimation) => {
+    if (cancelAnimation && typeof cancelAnimation === "boolean") {
+        cancelAnimationFrame(animationId);
+        console.log("I run")
+    }
+
     clearBoard();
     drawAllBoards();
     drawFullRoad();
@@ -222,7 +227,6 @@ window.addEventListener('load', () => {
         disableWaveButton();
         setWaveData();
         startWave();
-
     })
 
     playAgainVictoryBtn.addEventListener('click', () => { // ?? Can I create the same event listener for 2 differen buttons?
@@ -394,7 +398,7 @@ window.addEventListener('load', () => {
         if (gameMusic.playStatus) {
             gameMusic.playStatus = false;
             gameMusic.sound.pause();
-            musicButton.src = './images.music-off.png'
+            musicButton.src = '../images/music-off.png'
         }
         else {
             gameMusic.playStatus = true;
@@ -405,7 +409,7 @@ window.addEventListener('load', () => {
     soundEffectButton.addEventListener('click', () => {
         if (playSoundEffects) {
             playSoundEffects = false;
-            soundEffectButton.src = './images.sound-effect-off.png'
+            soundEffectButton.src = '../images/sound-effect-off.png'
         }
         else {
             playSoundEffects = true;

@@ -8,7 +8,7 @@ const monsterWaves = [
             amountOfBigMonsters: 0,
             amountOfFlyingMonsters: 0,
             waveTime: 1
-        },
+        }
     ],
     [
         {

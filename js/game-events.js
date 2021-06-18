@@ -61,7 +61,7 @@ const startWave = () => {
 }
 
 const startLevel = () => {
-    animate();
+    animate(true);
 }
 
 const startGameTimer = () => {
