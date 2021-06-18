@@ -125,11 +125,13 @@ const changeHotGunPrototypePosition = (x, y) => {
 }
 
 const setSoundEffectTimer = (soundObject) => {
-    soundObject.sound.play();
-    soundObject.playStatus = false;
-    setTimeout(() => {
-        soundObject.playStatus = true;
-    }, soundObject.playTimeOut)
+    if (playSoundEffects) {
+        soundObject.sound.play();
+        soundObject.playStatus = false;
+        setTimeout(() => {
+            soundObject.playStatus = true;
+        }, soundObject.playTimeOut)
+    }
 }
 
 const loadInBetweenScreenHtml = () => {

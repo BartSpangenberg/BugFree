@@ -122,7 +122,6 @@ let heatMeter = 0;
 const animate = (cancelAnimation) => {
     if (cancelAnimation && typeof cancelAnimation === "boolean") {
         cancelAnimationFrame(animationId);
-        console.log("I run")
     }
 
     clearBoard();
@@ -130,7 +129,6 @@ const animate = (cancelAnimation) => {
     drawFullRoad();
     drawHotGuns();
     // drawHotGunRange();
-
     if (waveStarted) {
         if (!monsters.length) {
             waveStarted = false;
@@ -398,21 +396,23 @@ window.addEventListener('load', () => {
         if (gameMusic.playStatus) {
             gameMusic.playStatus = false;
             gameMusic.sound.pause();
-            musicButton.src = '../images/music-off.png'
+            musicButton.src = './images/music-off.png'
         }
         else {
             gameMusic.playStatus = true;
             gameMusic.sound.play();
+            musicButton.src = './images/music.png'
         }
     })
 
     soundEffectButton.addEventListener('click', () => {
         if (playSoundEffects) {
             playSoundEffects = false;
-            soundEffectButton.src = '../images/sound-effect-off.png'
+            soundEffectButton.src = './images/sound-effect-off.png'
         }
         else {
             playSoundEffects = true;
+            soundEffectButton.src = './images/sound-effect.png'
         }
     })
 

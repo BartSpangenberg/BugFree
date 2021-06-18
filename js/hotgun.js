@@ -190,7 +190,7 @@ class Sniper extends HotGun {
         this.damage = 300;
         this.range = 175; 
         this.loadingTime = 2500;
-        this.radius = 10;
+        this.radius = 13;
         this.shotColor = 'red'; 
         this.cost = 500;
         this.animationTime = 10;
@@ -280,11 +280,11 @@ class Bazooka extends HotGun {
         this.surroundingPercentage = 0.2;
         this.range = 125; 
         this.loadingTime = 3000;
-        this.radius = 22;
+        this.radius = 27;
         this.shotColor = 'black'; 
         this.cost = 500;
         this.animationTime = 20;  // does nothing, since shotColor is invisible
-        this.splashRange = 100;
+        this.splashRange = 250;
         this.dps = 1000 / this.loadingTime * this.damage;
         this.shotsPerSecond = 1000 / this.loadingTime;
         this.towerFoundation = towerFoundationBazooka;
