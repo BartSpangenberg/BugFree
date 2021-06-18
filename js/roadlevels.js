@@ -25,11 +25,11 @@ const roadLevelStartPoints = [
     }
 ]
 
-const startMoney = [5000, 5000, 3000, 4000, 5000, 6000];
+const startMoney = [600, 1500, 2200, 3000, 5000, 5000];
 
 const levelInformation = [
     {
-        title: "Are you ready for the next level?",
+        title: "Are you ready for the first level?",
         monsterTitle: "SMALL BUG",
         monsterParagraph: "Small bugs occur regularly, luckily they are easy to eliminate.",
         didYouKnow: "Did you know?",
@@ -45,7 +45,7 @@ const levelInformation = [
         monsterImg: './images/speed.png'
     },
     {
-        title: "Are you ready for the next level?",
+        title: "You are on a roll! Keep it up!",
         monsterTitle: "MEDIC BUG",
         monsterParagraph: "Those bugs care about their fellow bugs. They heal them.",
         didYouKnow: "Did you know?",
@@ -53,7 +53,7 @@ const levelInformation = [
         monsterImg: './images/heal.png'
     },
     {
-        title: "Are you ready for the next level?",
+        title: "This will be hard one.",
         monsterTitle: "HUGE BUG",
         monsterParagraph: "Those Bugs are huge, do you have enough firepower?",
         didYouKnow: "Did you know?",
@@ -61,7 +61,7 @@ const levelInformation = [
         monsterImg: './images/big.png'
     },
     {
-        title: "Are you ready for the next level?",
+        title: "You are great at this!",
         monsterTitle: "NINJA BUG",
         monsterParagraph: "These are tricky bugs! They might become invisible.",
         didYouKnow: "Did you know?",
@@ -69,7 +69,7 @@ const levelInformation = [
         monsterImg: './images/ninja.png'
     },
     {
-        title: "Are you ready for the next level?",
+        title: "The final level",
         monsterTitle: "FLYING BUG",
         monsterParagraph: "Those bugs will not follow the roads. They Fly!",
         didYouKnow: "Did you know?",
@@ -389,7 +389,7 @@ const roadLevels = [
             height: 50, 
             collisionSide: 'left',
             directionChangeX: 0,
-            directionChangeY: -1,
+            directionChangeY: 1,
         },   
         {
             startX: 500,

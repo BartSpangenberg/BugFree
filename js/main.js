@@ -400,6 +400,7 @@ window.addEventListener('load', () => {
         }
         else {
             gameMusic.playStatus = true;
+            gameMusic.volume = 0.1;
             gameMusic.sound.play();
             musicButton.src = './images/music.png'
         }

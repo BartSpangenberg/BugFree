@@ -100,9 +100,9 @@ class BigGun extends HotGun {
     constructor() {
         super();
         this.name = 'bigGun';
-        this.damage = 10;
+        this.damage = 15;
         this.range = 75; 
-        this.loadingTime = 1000;
+        this.loadingTime = 200;
         this.radius = 15;
         this.shotColor = 'red'; 
         this.cost = 100;
@@ -152,7 +152,7 @@ class QuickGun extends HotGun {
     constructor() {
         super();
         this.name = 'doubleGun';
-        this.damage = 8;
+        this.damage = 10;
         this.range = 100; 
         this.loadingTime = 100;
         this.radius = 20;
@@ -284,7 +284,7 @@ class Bazooka extends HotGun {
         this.shotColor = 'black'; 
         this.cost = 500;
         this.animationTime = 20;  // does nothing, since shotColor is invisible
-        this.splashRange = 250;
+        this.splashRange = 100;
         this.dps = 1000 / this.loadingTime * this.damage;
         this.shotsPerSecond = 1000 / this.loadingTime;
         this.towerFoundation = towerFoundationBazooka;
